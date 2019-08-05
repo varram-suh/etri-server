@@ -1,0 +1,191 @@
+syntax = "proto2"; 
+// option java_package = "com.example.ksoo.ballbotpkg";
+option java_package = "com.varram.model";
+
+message FirmwareUpdate {
+    optional bytes data = 2;
+    optional uint32 verify = 3;
+    optional uint32 start = 4;
+    optional uint32 end = 5; 
+    optional uint32 start_offset = 6;
+    optional uint32 end_offset = 7;
+    // optional bytes bin_data = 8;
+} 
+
+message FirmwareUpdateFeedback {
+    optional uint32 data = 2;
+    optional uint32 verify = 3;
+    optional uint32 start = 4;
+    optional uint32 end = 5; 
+    optional uint32 crc = 6;
+}
+message SmoothMotorControlDeprecated {
+    optional int32 left_motor = 1;
+    optional int32 right_motor = 2;
+    optional uint32 adc_interval = 3;
+    optional uint32 acc_decrease = 4;
+}
+message RoughMotorControl {
+    optional int32 left_motor = 1;		//0~60rpm
+    optional int32 right_motor = 2;		//0~60rpm
+}
+
+message LedControl {
+    optional uint32 left = 1;
+    optional uint32 right = 2;
+    optional uint32 bright = 3;
+}
+
+message EncoderControl {
+    optional uint32 left = 1;
+    optional uint32 right = 2;
+}
+
+message BandwidthTest {
+    optional bytes data = 1;
+    optional uint32 step = 2; // 처음=1, 중간=2, 마지막=3
+    optional uint32 bandwidth_by_hi = 3;
+    // optional uint32 is_begin = 4;
+}
+
+enum StInfo
+{
+    STATUS = 1;  //0x01
+    TOF = 2;	//0x02
+    ACC = 4;
+    GYRO = 8;
+    IMU = 16;
+    HOP = 32;
+    MOTOR = 64;
+    ENC = 128;
+    BATTERY = 256;
+}
+
+message ToBle {
+    // {{{{{{{{{{{{{{{{{{{ from ??
+    optional uint32 interval = 1;
+    optional uint32 power = 2;
+    optional string name = 3;
+    // from ?? }}}}}}}}}}}}}}}}}}} 
+    optional ToHi to_hi_from_phone = 50; // ble data
+    optional ToHost to_host_from_hi = 51; // ble data 
+}
+
+
+message ToSt {
+    // {{{{{{{{{{{{{{{{{{{ from HI
+    optional SmoothMotorControlDeprecated smooth_motor_control_deprecated = 1;
+    optional RoughMotorControl rough_motor_control = 2;
+    optional EncoderControl encoder_control = 3;
+    optional LedControl led_control = 4;
+    optional bool auto_charge_control = 5;
+    optional uint32 neck_speed = 6; // -350 ~ 350
+    optional uint32 request_st_info = 7; // st 에게 요청하는 정보, StInfo bitwise 연산 
+    optional uint32 power_command = 8; // 전원 명령, 1 이면 꺼라. 2이면 슬립모드... 등등
+    optional uint32 do_charge = 9; // 충전해라.
+    optional uint32 reset_if_no_serial = 10; // 1 이면 시리얼이 특정 시간만큼 안들어왔을 때 전원 리셋
+    optional bytes loopback = 11; // 여기에 속한 데이터를 그대로 담아서 응답해야 함.
+    optional FirmwareUpdate stm_update = 12;
+    optional FirmwareUpdate ble_update = 13; 
+    required uint32 seq = 99; ///&lt; 증가하는값인데, 이미 처리된 명령이라면 기억하고 있는 마지막 응답을 돌려줘야 한다.  
+    // from HI }}}}}}}}}}}}}}}}}}} 
+}
+
+message ReqCompleteSetup {
+    optional string user_id = 1;
+    optional string device_id = 2;
+}
+message ToHi {
+    optional ToHost tohost_bypass = 1;
+    optional ToSt tost_bypass = 2;
+
+    // {{{{{{{{{{{{{{{{{{{ from ST
+    optional uint32 status = 3;
+    optional uint32 tof = 4;	//mm
+    optional float accx = 5;
+    optional float accy = 6;
+    optional float accz = 7;
+    optional float gyro_x = 8;
+    optional float gyro_y = 9;
+    optional float gyro_z = 10;	
+    optional float yaw = 11;	//rad
+    optional float pitch = 12;	//rad
+    optional float roll = 13; 	//rad
+    optional float battery = 14; // voltage
+    optional uint32 hopadc = 15; // neck position
+    optional int32 lspeed = 16;	//-2500~2500
+    optional int32 rspeed = 17; //-2500~2500
+    optional int32 t_speed = 18; //-2500~2500   neck speed
+    optional int32 lenc = 19; //left motor rpm
+    optional int32 renc = 20; //right motor rpm
+    optional bool power_button_pressed = 21;
+    optional bool usb_con = 22;
+    optional bool charge_complete = 23;
+    optional uint32 auto_charge_step = 24;
+    optional bytes loopback = 25; // ToSt::loopback 으로 전달된 데이터가 다시 받아지는 것.  
+    optional FirmwareUpdateFeedback firmware_update_feedback = 26;
+    // from ST }}}}}}}}}}}}}}}}}}} 
+
+
+
+    // {{{{{{{{{{{{{{{{{{{ from host
+    optional string phone_public_key = 100;
+    optional uint32 do_charge = 101;
+    optional uint32 video_seq = 102;
+    optional BandwidthTest bandwidth_test = 103; 
+    optional uint32 request_stop_qc = 104; 
+
+    optional uint32 request_mic_loop_back = 105;
+    optional uint32 set_invert_vert = 106; 
+    optional uint32 set_invert_horiz = 107; 
+    optional int32 set_mic_vol = 108; 
+    optional uint32 set_speaker_vol = 109; 
+    optional uint32 set_ir_cut1 = 110; 
+    optional uint32 set_ir_cut2 = 111; 
+    optional int32 play_pcm = 112; 
+    optional int32 set_mute = 113; 
+    optional bytes audio = 114;
+    optional uint32 qc_retry = 115;
+    // from host }}}}}}}}}}}}}}}}}}} 
+
+    // {{{{{{{{{{{{{{{{{{{ from BLE
+    optional string ssid = 200;
+    optional string ssid_password = 201;
+    optional string ssid_type = 202;
+
+    optional uint32 req_service_key = 203;
+    optional ReqCompleteSetup req_complete_setup = 204;
+    // from BLE }}}}}}}}}}}}}}}}}}} 
+}
+// ToHi 
+
+message RspServiceKey {
+    optional string service_key = 1;
+    optional string mac_address = 2;
+    optional string model_name = 3;
+    optional string serial_number = 4;
+}
+message ToHost {
+    // {{{{{{{{{{{{{{{{{{{ from HI
+    optional bytes video = 1; // host 가 재생할 비디오
+    optional bytes audio = 2; // host 가 재생할 오디오
+    optional bytes encrypted_secret_key = 3; // Hi 가 phone public key 로 암호화한 aes key, phone secret key 로 풀어야 됨.
+    optional uint32 video_seq = 4; // latency 측정용
+    optional uint32 video_ts = 5; // 참고자료
+    optional uint32 latency = 6; // hi 가 올려주는 latency
+    optional uint32 bitrate = 7; // hi 가 올려주는 h.264 bitrate
+
+    optional ToHi tohi_bypass = 8;
+    optional uint32 request_start_qc = 9;
+    optional uint32 request_bandwidth = 10; 
+    optional BandwidthTest bandwidth_test = 11; 
+    optional string debugging_info = 12;  ///&lt; 보고 싶은 디버깅 문자열 
+    optional BandwidthTest serial_bandwidth_test = 13; 
+    optional bool play_pcm_end = 14; // Host (pcqc) 에게 pcm 재생이 끝났음을 알림.
+    // from HI }}}}}}}}}}}}}}}}}}} 
+
+    // {{{{{{{{{{{{{{{{{{{ from BLE
+    optional RspServiceKey rsp_service_key = 100; // ReqServiceKey 의 응답
+    optional uint32 rsp_complete_setup = 101; // ReqCompleteSetup 의 응답
+    // from BLE }}}}}}}}}}}}}}}}}}}
+}

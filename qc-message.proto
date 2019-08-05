@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+
+message Imu {
+optional int32 x = 1;
+optional int32 y = 2;
+}
+
+message Protocol {
+optional int32 left_motor = 2;
+optional int32 right_motor = 3;
+optional bytes video = 4;
+optional bytes audio = 5;
+optional Imu imu = 6;
+optional int32 ksoo = 7;
+}
+
+
+
