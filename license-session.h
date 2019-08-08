@@ -46,10 +46,10 @@ class LicenseSession : public boost::enable_shared_from_this<LicenseSession>
         boost::asio::io_service& m_ioService;
         typedef boost::shared_ptr<LicenseSession> pointer;
         enum E_STEP {
-            STEP_CA = 0, STEP_B7, STEP_CRC, STEP_LENGTH, STEP_PROTOBUF
+            STEP_CB = 0, STEP_B7, STEP_MSGID, STEP_LENGTH, STEP_PROTOBUF
         } ;
         uint8_t data_[1024*1024];///< [수신]
-        E_STEP m_modernStep = STEP_CA;///< [수신]
+        E_STEP m_modernStep = STEP_CB;///< [수신]
         uint32_t m_requiredSize = 1;///< [수신]
         CircularBuffer m_dataBuffer = CircularBuffer(205344); ///< [수신]
         CircularBuffer m_sendBuffer = CircularBuffer(1024); ///< [송신]

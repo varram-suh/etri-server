@@ -51,14 +51,14 @@ void LicenseSession::sendStream() {
 void LicenseSession::packHiToBuffer(const ToHi* d) {
     CONSOLE_INFO("packHiToBuffer");
     int serializedSize = to_hi__get_packed_size(d);
-    int requiredSize = sizeof(ModernProtocolWithSTM) + serializedSize;
-    ModernProtocolWithSTM* pkt = (ModernProtocolWithSTM*)malloc(requiredSize);
-    pkt->sig1 = 0xCA;
-    pkt->sig2 = 0xB7;
-    pkt->crc = 0xBB;
+    int requiredSize = sizeof(EtriProtocol) + serializedSize;
+    EtriProtocol* pkt = (EtriProtocol*)malloc(requiredSize);
+    pkt->sig1 = 0xAB;
+    pkt->sig2 = 0xCD;
+    pkt->msgid = 0x1;
     pkt->length = serializedSize;
     to_hi__pack(d, pkt->data); 
-    m_sendBuffer.writeBytes(pkt, sizeof(ModernProtocolWithSTM));
+    m_sendBuffer.writeBytes(pkt, sizeof(EtriProtocol));
     m_sendBuffer.writeBytes(pkt->data, pkt->length);
     free(pkt);
 
@@ -70,16 +70,16 @@ void LicenseSession::packHiToBuffer(const ToHi* d) {
 int LicenseSession::processBytes() {
     while(m_dataBuffer.size() >= m_requiredSize) {
         switch(m_modernStep) {
-            case STEP_CA: 
+            case STEP_CB: 
                 {
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
-                    if(one == 0xCA) {
+                    if(one == 0xAB) {
                         m_modernStep = STEP_B7;
                     }
                     else {
                         printf("wrong packet %x\n", one);
-                        m_modernStep = STEP_CA;
+                        m_modernStep = STEP_CB;
                     }
                 }
                 break;
@@ -88,21 +88,21 @@ int LicenseSession::processBytes() {
                     // uart_printf("[%02x] :: %d\r\n", m_modernStep, __LINE__);
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
-                    if(one == 0xB7) {
-                        m_modernStep = STEP_CRC;
+                    if(one == 0xCD) {
+                        m_modernStep = STEP_MSGID;
                     }
                     else {
                         printf("wrong packet\n");
-                        m_modernStep = STEP_CA;
+                        m_modernStep = STEP_CB;
                     }
                 }
                 break;
-            case STEP_CRC:
+            case STEP_MSGID:
                 {
                     // uart_printf("[%02x] :: %d\r\n", m_modernStep, __LINE__);
-                    uint8_t one;
+                    uint16_t one;
                     m_dataBuffer.read(&one, sizeof(one));
-                    uint8_t crc = one;
+                    uint16_t crc = one;
                     m_modernStep = STEP_LENGTH;
                     m_requiredSize = 4; 
                 }
@@ -126,19 +126,15 @@ int LicenseSession::processBytes() {
                     delete [] buf;
                     to_host__free_unpacked(msg2, NULL);
                     m_requiredSize = 1;
-                    m_modernStep = STEP_CA;
+                    m_modernStep = STEP_CB;
                 }
                 break;
         }
     } 
     return 0;
 }
+
 void LicenseSession::processMessage(ToHost* msg2) {
-    if(msg2->has_play_pcm_end) {
-        if(msg2->play_pcm_end == 1) {
-            m_mdiChild->pcmPlayRecordStop();
-        }
-    }
     if(msg2->has_audio) {
         //CONSOLE_INFO("has_audio {}", msg2->audio.len);
         QByteArray qa = QByteArray((const char*)msg2->audio.data, (size_t)msg2->audio.len);
@@ -166,69 +162,8 @@ void LicenseSession::processMessage(ToHost* msg2) {
             m_lastRecvTime = Chrono::tickCount();
             m_recvBytes = 0;
         }
-        // ToHi tohi = TO_HI__INIT;
-        // tohi.has_do_charge = 1;
-        // tohi.do_charge = 150;
-        // packHiToBuffer(&tohi);
     }
 
-    if(msg2->has_request_start_qc) {
-        printf("start_qc!!msg\n"); 
-    }
-    if(msg2->has_request_bandwidth) {
-        printf("start bw-test!!msg\n"); 
-        ToHi tohi = TO_HI__INIT; 
-        BandwidthTest bt = BANDWIDTH_TEST__INIT;
-        std::vector<uint8_t> g(1024*1024*2);
-        bt.data.data = &g[0];
-        bt.data.len = g.size();
-        bt.has_data = 1; 
-        bt.has_step = 1;
-        bt.step = 1;
-        tohi.bandwidth_test = &bt; 
-        packHiToBuffer(&tohi);
-        bt.step = 3;
-        packHiToBuffer(&tohi);
-    }
-    if(msg2->serial_bandwidth_test) {
-        m_mdiChild->ui->chkboxSerialTest->setChecked(1);
-        m_mdiChild->ui->serialDownloadBps->setText(QString::fromStdString(std::to_string(msg2->serial_bandwidth_test->bandwidth_by_hi/1024.f) + " kb/s .........."));
-    }
-    if(msg2->bandwidth_test) {
-        QByteArray qa;
-        if(msg2->bandwidth_test->step == 1) {
-            m_lastRecvTime = Chrono::tickCount();
-            CONSOLE_INFO("bandwidth step == 1");
-            m_recvBytes = 0;
-            qa.push_back((char)1);
-            qa.push_back((char)0);
-            QMetaObject::invokeMethod(m_mdiChild,
-                                      "applyResults",
-                                      Qt::AutoConnection, // Can also use any other except DirectConnection
-                                      Q_ARG(QByteArray, qa)); // And some more args if needed
-        }
-        else if(msg2->bandwidth_test->step == 2) {
-        }
-        else if(msg2->bandwidth_test->step == 3) {
-            CONSOLE_INFO("bandwidth step == 3");
-            qa.push_back((char)1);
-            qa.push_back((char)1);
-
-            CONSOLE_INFO("recv {}", m_recvBps);
-            CONSOLE_INFO("bandwidth by hi: {}, recv Bw(kbps): {}", msg2->bandwidth_test->bandwidth_by_hi, m_recvBps / 1024.f);
-            m_lastRecvTime = Chrono::tickCount();
-            m_mdiChild->ui->downloadBandwidth->setText(QString::fromStdString(std::to_string(msg2->bandwidth_test->bandwidth_by_hi/1024.f) + " kb/s"));
-            m_mdiChild->ui->uploadBandwidth->setText(QString::fromStdString(std::to_string(m_recvBps/1024.f) + " kb/s"));
-            m_recvBytes = 0;
-
-            QMetaObject::invokeMethod(m_mdiChild,
-                                      "applyResults",
-                                      Qt::AutoConnection, // Can also use any other except DirectConnection
-                                      Q_ARG(QByteArray, qa)); // And some more args if needed
-        }
-        else {
-        }
-    }
     if(msg2->tohi_bypass) {
         CONSOLE_INFO("bypass by hi");
         auto tohi = msg2->tohi_bypass;
@@ -242,8 +177,7 @@ void LicenseSession::processMessage(ToHost* msg2) {
                                   "showStatus",
                                   Qt::AutoConnection, // Can also use any other except DirectConnection
                                   Q_ARG(QString, qa)); // And some more args if needed
-    }
-
+    } 
 
 }
 

@@ -15,16 +15,14 @@ PROTOBUF_C__BEGIN_DECLS
 #endif
 
 
-typedef struct _FirmwareUpdate FirmwareUpdate;
-typedef struct _FirmwareUpdateFeedback FirmwareUpdateFeedback;
-typedef struct _SmoothMotorControlDeprecated SmoothMotorControlDeprecated;
 typedef struct _RoughMotorControl RoughMotorControl;
 typedef struct _LedControl LedControl;
+typedef struct _PwmLed PwmLed;
 typedef struct _EncoderControl EncoderControl;
-typedef struct _BandwidthTest BandwidthTest;
-typedef struct _ToBle ToBle;
+typedef struct _ToWb55 ToWb55;
 typedef struct _ToSt ToSt;
 typedef struct _ReqCompleteSetup ReqCompleteSetup;
+typedef struct _Ap Ap;
 typedef struct _ToHi ToHi;
 typedef struct _RspServiceKey RspServiceKey;
 typedef struct _ToHost ToHost;
@@ -52,66 +50,6 @@ typedef enum _StInfo {
 } StInfo;
 
 /* --- messages --- */
-
-struct  _FirmwareUpdate
-{
-  ProtobufCMessage base;
-  protobuf_c_boolean has_data;
-  ProtobufCBinaryData data;
-  protobuf_c_boolean has_verify;
-  uint32_t verify;
-  protobuf_c_boolean has_start;
-  uint32_t start;
-  protobuf_c_boolean has_end;
-  uint32_t end;
-  protobuf_c_boolean has_start_offset;
-  uint32_t start_offset;
-  /*
-   * optional bytes bin_data = 8;
-   */
-  protobuf_c_boolean has_end_offset;
-  uint32_t end_offset;
-};
-#define FIRMWARE_UPDATE__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&firmware_update__descriptor) \
-    , 0, {0,NULL}, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-
-
-struct  _FirmwareUpdateFeedback
-{
-  ProtobufCMessage base;
-  protobuf_c_boolean has_data;
-  uint32_t data;
-  protobuf_c_boolean has_verify;
-  uint32_t verify;
-  protobuf_c_boolean has_start;
-  uint32_t start;
-  protobuf_c_boolean has_end;
-  uint32_t end;
-  protobuf_c_boolean has_crc;
-  uint32_t crc;
-};
-#define FIRMWARE_UPDATE_FEEDBACK__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&firmware_update_feedback__descriptor) \
-    , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-
-
-struct  _SmoothMotorControlDeprecated
-{
-  ProtobufCMessage base;
-  protobuf_c_boolean has_left_motor;
-  int32_t left_motor;
-  protobuf_c_boolean has_right_motor;
-  int32_t right_motor;
-  protobuf_c_boolean has_adc_interval;
-  uint32_t adc_interval;
-  protobuf_c_boolean has_acc_decrease;
-  uint32_t acc_decrease;
-};
-#define SMOOTH_MOTOR_CONTROL_DEPRECATED__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&smooth_motor_control_deprecated__descriptor) \
-    , 0, 0, 0, 0, 0, 0, 0, 0 }
-
 
 struct  _RoughMotorControl
 {
@@ -147,6 +85,23 @@ struct  _LedControl
     , 0, 0, 0, 0, 0, 0 }
 
 
+struct  _PwmLed
+{
+  ProtobufCMessage base;
+  protobuf_c_boolean has_pwm;
+  uint32_t pwm;
+  protobuf_c_boolean has_duty;
+  uint32_t duty;
+  protobuf_c_boolean has_period;
+  uint32_t period;
+  protobuf_c_boolean has_enable;
+  uint32_t enable;
+};
+#define PWM_LED__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&pwm_led__descriptor) \
+    , 0, 0, 0, 0, 0, 0, 0, 0 }
+
+
 struct  _EncoderControl
 {
   ProtobufCMessage base;
@@ -160,67 +115,56 @@ struct  _EncoderControl
     , 0, 0, 0, 0 }
 
 
-struct  _BandwidthTest
-{
-  ProtobufCMessage base;
-  protobuf_c_boolean has_data;
-  ProtobufCBinaryData data;
-  /*
-   * 처음=1, 중간=2, 마지막=3
-   */
-  protobuf_c_boolean has_step;
-  uint32_t step;
-  /*
-   * optional uint32 is_begin = 4;
-   */
-  protobuf_c_boolean has_bandwidth_by_hi;
-  uint32_t bandwidth_by_hi;
-};
-#define BANDWIDTH_TEST__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&bandwidth_test__descriptor) \
-    , 0, {0,NULL}, 0, 0, 0, 0 }
-
-
-struct  _ToBle
+struct  _ToWb55
 {
   ProtobufCMessage base;
   /*
    * {{{{{{{{{{{{{{{{{{{ from ??
    */
-  protobuf_c_boolean has_interval;
-  uint32_t interval;
+  protobuf_c_boolean has_broadcast_interval;
+  uint32_t broadcast_interval;
   protobuf_c_boolean has_power;
   uint32_t power;
   char *name;
   /*
-   * from ?? }}}}}}}}}}}}}}}}}}} 
+   * 
    */
+  protobuf_c_boolean has_get_st_message;
+  protobuf_c_boolean get_st_message;
   /*
-   * ble data
+   * hi 에서 serial resender 목적으로 seq 를 채워서 준다. 만약 이 값이 있다면, wb55 는 seq 를 그대로 담아서 보내야 한다.
    */
-  ToHi *to_hi_from_phone;
+  protobuf_c_boolean has_seq;
+  uint32_t seq;
+  /*
+   * android, st 에서 Hi 로 줄 데이터는 여기에 넣는다. 
+   * wb55 가 get_st_message 가 들어왔을 때 만들어놓은 serilize bytes 가 있다면 패킷을 만들어서 전송한다. 
+   */
+  ToHi *to_hi_from_host;
   /*
    * ble data 
    */
   ToHost *to_host_from_hi;
+  /*
+   * ble data 
+   */
+  ToSt *to_st_from_hi;
+  ToHi *to_hi_from_wb55;
 };
-#define TO_BLE__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&to_ble__descriptor) \
-    , 0, 0, 0, 0, NULL, NULL, NULL }
+#define TO_WB55__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&to_wb55__descriptor) \
+    , 0, 0, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL }
 
 
 struct  _ToSt
 {
   ProtobufCMessage base;
   /*
-   * {{{{{{{{{{{{{{{{{{{ from HI
+   * {{{{{{{{{{{{{{{{{{{ from HI begin
    */
-  SmoothMotorControlDeprecated *smooth_motor_control_deprecated;
   RoughMotorControl *rough_motor_control;
   EncoderControl *encoder_control;
   LedControl *led_control;
-  protobuf_c_boolean has_auto_charge_control;
-  protobuf_c_boolean auto_charge_control;
   /*
    * -350 ~ 350
    */
@@ -251,8 +195,6 @@ struct  _ToSt
    */
   protobuf_c_boolean has_loopback;
   ProtobufCBinaryData loopback;
-  FirmwareUpdate *stm_update;
-  FirmwareUpdate *ble_update;
   /*
    * /&lt; 증가하는값인데, 이미 처리된 명령이라면 기억하고 있는 마지막 응답을 돌려줘야 한다.  
    */
@@ -260,7 +202,7 @@ struct  _ToSt
 };
 #define TO_ST__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_st__descriptor) \
-    , NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0 }
+    , NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, 0 }
 
 
 struct  _ReqCompleteSetup
@@ -271,6 +213,17 @@ struct  _ReqCompleteSetup
 };
 #define REQ_COMPLETE_SETUP__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&req_complete_setup__descriptor) \
+    , NULL, NULL }
+
+
+struct  _Ap
+{
+  ProtobufCMessage base;
+  char *ssid;
+  char *ssid_type;
+};
+#define AP__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&ap__descriptor) \
     , NULL, NULL }
 
 
@@ -365,10 +318,6 @@ struct  _ToHi
   protobuf_c_boolean has_loopback;
   ProtobufCBinaryData loopback;
   /*
-   * from ST }}}}}}}}}}}}}}}}}}} 
-   */
-  FirmwareUpdateFeedback *firmware_update_feedback;
-  /*
    * {{{{{{{{{{{{{{{{{{{ from host
    */
   char *phone_public_key;
@@ -376,34 +325,17 @@ struct  _ToHi
   uint32_t do_charge;
   protobuf_c_boolean has_video_seq;
   uint32_t video_seq;
-  BandwidthTest *bandwidth_test;
-  protobuf_c_boolean has_request_stop_qc;
-  uint32_t request_stop_qc;
-  protobuf_c_boolean has_request_mic_loop_back;
-  uint32_t request_mic_loop_back;
-  protobuf_c_boolean has_set_invert_vert;
-  uint32_t set_invert_vert;
-  protobuf_c_boolean has_set_invert_horiz;
-  uint32_t set_invert_horiz;
-  protobuf_c_boolean has_set_mic_vol;
-  int32_t set_mic_vol;
-  protobuf_c_boolean has_set_speaker_vol;
-  uint32_t set_speaker_vol;
   protobuf_c_boolean has_set_ir_cut1;
   uint32_t set_ir_cut1;
   protobuf_c_boolean has_set_ir_cut2;
   uint32_t set_ir_cut2;
-  protobuf_c_boolean has_play_pcm;
-  int32_t play_pcm;
   protobuf_c_boolean has_set_mute;
   int32_t set_mute;
-  protobuf_c_boolean has_audio;
-  ProtobufCBinaryData audio;
   /*
    * from host }}}}}}}}}}}}}}}}}}} 
    */
-  protobuf_c_boolean has_qc_retry;
-  uint32_t qc_retry;
+  protobuf_c_boolean has_audio;
+  ProtobufCBinaryData audio;
   /*
    * {{{{{{{{{{{{{{{{{{{ from BLE
    */
@@ -412,14 +344,29 @@ struct  _ToHi
   char *ssid_type;
   protobuf_c_boolean has_req_service_key;
   uint32_t req_service_key;
+  ReqCompleteSetup *req_complete_setup;
+  /*
+   * HI 한테 주변 AP 검색하라고 명령.
+   */
+  protobuf_c_boolean has_req_scan_ap;
+  uint32_t req_scan_ap;
+  protobuf_c_boolean has_seq;
+  uint32_t seq;
   /*
    * from BLE }}}}}}}}}}}}}}}}}}} 
    */
-  ReqCompleteSetup *req_complete_setup;
+  char *sender;
+  /*
+   * {{{{{{{{{{{{{{{{{{{ from everyone
+   */
+  /*
+   * from everyone }}}}}}}}}}}}}}}}}}} 
+   */
+  PwmLed *pwm_led;
 };
 #define TO_HI__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_hi__descriptor) \
-    , NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, 0, 0, NULL, NULL, NULL, 0, 0, NULL }
+    , NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL }
 
 
 struct  _RspServiceKey
@@ -442,131 +389,47 @@ struct  _ToHost
    * {{{{{{{{{{{{{{{{{{{ from HI
    */
   /*
-   * host 가 재생할 비디오
+   * host 가 재생할 비디오(jpeg)
    */
   protobuf_c_boolean has_video;
   ProtobufCBinaryData video;
   /*
-   * host 가 재생할 오디오
+   * host 가 재생할 오디오 
    */
   protobuf_c_boolean has_audio;
   ProtobufCBinaryData audio;
   /*
-   * Hi 가 phone public key 로 암호화한 aes key, phone secret key 로 풀어야 됨.
+   * from HI }}}}}}}}}}}}}}}}}}} 
    */
-  protobuf_c_boolean has_encrypted_secret_key;
-  ProtobufCBinaryData encrypted_secret_key;
-  /*
-   * latency 측정용
-   */
-  protobuf_c_boolean has_video_seq;
-  uint32_t video_seq;
-  /*
-   * 참고자료
-   */
-  protobuf_c_boolean has_video_ts;
-  uint32_t video_ts;
-  /*
-   * hi 가 올려주는 latency
-   */
-  protobuf_c_boolean has_latency;
-  uint32_t latency;
-  /*
-   * hi 가 올려주는 h.264 bitrate
-   */
-  protobuf_c_boolean has_bitrate;
-  uint32_t bitrate;
   ToHi *tohi_bypass;
-  protobuf_c_boolean has_request_start_qc;
-  uint32_t request_start_qc;
-  protobuf_c_boolean has_request_bandwidth;
-  uint32_t request_bandwidth;
-  BandwidthTest *bandwidth_test;
   /*
-   * /&lt; 보고 싶은 디버깅 문자열 
-   */
-  char *debugging_info;
-  BandwidthTest *serial_bandwidth_test;
-  /*
-   * Host (pcqc) 에게 pcm 재생이 끝났음을 알림.
-   */
-  protobuf_c_boolean has_play_pcm_end;
-  protobuf_c_boolean play_pcm_end;
-  /*
-   * {{{{{{{{{{{{{{{{{{{ from BLE
+   * {{{{{{{{{{{{{{{{{{{ from BLE    
    */
   /*
    * ReqServiceKey 의 응답
    */
   RspServiceKey *rsp_service_key;
   /*
-   * ReqCompleteSetup 의 응답
+   * ReqCompleteSetup 의 응답 
    */
   protobuf_c_boolean has_rsp_complete_setup;
   uint32_t rsp_complete_setup;
+  /*
+   * ap scan 후 돌려주는 리스트, 폰에서 이 중 하나를 선택함.  
+   */
+  size_t n_ap_list;
+  Ap **ap_list;
+  /*
+   * ap 접속시도 결과 리턴   
+   */
+  protobuf_c_boolean has_ap_connection_result;
+  int32_t ap_connection_result;
 };
 #define TO_HOST__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_host__descriptor) \
-    , 0, {0,NULL}, 0, {0,NULL}, 0, {0,NULL}, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, 0, 0, NULL, 0, 0 }
+    , 0, {0,NULL}, 0, {0,NULL}, NULL, NULL, 0, 0, 0,NULL, 0, 0 }
 
 
-/* FirmwareUpdate methods */
-void   firmware_update__init
-                     (FirmwareUpdate         *message);
-size_t firmware_update__get_packed_size
-                     (const FirmwareUpdate   *message);
-size_t firmware_update__pack
-                     (const FirmwareUpdate   *message,
-                      uint8_t             *out);
-size_t firmware_update__pack_to_buffer
-                     (const FirmwareUpdate   *message,
-                      ProtobufCBuffer     *buffer);
-FirmwareUpdate *
-       firmware_update__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   firmware_update__free_unpacked
-                     (FirmwareUpdate *message,
-                      ProtobufCAllocator *allocator);
-/* FirmwareUpdateFeedback methods */
-void   firmware_update_feedback__init
-                     (FirmwareUpdateFeedback         *message);
-size_t firmware_update_feedback__get_packed_size
-                     (const FirmwareUpdateFeedback   *message);
-size_t firmware_update_feedback__pack
-                     (const FirmwareUpdateFeedback   *message,
-                      uint8_t             *out);
-size_t firmware_update_feedback__pack_to_buffer
-                     (const FirmwareUpdateFeedback   *message,
-                      ProtobufCBuffer     *buffer);
-FirmwareUpdateFeedback *
-       firmware_update_feedback__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   firmware_update_feedback__free_unpacked
-                     (FirmwareUpdateFeedback *message,
-                      ProtobufCAllocator *allocator);
-/* SmoothMotorControlDeprecated methods */
-void   smooth_motor_control_deprecated__init
-                     (SmoothMotorControlDeprecated         *message);
-size_t smooth_motor_control_deprecated__get_packed_size
-                     (const SmoothMotorControlDeprecated   *message);
-size_t smooth_motor_control_deprecated__pack
-                     (const SmoothMotorControlDeprecated   *message,
-                      uint8_t             *out);
-size_t smooth_motor_control_deprecated__pack_to_buffer
-                     (const SmoothMotorControlDeprecated   *message,
-                      ProtobufCBuffer     *buffer);
-SmoothMotorControlDeprecated *
-       smooth_motor_control_deprecated__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   smooth_motor_control_deprecated__free_unpacked
-                     (SmoothMotorControlDeprecated *message,
-                      ProtobufCAllocator *allocator);
 /* RoughMotorControl methods */
 void   rough_motor_control__init
                      (RoughMotorControl         *message);
@@ -605,6 +468,25 @@ LedControl *
 void   led_control__free_unpacked
                      (LedControl *message,
                       ProtobufCAllocator *allocator);
+/* PwmLed methods */
+void   pwm_led__init
+                     (PwmLed         *message);
+size_t pwm_led__get_packed_size
+                     (const PwmLed   *message);
+size_t pwm_led__pack
+                     (const PwmLed   *message,
+                      uint8_t             *out);
+size_t pwm_led__pack_to_buffer
+                     (const PwmLed   *message,
+                      ProtobufCBuffer     *buffer);
+PwmLed *
+       pwm_led__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   pwm_led__free_unpacked
+                     (PwmLed *message,
+                      ProtobufCAllocator *allocator);
 /* EncoderControl methods */
 void   encoder_control__init
                      (EncoderControl         *message);
@@ -624,43 +506,24 @@ EncoderControl *
 void   encoder_control__free_unpacked
                      (EncoderControl *message,
                       ProtobufCAllocator *allocator);
-/* BandwidthTest methods */
-void   bandwidth_test__init
-                     (BandwidthTest         *message);
-size_t bandwidth_test__get_packed_size
-                     (const BandwidthTest   *message);
-size_t bandwidth_test__pack
-                     (const BandwidthTest   *message,
+/* ToWb55 methods */
+void   to_wb55__init
+                     (ToWb55         *message);
+size_t to_wb55__get_packed_size
+                     (const ToWb55   *message);
+size_t to_wb55__pack
+                     (const ToWb55   *message,
                       uint8_t             *out);
-size_t bandwidth_test__pack_to_buffer
-                     (const BandwidthTest   *message,
+size_t to_wb55__pack_to_buffer
+                     (const ToWb55   *message,
                       ProtobufCBuffer     *buffer);
-BandwidthTest *
-       bandwidth_test__unpack
+ToWb55 *
+       to_wb55__unpack
                      (ProtobufCAllocator  *allocator,
                       size_t               len,
                       const uint8_t       *data);
-void   bandwidth_test__free_unpacked
-                     (BandwidthTest *message,
-                      ProtobufCAllocator *allocator);
-/* ToBle methods */
-void   to_ble__init
-                     (ToBle         *message);
-size_t to_ble__get_packed_size
-                     (const ToBle   *message);
-size_t to_ble__pack
-                     (const ToBle   *message,
-                      uint8_t             *out);
-size_t to_ble__pack_to_buffer
-                     (const ToBle   *message,
-                      ProtobufCBuffer     *buffer);
-ToBle *
-       to_ble__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   to_ble__free_unpacked
-                     (ToBle *message,
+void   to_wb55__free_unpacked
+                     (ToWb55 *message,
                       ProtobufCAllocator *allocator);
 /* ToSt methods */
 void   to_st__init
@@ -699,6 +562,25 @@ ReqCompleteSetup *
                       const uint8_t       *data);
 void   req_complete_setup__free_unpacked
                      (ReqCompleteSetup *message,
+                      ProtobufCAllocator *allocator);
+/* Ap methods */
+void   ap__init
+                     (Ap         *message);
+size_t ap__get_packed_size
+                     (const Ap   *message);
+size_t ap__pack
+                     (const Ap   *message,
+                      uint8_t             *out);
+size_t ap__pack_to_buffer
+                     (const Ap   *message,
+                      ProtobufCBuffer     *buffer);
+Ap *
+       ap__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   ap__free_unpacked
+                     (Ap *message,
                       ProtobufCAllocator *allocator);
 /* ToHi methods */
 void   to_hi__init
@@ -759,35 +641,29 @@ void   to_host__free_unpacked
                       ProtobufCAllocator *allocator);
 /* --- per-message closures --- */
 
-typedef void (*FirmwareUpdate_Closure)
-                 (const FirmwareUpdate *message,
-                  void *closure_data);
-typedef void (*FirmwareUpdateFeedback_Closure)
-                 (const FirmwareUpdateFeedback *message,
-                  void *closure_data);
-typedef void (*SmoothMotorControlDeprecated_Closure)
-                 (const SmoothMotorControlDeprecated *message,
-                  void *closure_data);
 typedef void (*RoughMotorControl_Closure)
                  (const RoughMotorControl *message,
                   void *closure_data);
 typedef void (*LedControl_Closure)
                  (const LedControl *message,
                   void *closure_data);
+typedef void (*PwmLed_Closure)
+                 (const PwmLed *message,
+                  void *closure_data);
 typedef void (*EncoderControl_Closure)
                  (const EncoderControl *message,
                   void *closure_data);
-typedef void (*BandwidthTest_Closure)
-                 (const BandwidthTest *message,
-                  void *closure_data);
-typedef void (*ToBle_Closure)
-                 (const ToBle *message,
+typedef void (*ToWb55_Closure)
+                 (const ToWb55 *message,
                   void *closure_data);
 typedef void (*ToSt_Closure)
                  (const ToSt *message,
                   void *closure_data);
 typedef void (*ReqCompleteSetup_Closure)
                  (const ReqCompleteSetup *message,
+                  void *closure_data);
+typedef void (*Ap_Closure)
+                 (const Ap *message,
                   void *closure_data);
 typedef void (*ToHi_Closure)
                  (const ToHi *message,
@@ -805,16 +681,14 @@ typedef void (*ToHost_Closure)
 /* --- descriptors --- */
 
 extern const ProtobufCEnumDescriptor    st_info__descriptor;
-extern const ProtobufCMessageDescriptor firmware_update__descriptor;
-extern const ProtobufCMessageDescriptor firmware_update_feedback__descriptor;
-extern const ProtobufCMessageDescriptor smooth_motor_control_deprecated__descriptor;
 extern const ProtobufCMessageDescriptor rough_motor_control__descriptor;
 extern const ProtobufCMessageDescriptor led_control__descriptor;
+extern const ProtobufCMessageDescriptor pwm_led__descriptor;
 extern const ProtobufCMessageDescriptor encoder_control__descriptor;
-extern const ProtobufCMessageDescriptor bandwidth_test__descriptor;
-extern const ProtobufCMessageDescriptor to_ble__descriptor;
+extern const ProtobufCMessageDescriptor to_wb55__descriptor;
 extern const ProtobufCMessageDescriptor to_st__descriptor;
 extern const ProtobufCMessageDescriptor req_complete_setup__descriptor;
+extern const ProtobufCMessageDescriptor ap__descriptor;
 extern const ProtobufCMessageDescriptor to_hi__descriptor;
 extern const ProtobufCMessageDescriptor rsp_service_key__descriptor;
 extern const ProtobufCMessageDescriptor to_host__descriptor;

@@ -103,22 +103,6 @@ void MdiChild::pcmPlayRecordStop()
 void MdiChild::on_pushButton_clicked()
 {
     ToHi tohi = TO_HI__INIT;
-    tohi.has_request_mic_loop_back = 1;
-
-
-    if( mic_loopback_on ) {
-        ui->playPcm->setEnabled(true);
-        ui->stopPcm->setEnabled(true);
-        mic_loopback_on = false;
-        tohi.request_mic_loop_back = mic_loopback_on;
-    }
-    else {
-        on_stopPcm_clicked();
-        ui->playPcm->setEnabled(false);
-        ui->stopPcm->setEnabled(false);
-        mic_loopback_on = true;
-        tohi.request_mic_loop_back = mic_loopback_on;
-    }
 
     auto p = m_session.lock();
     if(p) {
@@ -277,61 +261,19 @@ void MdiChild::finishedPlaying(QAudio::State state) {
 
 void MdiChild::on_micSlider_valueChanged(int value)
 {
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_mic_vol = 1;
-    tohi.set_mic_vol = value;
-    auto p = m_session.lock();
-    if(p) {
-        CONSOLE_INFO("mic slider to pack");
-        p->packHiToBuffer(&tohi);
-    }
-
-    std::string t = "";
-    t += "M.I.C volume(" + std::to_string(value) + ")";
-    ui->micVolume->setText(QString(t.c_str()));
-    CONSOLE_INFO("mic value: {}", value);
-
 }
 
 void MdiChild::on_speakerSlider_valueChanged(int value)
 {
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_speaker_vol = 1;
-    tohi.set_speaker_vol = value;
-    auto p = m_session.lock();
-    if(p) {
-        CONSOLE_INFO("spk slider to pack");
-        p->packHiToBuffer(&tohi);
-    }
-    std::string t = "";
-    t += "Speaker volume(" + std::to_string(value) + ")";
-    ui->speakerVolume->setText(QString(t.c_str()));
-    CONSOLE_INFO("spk value: {}", value); 
 }
 
 void MdiChild::on_chkHorizonalInvert_stateChanged(int arg1)
 {
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_invert_horiz = 1;
-    tohi.set_invert_horiz = arg1;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("horiz inv value: {}", arg1);
 
 }
 
 void MdiChild::on_chkVerticalInvert_stateChanged(int arg1)
 {
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_invert_vert = 1;
-    tohi.set_invert_vert = arg1;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("vert inv value: {}", arg1); 
 } 
 
 void MdiChild::on_chkIrCut1_stateChanged(int arg1)
@@ -361,39 +303,10 @@ void MdiChild::on_chkIrCut2_stateChanged(int arg1)
 
 void MdiChild::on_playPcm_clicked()
 {
-    playlistX.clear();
-    playlistY.clear();
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_play_pcm = 1;
-    tohi.play_pcm = ui->comboBoxPlayList->currentIndex() + 1;
-
-    pcm_record_count = 0;
-
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("play pcm");
-
-    on_startRecordButton_clicked();
 }
 
 void MdiChild::on_stopPcm_clicked()
 {
-    if( pcmVolumeOutput )
-    {
-        fclose(pcmVolumeOutput);
-        pcmVolumeOutput = nullptr;
-    }
-
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_play_pcm = 1;
-    tohi.play_pcm = 0;
-    m_hz_division = 0;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
     CONSOLE_INFO("stop pcm");
 
 }
@@ -410,19 +323,21 @@ void MdiChild::showStatus(const QString& message) {
 
 void MdiChild::on_retryButton_clicked()
 {
-    ui->chkboxDownloadTest->setChecked(0);
-    ui->chkboxUploadTest->setChecked(0);
-    ui->chkboxSerialTest->setChecked(0);
-
-
     ToHi tohi = TO_HI__INIT;
-    tohi.has_qc_retry = 1;
+    PwmLed pwmLed = PWM_LED__INIT;
+    tohi.pwm_led = &pwmLed;
+    pwmLed.has_pwm = 1;
+    pwmLed.pwm = rand() % 2;
+    pwmLed.has_duty = 1;
+    pwmLed.duty = rand() % 600;
+    pwmLed.has_period = 1; // rand() % 1000;
+    pwmLed.period = rand() % 1000;
+    pwmLed.has_enable = 1;
+    pwmLed.enable = 1; 
     auto p = m_session.lock();
     if(p) {
         p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("retry QC");
-
+    } 
 }
 
 void MdiChild::on_retryButton_clicked(bool checked)
