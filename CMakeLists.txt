@@ -26,6 +26,7 @@ find_package(Qt5Multimedia REQUIRED)
 find_package( OpenCV REQUIRED )
 find_package(Qt5PrintSupport REQUIRED )
 
+MESSAGE(${OpenCV_LIBS})
 # Populate a CMake variable with the sources
 set(helloworld_SRCS
     mainwindow.ui
@@ -51,6 +52,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}
     ${Protobuf_INCLUDE_DIRS}
     ${CMAKE_BINARY_DIR}/src
+    ${OpenCV_INCLUDE_DIR}
+
     )
 
 target_link_libraries(helloworld

@@ -1,30 +1,10 @@
 syntax = "proto2"; 
+
+
 // option java_package = "com.example.ksoo.ballbotpkg";
-option java_package = "com.varram.model";
+// option java_package = "com.varram.model";
+// 참고 자료: https://docs.google.com/presentation/d/1tmdnr6woK1--EoZApqjyL7k8lveUc39JXn4Tf8xv5pc/edit?usp=sharing
 
-message FirmwareUpdate {
-    optional bytes data = 2;
-    optional uint32 verify = 3;
-    optional uint32 start = 4;
-    optional uint32 end = 5; 
-    optional uint32 start_offset = 6;
-    optional uint32 end_offset = 7;
-    // optional bytes bin_data = 8;
-} 
-
-message FirmwareUpdateFeedback {
-    optional uint32 data = 2;
-    optional uint32 verify = 3;
-    optional uint32 start = 4;
-    optional uint32 end = 5; 
-    optional uint32 crc = 6;
-}
-message SmoothMotorControlDeprecated {
-    optional int32 left_motor = 1;
-    optional int32 right_motor = 2;
-    optional uint32 adc_interval = 3;
-    optional uint32 acc_decrease = 4;
-}
 message RoughMotorControl {
     optional int32 left_motor = 1;		//0~60rpm
     optional int32 right_motor = 2;		//0~60rpm
@@ -41,12 +21,6 @@ message EncoderControl {
     optional uint32 right = 2;
 }
 
-message BandwidthTest {
-    optional bytes data = 1;
-    optional uint32 step = 2; // 처음=1, 중간=2, 마지막=3
-    optional uint32 bandwidth_by_hi = 3;
-    // optional uint32 is_begin = 4;
-}
 
 enum StInfo
 {
@@ -61,20 +35,25 @@ enum StInfo
     BATTERY = 256;
 }
 
-message ToBle {
+message ToWb55 {
     // {{{{{{{{{{{{{{{{{{{ from ??
-    optional uint32 interval = 1;
+    optional uint32 broadcast_interval = 1;
     optional uint32 power = 2;
     optional string name = 3;
+    optional bool get_st_message = 4; // 
+    optional uint32 seq = 5; // hi 에서 serial resender 목적으로 seq 를 채워서 준다. 만약 이 값이 있다면, wb55 는 seq 를 그대로 담아서 보내야 한다.
     // from ?? }}}}}}}}}}}}}}}}}}} 
-    optional ToHi to_hi_from_phone = 50; // ble data
-    optional ToHost to_host_from_hi = 51; // ble data 
-}
 
+    // android, st 에서 Hi 로 줄 데이터는 여기에 넣는다. 
+    // wb55 가 get_st_message 가 들어왔을 때 만들어놓은 serilize bytes 가 있다면 패킷을 만들어서 전송한다. 
+    optional ToHi to_hi_from_host = 50; 
+    optional ToHost to_host_from_hi = 51; // ble data 
+    optional ToSt to_st_from_hi = 52; // ble data 
+    optional ToHi to_hi_from_wb55 = 53; 
+} 
 
 message ToSt {
-    // {{{{{{{{{{{{{{{{{{{ from HI
-    optional SmoothMotorControlDeprecated smooth_motor_control_deprecated = 1;
+    // {{{{{{{{{{{{{{{{{{{ from HI begin
     optional RoughMotorControl rough_motor_control = 2;
     optional EncoderControl encoder_control = 3;
     optional LedControl led_control = 4;
@@ -85,8 +64,6 @@ message ToSt {
     optional uint32 do_charge = 9; // 충전해라.
     optional uint32 reset_if_no_serial = 10; // 1 이면 시리얼이 특정 시간만큼 안들어왔을 때 전원 리셋
     optional bytes loopback = 11; // 여기에 속한 데이터를 그대로 담아서 응답해야 함.
-    optional FirmwareUpdate stm_update = 12;
-    optional FirmwareUpdate ble_update = 13; 
     required uint32 seq = 99; ///&lt; 증가하는값인데, 이미 처리된 명령이라면 기억하고 있는 마지막 응답을 돌려줘야 한다.  
     // from HI }}}}}}}}}}}}}}}}}}} 
 }
@@ -95,6 +72,12 @@ message ReqCompleteSetup {
     optional string user_id = 1;
     optional string device_id = 2;
 }
+
+message Ap {    
+    optional string ssid = 1; 
+    optional string ssid_type = 2;
+} 
+
 message ToHi {
     optional ToHost tohost_bypass = 1;
     optional ToSt tost_bypass = 2;
@@ -123,29 +106,16 @@ message ToHi {
     optional bool charge_complete = 23;
     optional uint32 auto_charge_step = 24;
     optional bytes loopback = 25; // ToSt::loopback 으로 전달된 데이터가 다시 받아지는 것.  
-    optional FirmwareUpdateFeedback firmware_update_feedback = 26;
     // from ST }}}}}}}}}}}}}}}}}}} 
-
-
 
     // {{{{{{{{{{{{{{{{{{{ from host
     optional string phone_public_key = 100;
     optional uint32 do_charge = 101;
     optional uint32 video_seq = 102;
-    optional BandwidthTest bandwidth_test = 103; 
-    optional uint32 request_stop_qc = 104; 
-
-    optional uint32 request_mic_loop_back = 105;
-    optional uint32 set_invert_vert = 106; 
-    optional uint32 set_invert_horiz = 107; 
-    optional int32 set_mic_vol = 108; 
-    optional uint32 set_speaker_vol = 109; 
     optional uint32 set_ir_cut1 = 110; 
     optional uint32 set_ir_cut2 = 111; 
-    optional int32 play_pcm = 112; 
     optional int32 set_mute = 113; 
     optional bytes audio = 114;
-    optional uint32 qc_retry = 115;
     // from host }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from BLE
@@ -155,9 +125,12 @@ message ToHi {
 
     optional uint32 req_service_key = 203;
     optional ReqCompleteSetup req_complete_setup = 204;
+    optional uint32 req_scan_ap = 205; // HI 한테 주변 AP 검색하라고 명령.
+    optional uint32 seq = 999;
+    required string sender = 1000;
     // from BLE }}}}}}}}}}}}}}}}}}} 
 }
-// ToHi 
+// ToHi close
 
 message RspServiceKey {
     optional string service_key = 1;
@@ -165,6 +138,7 @@ message RspServiceKey {
     optional string model_name = 3;
     optional string serial_number = 4;
 }
+
 message ToHost {
     // {{{{{{{{{{{{{{{{{{{ from HI
     optional bytes video = 1; // host 가 재생할 비디오
@@ -176,16 +150,13 @@ message ToHost {
     optional uint32 bitrate = 7; // hi 가 올려주는 h.264 bitrate
 
     optional ToHi tohi_bypass = 8;
-    optional uint32 request_start_qc = 9;
-    optional uint32 request_bandwidth = 10; 
-    optional BandwidthTest bandwidth_test = 11; 
-    optional string debugging_info = 12;  ///&lt; 보고 싶은 디버깅 문자열 
-    optional BandwidthTest serial_bandwidth_test = 13; 
-    optional bool play_pcm_end = 14; // Host (pcqc) 에게 pcm 재생이 끝났음을 알림.
+    optional uint64 pts = 15; // video or audio pts.
     // from HI }}}}}}}}}}}}}}}}}}} 
 
-    // {{{{{{{{{{{{{{{{{{{ from BLE
+    // {{{{{{{{{{{{{{{{{{{ from BLE    
     optional RspServiceKey rsp_service_key = 100; // ReqServiceKey 의 응답
-    optional uint32 rsp_complete_setup = 101; // ReqCompleteSetup 의 응답
-    // from BLE }}}}}}}}}}}}}}}}}}}
+    optional uint32 rsp_complete_setup = 101; // ReqCompleteSetup 의 응답 
+    repeated Ap ap_list = 102; // ap scan 후 돌려주는 리스트, 폰에서 이 중 하나를 선택함.  
+    optional int32 ap_connection_result = 103; // ap 접속시도 결과 리턴   
 }
+

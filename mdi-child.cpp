@@ -9,7 +9,6 @@ using nlohmann::json;
 #include "license-session.h"
 #include "spdlogger.h"
 #include <opencv2/opencv.hpp>
-
 #include <opencv2/imgproc/types_c.h>
 
 
