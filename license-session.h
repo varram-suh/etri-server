@@ -46,7 +46,8 @@ class LicenseSession : public boost::enable_shared_from_this<LicenseSession>
         boost::asio::io_service& m_ioService;
         typedef boost::shared_ptr<LicenseSession> pointer;
         enum E_STEP {
-            STEP_CB = 0, STEP_B7, STEP_MSGID, STEP_LENGTH, STEP_PROTOBUF
+            STEP_CB = 0, STEP_B7, STEP_LENGTH, STEP_PROTOBUF,
+            STEP_CE, STEP_ELSEN_LENGTH, STEP_ELSEN_PACKET
         } ;
         uint8_t data_[1024*1024];///< [수신]
         E_STEP m_modernStep = STEP_CB;///< [수신]

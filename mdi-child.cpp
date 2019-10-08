@@ -20,38 +20,6 @@ MdiChild::MdiChild(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    { // set graph 1 : realtime
-        realtimeX.resize(640);
-        realtimeY.resize(640);
-        for(int i=0; i<640; i++) realtimeX[i] = i;
-        ui->soundPlotChart->addGraph();
-        ui->soundPlotChart->graph(0)->setData(realtimeX, realtimeY);
-        ui->soundPlotChart->xAxis->setLabel("real_time pcm data(0 ~ 255)");
-        ui->soundPlotChart->yAxis->setLabel("soundLevel");
-        ui->soundPlotChart->xAxis->setRange(0, 640);
-        ui->soundPlotChart->yAxis->setRange(0, 255);
-        ui->soundPlotChart->replot();
-    } // end of set graph 1
-
-    { // set graph 2 : realtime
-        ui->soundPlotChart2->addGraph();
-        ui->soundPlotChart2->graph(0)->setData(playlistX, playlistY);
-        ui->soundPlotChart2->xAxis->setLabel("Frequency (Hz))");
-        ui->soundPlotChart2->yAxis->setLabel("soundLevel");
-        ui->soundPlotChart2->xAxis->setRange(0, 1000);
-        ui->soundPlotChart2->yAxis->setRange(0, 255);
-        ui->soundPlotChart2->replot();
-    } // end of set graph 2
-
-    {
-        ui->comboBoxPlayList->addItem("Do Re Mi Sound");
-        ui->comboBoxPlayList->addItem("500 to 20khz");
-        ui->comboBoxPlayList->addItem("NO(music)");
-        ui->comboBoxPlayList->addItem("1 5 8 12 16");
-        ui->comboBoxPlayList->addItem("Nessun Dorrma 48k");
-        ui->comboBoxPlayList->addItem("NO(TEST)");
-    }
-
     QAudioFormat format;
     format.setSampleRate(16000);
     format.setChannelCount(1);
@@ -63,7 +31,6 @@ MdiChild::MdiChild(QWidget *parent) :
     QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
     if (!info.isFormatSupported(format)) {
         printf("no supported\n");
-        // qWarning()<<"raw audio format not supported by backend, cannot play audio.";
         return;
     }
 
@@ -71,32 +38,8 @@ MdiChild::MdiChild(QWidget *parent) :
     qb.open(QIODevice::ReadWrite);
     connect(audio,SIGNAL(stateChanged(QAudio::State)),SLOT(finishedPlaying(QAudio::State)));
     m_audioDevice = audio->start();
-    //QString img_path = "/home/ksoo/Downloads/1553473895132.jpg";
-    //QImage img(img_path);    
-    //QPixmap buf = QPixmap::fromImage(img); 
 }
 MdiChild::~MdiChild() {
-    if( pcmVolumeOutput )
-    {
-        fclose(pcmVolumeOutput);
-        pcmVolumeOutput = nullptr;
-    }
-}
-
-void MdiChild::pcmPlayRecordStop()
-{
-    isPlayPcmNow = false;
-
-    if( pcmVolumeOutput )
-    {
-        CONSOLE_INFO("close pcmRecord.txt file");
-        fclose(pcmVolumeOutput);
-        pcmVolumeOutput = nullptr;
-        ui->closeRecordButton->setText("PCM Textfile Closed. Named \"pcmRecord.txt\"");
-    }
-    pcm_record_count = 0;
-    playlistX.clear();
-    playlistY.clear();
 }
 
 void MdiChild::on_pushButton_clicked()
@@ -137,206 +80,26 @@ void MdiChild::mySlotName(const QByteArray& message) {
     ui->label->setPixmap(QPixmap::fromImage(QImage(img.data, img.cols, img.rows, img.step, QImage::Format_RGB888)));
 }
 
+//void MdiChild::showBandwidth(int download, int upload) {
+//}
 
-void MdiChild::applyResults(const QByteArray& message) {
-    if(message.size() >= 1) {
-        if(message[0]) {
-            ui->chkboxDownloadTest->setChecked(1);
-        }
-        else {
-            ui->chkboxDownloadTest->setChecked(0);
-        }
-    }
-    if(message.size() >= 2) {
-        if(message[1]) {
-            ui->chkboxUploadTest->setChecked(1);
-        }
-        else {
-            ui->chkboxUploadTest->setChecked(0);
-        }
-    }
-    if(message.size() >= 3) {
-        if(message[2]) {
-            ui->chkboxSerialTest->setChecked(1);
-        }
-        else {
-            ui->chkboxSerialTest->setChecked(0);
-        }
-    }
-
-    ui->micSlider->setValue(20);
-    // on_micSlider_valueChanged(20);
-    ui->speakerSlider->setValue(0);
-    // on_speakerSlider_valueChanged(0); 
-    on_chkIrCut1_stateChanged(0);
-    on_chkIrCut2_stateChanged(0);
-}
-void MdiChild::showBandwidth(int download, int upload) {
-    CONSOLE_INFO("{} / {}-----------------------------", download, upload);
-    ui->downloadBandwidth->setText(QString::fromStdString(std::to_string(download/1024.f) + " kb/s"));
-    ui->uploadBandwidth->setText(QString::fromStdString(std::to_string(upload/1024.f) + " kb/s"));
-}
 void MdiChild::mySlotName2(const QByteArray& message) {
-    char* buff = (char*)message.data();
-
-    char minBuf = 127;
-    char maxBuf = -128;
-    int len = message.size();
-
-    for(int i=0; i<len; i++) {
-        realtimeY.pop_front();
-        realtimeY.push_back(buff[i]+128);
-        minBuf = minBuf < buff[i] ? minBuf : buff[i];
-        maxBuf = maxBuf > buff[i] ? maxBuf : buff[i];
-    }
-
-    ui->soundPlotChart->graph(0)->setData(realtimeX, realtimeY);
-    ui->soundPlotChart->replot();
-
-    if( pcmVolumeOutput )
-    {
-        printf("%d %d\n", maxBuf-minBuf, pcm_record_count);
-        playlistX.push_back(pcm_record_count++);
-        playlistY.push_back(maxBuf-minBuf);
-        ui->soundPlotChart2->graph(0)->setData(playlistX, playlistY);
-        ui->soundPlotChart2->xAxis->setRange(0, pcm_record_count);
-        ui->soundPlotChart2->replot();
-        std::chrono::system_clock::time_point endTimePoint = std::chrono::system_clock::now();
-        std::chrono::milliseconds ms = std::chrono::duration_cast<std::chrono::milliseconds>(endTimePoint - startTimePoint);
-        fprintf(pcmVolumeOutput, "%d\t%d\n", ms.count(), maxBuf-minBuf);
-    }
-
-    // CONSOLE_INFO("mesize: {}", message.size());
-    // m_audioDevice->write(buff, message.size());
-    // ssize_t volume = 0;
-    // for(int i=0; i<message.size(); i+=2) { 
-    //     int16_t* b = (int16_t*)&buff[i];
-    //     volume += *b;
-    // }
-    // volume /= (message.size() / 2);
-    // volume *= 100;
-    // volume += 30000;
-
-    // volume = sqrtf(volume);
-    // ui->progressBar->setValue(volume);
-
-    // // qb = new QBuffer;
-    // qb->seek(0);
-    // qb->write(m_protocol.mutable_audio()->c_str(), m_protocol.mutable_audio()->size());
-    // qb->seek(0);
-    // ui->label->setPixmap(pix);
-    // ui->label->resize(pix.width(), pix.height()); 
-    // if(m_state == 0) {
-    //     printf("slot2\n");
-    //     audio->start(message);
-    // }
-    // else {
-    //     printf("not slot2\n");
-    //     buffers.push(message); 
-    // }
 }
 void MdiChild::finishedPlaying(QAudio::State state) {
-    // if(state == QAudio::ActiveState) {
-    //     m_state = 1;
-    // }
-    // else {
-    //     m_state = 0;
-    //     if(buffers.empty() == false) {
-    //         m_state = 1;
-    //         QBuffer* qb = buffers.front();
-    //         buffers.pop();
-    //         qb->seek(0);
-    //         printf("self start\n");
-    //         audio->start(qb);
-    //     }
-    //     else {
-    //         m_state = 0;
-    //     }
-    // }
-    // if(state == QAudio::StoppedState) {
-    // }
-}
-
-
-void MdiChild::on_micSlider_valueChanged(int value)
-{
-}
-
-void MdiChild::on_speakerSlider_valueChanged(int value)
-{
-}
-
-void MdiChild::on_chkHorizonalInvert_stateChanged(int arg1)
-{
-
-}
-
-void MdiChild::on_chkVerticalInvert_stateChanged(int arg1)
-{
-} 
-
-void MdiChild::on_chkIrCut1_stateChanged(int arg1)
-{
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_ir_cut1 = 1;
-    tohi.set_ir_cut1 = arg1;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("ir cut1 value: {}", arg1); 
-}
-
-void MdiChild::on_chkIrCut2_stateChanged(int arg1)
-{
-    ToHi tohi = TO_HI__INIT;
-    tohi.has_set_ir_cut2 = 1;
-    tohi.set_ir_cut2 = arg1;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    CONSOLE_INFO("ir cut2 value: {}", arg1); 
-
-}
-
-void MdiChild::on_playPcm_clicked()
-{
-}
-
-void MdiChild::on_stopPcm_clicked()
-{
-    CONSOLE_INFO("stop pcm");
-
 }
 
 void MdiChild::onDisconnection() {
     delete this;
 }
 void MdiChild::showRecvBytes(const QString& message) {
-    ui->recvBandwidth->setText(message);
+    //ui->recvBandwidth->setText(message);
 }
+
 void MdiChild::showStatus(const QString& message) {
-    ui->statusLabel->setText(message);
 }
 
 void MdiChild::on_retryButton_clicked()
 {
-    ToHi tohi = TO_HI__INIT;
-    PwmLed pwmLed = PWM_LED__INIT;
-    tohi.pwm_led = &pwmLed;
-    pwmLed.has_pwm = 1;
-    pwmLed.pwm = rand() % 2;
-    pwmLed.has_duty = 1;
-    pwmLed.duty = rand() % 600;
-    pwmLed.has_period = 1; // rand() % 1000;
-    pwmLed.period = rand() % 1000;
-    pwmLed.has_enable = 1;
-    pwmLed.enable = 1; 
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    } 
 }
 
 void MdiChild::on_retryButton_clicked(bool checked)
@@ -349,39 +112,113 @@ void MdiChild::on_retryButton_pressed()
 
 }
 
-void MdiChild::on_startRecordButton_clicked()
+void MdiChild::on_savePositionButton_clicked()
 {
-    isPlayPcmNow = true;
-    if( !pcmVolumeOutput )
-    {
-        CONSOLE_INFO("Start PCM Record");
-        pcmVolumeOutput = fopen("./pcmRecord.txt", "w");
-        startTimePoint = std::chrono::system_clock::now();
-        fprintf(pcmVolumeOutput, "ms\tsoundLevel\n");
-        pcm_record_count = 0;
+    ToHi tohi = TO_HI__INIT;
+    tohi.has_do_charge = 1;
+    tohi.do_charge = 11;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
     }
-    else
-    {
-        CONSOLE_INFO("PCM Recording... ignore button press");
-    }
-
-    ui->startRecordButton->setText("Recoding Now......");
-    ui->closeRecordButton->setText("Close Record PCM Data");
 }
 
-void MdiChild::on_closeRecordButton_clicked()
+void MdiChild::on_gotoPositionButton_clicked()
 {
-    if( pcmVolumeOutput )
-    {
-        CONSOLE_INFO("close pcmRecord.txt file");
-        fclose(pcmVolumeOutput);
-        pcmVolumeOutput = nullptr;
-        ui->closeRecordButton->setText("PCM Textfile Closed. Named \"pcmRecord.txt\"");
+    ToHi tohi = TO_HI__INIT;
+    tohi.has_do_charge = 1;
+    tohi.do_charge = 12;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
     }
-    else
-    {
-        CONSOLE_INFO("PCM Record NOT Start yet. ignore button press");
-        ui->closeRecordButton->setText("PCM Record NOT Start yet. ignore button press");
+}
+
+void MdiChild::on_initPositionButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    tohi.has_do_charge = 1;
+    tohi.do_charge = 13;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
     }
-    ui->startRecordButton->setText("Start Record PCM Data");
+}
+
+void MdiChild::on_pwmChangeButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    PwmLed pwmLed = PWM_LED__INIT;
+    tohi.pwm_led = &pwmLed;
+    pwmLed.has_pwm = 1;
+    pwmLed.pwm = rand() % 2;
+    pwmLed.has_duty = 1;
+    pwmLed.duty = rand() % 600;
+    pwmLed.has_period = 1; // rand() % 1000;
+    pwmLed.period = rand() % 1000;
+    pwmLed.has_enable = 1;
+    pwmLed.enable = 1;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_vaToggleButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    tohi.has_do_charge = 1;
+    tohi.do_charge = 2;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveUpButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
+    rmc.has_left_motor = 1;
+    rmc.has_right_motor = 1;
+
+    rmc.left_motor = 1;
+    rmc.right_motor = 1;
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveLeftButton_clicked()
+{
+
+}
+
+void MdiChild::on_moveOriginButton_clicked()
+{
+
+}
+
+void MdiChild::on_moveRightButton_clicked()
+{
+
+}
+
+void MdiChild::on_moveDownButton_clicked()
+{
+
+}
+
+void MdiChild::on_moveNeckUp_clicked()
+{
+
+}
+
+void MdiChild::on_moveNeckDown_clicked()
+{
+
 }

@@ -40,28 +40,10 @@ private slots:
     void on_pushButton_clicked();
     void mySlotName(const QByteArray& message);
     void mySlotName2(const QByteArray& message);
-    void applyResults(const QByteArray& message);
-    void showBandwidth(int download, int upload);
     void finishedPlaying(QAudio::State state);
     void onDisconnection();
     void showRecvBytes(const QString& message);
     void showStatus(const QString& message);
-    void on_micSlider_valueChanged(int value);
-
-    void on_speakerSlider_valueChanged(int value);
-
-    void on_chkHorizonalInvert_stateChanged(int arg1);
-
-    void on_chkVerticalInvert_stateChanged(int arg1);
-
-    void on_chkIrCut1_stateChanged(int arg1);
-
-    void on_chkIrCut2_stateChanged(int arg1);
-
-    void on_playPcm_clicked();
-
-    void on_stopPcm_clicked();
-
 
     void on_retryButton_clicked();
 
@@ -69,9 +51,29 @@ private slots:
 
     void on_retryButton_pressed();
 
-    void on_startRecordButton_clicked();
+    void on_savePositionButton_clicked();
 
-    void on_closeRecordButton_clicked();
+    void on_gotoPositionButton_clicked();
+
+    void on_initPositionButton_clicked();
+
+    void on_pwmChangeButton_clicked();
+
+    void on_vaToggleButton_clicked();
+
+    void on_moveUpButton_clicked();
+
+    void on_moveLeftButton_clicked();
+
+    void on_moveOriginButton_clicked();
+
+    void on_moveRightButton_clicked();
+
+    void on_moveDownButton_clicked();
+
+    void on_moveNeckUp_clicked();
+
+    void on_moveNeckDown_clicked();
 
 public:
     Ui::MdiChild *ui;
@@ -83,13 +85,8 @@ public:
     boost::weak_ptr<LicenseSession> m_session;
     QVector<double> realtimeX, realtimeY;
     QVector<double> playlistX, playlistY;
-    FILE *pcmVolumeOutput = nullptr;
-    int pcm_record_count = 0;
     std::chrono::system_clock::time_point startTimePoint;
 
-    bool isPlayPcmNow = false;
-
-    void pcmPlayRecordStop();
     int m_hz_division = 0;
     bool mic_loopback_on = false;
 

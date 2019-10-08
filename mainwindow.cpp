@@ -61,7 +61,7 @@ void MainWindow::handle_accept(typename LicenseSession::pointer new_session,
         // }
     }
     else {
-        printf("delete %x\n", new_session.get());
+        printf("delete \n");
         std::cout << error.message() << std::endl;
     }
 

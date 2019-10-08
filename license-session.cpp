@@ -54,7 +54,6 @@ void LicenseSession::packHiToBuffer(const ToHi* d) {
     EtriProtocol* pkt = (EtriProtocol*)malloc(requiredSize);
     pkt->sig1 = 0xAB;
     pkt->sig2 = 0xCD;
-    pkt->msgid = 0x1;
     pkt->length = serializedSize;
     to_hi__pack(d, pkt->data); 
     m_sendBuffer.writeBytes(pkt, sizeof(EtriProtocol));
@@ -76,8 +75,11 @@ int LicenseSession::processBytes() {
                     if(one == 0xAB) {
                         m_modernStep = STEP_B7;
                     }
+                    else if( one == 0xEA ) {
+                        m_modernStep = STEP_CE;
+                    }
                     else {
-                        printf("wrong packet %x\n", one);
+                        printf("wrong packet %02x\n", one);
                         m_modernStep = STEP_CB;
                     }
                 }
@@ -88,7 +90,7 @@ int LicenseSession::processBytes() {
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
                     if(one == 0xCD) {
-                        m_modernStep = STEP_MSGID;
+                        m_modernStep = STEP_LENGTH;
                     }
                     else {
                         printf("wrong packet\n");
@@ -96,14 +98,19 @@ int LicenseSession::processBytes() {
                     }
                 }
                 break;
-            case STEP_MSGID:
+            case STEP_CE:
                 {
                     // uart_printf("[%02x] :: %d\r\n", m_modernStep, __LINE__);
-                    uint16_t one;
+                    uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
-                    uint16_t crc = one;
-                    m_modernStep = STEP_LENGTH;
-                    m_requiredSize = 4; 
+                    if(one == 0xCE) {
+                        m_modernStep = STEP_ELSEN_LENGTH;
+                        m_requiredSize = 4;
+                    }
+                    else {
+                        printf("wrong packet\n");
+                        m_modernStep = STEP_CB;
+                    }
                 }
                 break;
             case STEP_LENGTH:
@@ -114,6 +121,35 @@ int LicenseSession::processBytes() {
                     m_modernStep = STEP_PROTOBUF;
                     // CONSOLE_INFO("[needed: {}]", m_requiredSize);
                     // uart_printf("[needed: %02d] :: %d\r\n", requiredBytes, __LINE__);
+                }
+                break;
+            case STEP_ELSEN_LENGTH:
+                {
+                    uint32_t one;
+                    m_dataBuffer.read(&one, sizeof(one));
+                    m_requiredSize = one; 
+                    m_modernStep = STEP_ELSEN_PACKET;
+                    printf("LEN : %u\n", one);
+                }
+                break;
+            case STEP_ELSEN_PACKET:
+                {
+                    uint8_t* buf = new uint8_t[m_requiredSize];
+                    m_dataBuffer.read(buf, m_requiredSize);
+                    CONSOLE_INFO("ELSEN PACKET");
+                    printf("0xEA 0xCE ");
+                    printf("0x%02X ", (m_requiredSize << 0 ) & 0xFF);
+                    printf("0x%02X ", (m_requiredSize << 8 ) & 0xFF);
+                    printf("0x%02X ", (m_requiredSize << 16) & 0xFF);
+                    printf("0x%02X ", (m_requiredSize << 24) & 0xFF);
+
+                    for(size_t i=0; i<m_requiredSize; i++) {
+                        printf("0x%02X ", buf[i]);
+                    }
+                    printf("\n");
+                    delete [] buf;
+                    m_requiredSize = 1;
+                    m_modernStep = STEP_CB;
                 }
                 break;
             case STEP_PROTOBUF:
@@ -140,23 +176,16 @@ void LicenseSession::processMessage(ToHost* msg2) {
 
         QMetaObject::invokeMethod(m_mdiChild,
                                   "mySlotName2",
-                                  Qt::AutoConnection, // Can also use any other except DirectConnection
-                                  Q_ARG(QByteArray, qa)); // And some more args if needed
-
-
-
-
-
-
+                                  Qt::AutoConnection,
+                                  Q_ARG(QByteArray, qa));
     }
+
     if(msg2->has_video) {
         QByteArray qa = QByteArray((const char*)msg2->video.data, (size_t)msg2->video.len);
-        //const char* myMessage = m_protocol.mutable_video()->c_str(); // QString("TCP event received.");
-        //viewMemory((void*)myMessage, 10);
         QMetaObject::invokeMethod(m_mdiChild,
                                   "mySlotName",
-                                  Qt::AutoConnection, // Can also use any other except DirectConnection
-                                  Q_ARG(QByteArray, qa)); // And some more args if needed
+                                  Qt::AutoConnection,
+                                  Q_ARG(QByteArray, qa));
         if(Chrono::tickCount() - m_lastRecvTime > 1000) {
             m_lastRecvTime = Chrono::tickCount();
             m_recvBytes = 0;

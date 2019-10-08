@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>693</width>
-    <height>500</height>
+    <width>928</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,227 +83,114 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="statusLabel">
-        <property name="text">
-         <string>TextLabel</string>
+       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0">
+        <property name="spacing">
+         <number>5</number>
         </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="0,0,0,0" rowminimumheight="0,0,0,0,0,0,0,0,0,0">
-        <item row="1" column="0">
-         <widget class="QCheckBox" name="chkboxDownloadTest">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="initPositionButton">
           <property name="text">
-           <string>WIFI 다운로드 테스트</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QSlider" name="speakerSlider">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimum">
-           <number>-100</number>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>-100</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QCheckBox" name="chkIrCut2">
-          <property name="text">
-           <string>IR CUT 2</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="downloadBandwidth">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="3">
-         <widget class="QPushButton" name="stopPcm">
-          <property name="text">
-           <string>stop music!</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QCheckBox" name="chkboxUploadTest">
-          <property name="text">
-           <string>WIFI 업로드 테스트</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QCheckBox" name="chkIrCut1">
-          <property name="text">
-           <string>IR CUT 1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QCheckBox" name="chkVerticalInvert">
-          <property name="text">
-           <string>Vertical Invert</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QSlider" name="micSlider">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximum">
-           <number>45</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0" colspan="4">
-         <widget class="QLabel" name="recvBandwidth">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>4</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>0 kbps</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QCheckBox" name="chkHorizonalInvert">
-          <property name="text">
-           <string>Horizonal Invert</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QPushButton" name="playPcm">
-          <property name="text">
-           <string>play music!</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QCheckBox" name="chkboxSerialTest">
-          <property name="text">
-           <string>시리얼 rx/tx 테스트</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QCheckBox" name="checkBox_4">
-          <property name="text">
-           <string>BLE download 테스트</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Mic-Speak loop back</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="serialDownloadBps">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="speakerVolume">
-          <property name="text">
-           <string>Speaker volume</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLabel" name="uploadBandwidth">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="micVolume">
-          <property name="text">
-           <string>M.I.C volume</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QCheckBox" name="motor1">
-          <property name="text">
-           <string>Motor 1</string>
+           <string>Init Position</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QCheckBox" name="motor2">
+         <widget class="QPushButton" name="savePositionButton">
           <property name="text">
-           <string>Motor 2</string>
+           <string>Save Position</string>
           </property>
          </widget>
         </item>
         <item row="4" column="2">
-         <widget class="QCheckBox" name="motor3">
+         <widget class="QPushButton" name="gotoPositionButton">
           <property name="text">
-           <string>Motor 3</string>
+           <string>Go to Position</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="3">
-         <widget class="QCheckBox" name="motor4">
+        <item row="6" column="4">
+         <widget class="QPushButton" name="pushButton_2">
           <property name="text">
-           <string>Motor 4</string>
+           <string>------------------</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="2">
-         <widget class="QPushButton" name="startRecordButton">
+        <item row="4" column="5">
+         <widget class="QPushButton" name="pwmChangeButton">
           <property name="text">
-           <string>Start Record PCM Data</string>
+           <string>random PWM</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="3">
-         <widget class="QPushButton" name="closeRecordButton">
+        <item row="1" column="2">
+         <widget class="QPushButton" name="moveOriginButton">
           <property name="text">
-           <string>Close Record PCM Data</string>
+           <string>O</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
-         <widget class="QComboBox" name="comboBoxPlayList"/>
+        <item row="5" column="5">
+         <widget class="QPushButton" name="vaToggleButton">
+          <property name="text">
+           <string>Video/Audio Toggle</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>------------------</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="moveUpButton">
+          <property name="text">
+           <string>^</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="moveRightButton">
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="moveLeftButton">
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="moveDownButton">
+          <property name="text">
+           <string>v</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>------------------</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QPushButton" name="moveNeckUp">
+          <property name="text">
+           <string>NECK ^</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="moveNeckDown">
+          <property name="text">
+           <string>NECK v</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -312,7 +199,7 @@
     <item>
      <widget class="QPushButton" name="retryButton">
       <property name="text">
-       <string>Retry process</string>
+       <string>------------------</string>
       </property>
      </widget>
     </item>
@@ -323,8 +210,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>693</width>
-     <height>21</height>
+     <width>928</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>

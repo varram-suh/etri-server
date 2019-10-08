@@ -15,7 +15,6 @@ struct ModernProtocolWithSTM {
 struct EtriProtocol {
     uint8_t sig1;
     uint8_t sig2;
-    uint16_t msgid;
     uint32_t length;
     uint8_t data[0];
 }; 
