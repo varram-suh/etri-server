@@ -3,7 +3,6 @@
 #include "packet-buffer.h"
 #include "json.hpp"
 #include "http-request.h"
-#include "ks19937.h"
 #include "tcp-packet.h"
 #include "chrono-util.h"
 using json = nlohmann::json;
