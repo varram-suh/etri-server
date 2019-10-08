@@ -185,10 +185,17 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="5">
+        <item row="2" column="5">
          <widget class="QPushButton" name="moveNeckDown">
           <property name="text">
            <string>NECK v</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="moveNeckOriginButton">
+          <property name="text">
+           <string>NECK O</string>
           </property>
          </widget>
         </item>

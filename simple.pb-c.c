@@ -7,6 +7,321 @@
 #endif
 
 #include "simple.pb-c.h"
+void   firmware_update__init
+                     (FirmwareUpdate         *message)
+{
+  static const FirmwareUpdate init_value = FIRMWARE_UPDATE__INIT;
+  *message = init_value;
+}
+size_t firmware_update__get_packed_size
+                     (const FirmwareUpdate *message)
+{
+  assert(message->base.descriptor == &firmware_update__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t firmware_update__pack
+                     (const FirmwareUpdate *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &firmware_update__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t firmware_update__pack_to_buffer
+                     (const FirmwareUpdate *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &firmware_update__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+FirmwareUpdate *
+       firmware_update__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (FirmwareUpdate *)
+     protobuf_c_message_unpack (&firmware_update__descriptor,
+                                allocator, len, data);
+}
+void   firmware_update__free_unpacked
+                     (FirmwareUpdate *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &firmware_update__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   firmware_update_feedback__init
+                     (FirmwareUpdateFeedback         *message)
+{
+  static const FirmwareUpdateFeedback init_value = FIRMWARE_UPDATE_FEEDBACK__INIT;
+  *message = init_value;
+}
+size_t firmware_update_feedback__get_packed_size
+                     (const FirmwareUpdateFeedback *message)
+{
+  assert(message->base.descriptor == &firmware_update_feedback__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t firmware_update_feedback__pack
+                     (const FirmwareUpdateFeedback *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &firmware_update_feedback__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t firmware_update_feedback__pack_to_buffer
+                     (const FirmwareUpdateFeedback *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &firmware_update_feedback__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+FirmwareUpdateFeedback *
+       firmware_update_feedback__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (FirmwareUpdateFeedback *)
+     protobuf_c_message_unpack (&firmware_update_feedback__descriptor,
+                                allocator, len, data);
+}
+void   firmware_update_feedback__free_unpacked
+                     (FirmwareUpdateFeedback *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &firmware_update_feedback__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   vl53_l1_data__init
+                     (VL53L1Data         *message)
+{
+  static const VL53L1Data init_value = VL53_L1_DATA__INIT;
+  *message = init_value;
+}
+size_t vl53_l1_data__get_packed_size
+                     (const VL53L1Data *message)
+{
+  assert(message->base.descriptor == &vl53_l1_data__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t vl53_l1_data__pack
+                     (const VL53L1Data *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &vl53_l1_data__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t vl53_l1_data__pack_to_buffer
+                     (const VL53L1Data *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &vl53_l1_data__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+VL53L1Data *
+       vl53_l1_data__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (VL53L1Data *)
+     protobuf_c_message_unpack (&vl53_l1_data__descriptor,
+                                allocator, len, data);
+}
+void   vl53_l1_data__free_unpacked
+                     (VL53L1Data *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &vl53_l1_data__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   vl53_l1_set__init
+                     (VL53L1Set         *message)
+{
+  static const VL53L1Set init_value = VL53_L1_SET__INIT;
+  *message = init_value;
+}
+size_t vl53_l1_set__get_packed_size
+                     (const VL53L1Set *message)
+{
+  assert(message->base.descriptor == &vl53_l1_set__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t vl53_l1_set__pack
+                     (const VL53L1Set *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &vl53_l1_set__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t vl53_l1_set__pack_to_buffer
+                     (const VL53L1Set *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &vl53_l1_set__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+VL53L1Set *
+       vl53_l1_set__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (VL53L1Set *)
+     protobuf_c_message_unpack (&vl53_l1_set__descriptor,
+                                allocator, len, data);
+}
+void   vl53_l1_set__free_unpacked
+                     (VL53L1Set *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &vl53_l1_set__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   sensor_data__init
+                     (SensorData         *message)
+{
+  static const SensorData init_value = SENSOR_DATA__INIT;
+  *message = init_value;
+}
+size_t sensor_data__get_packed_size
+                     (const SensorData *message)
+{
+  assert(message->base.descriptor == &sensor_data__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t sensor_data__pack
+                     (const SensorData *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &sensor_data__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t sensor_data__pack_to_buffer
+                     (const SensorData *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &sensor_data__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+SensorData *
+       sensor_data__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (SensorData *)
+     protobuf_c_message_unpack (&sensor_data__descriptor,
+                                allocator, len, data);
+}
+void   sensor_data__free_unpacked
+                     (SensorData *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &sensor_data__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   sensor_set__init
+                     (SensorSet         *message)
+{
+  static const SensorSet init_value = SENSOR_SET__INIT;
+  *message = init_value;
+}
+size_t sensor_set__get_packed_size
+                     (const SensorSet *message)
+{
+  assert(message->base.descriptor == &sensor_set__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t sensor_set__pack
+                     (const SensorSet *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &sensor_set__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t sensor_set__pack_to_buffer
+                     (const SensorSet *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &sensor_set__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+SensorSet *
+       sensor_set__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (SensorSet *)
+     protobuf_c_message_unpack (&sensor_set__descriptor,
+                                allocator, len, data);
+}
+void   sensor_set__free_unpacked
+                     (SensorSet *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &sensor_set__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   smooth_motor_control_deprecated__init
+                     (SmoothMotorControlDeprecated         *message)
+{
+  static const SmoothMotorControlDeprecated init_value = SMOOTH_MOTOR_CONTROL_DEPRECATED__INIT;
+  *message = init_value;
+}
+size_t smooth_motor_control_deprecated__get_packed_size
+                     (const SmoothMotorControlDeprecated *message)
+{
+  assert(message->base.descriptor == &smooth_motor_control_deprecated__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t smooth_motor_control_deprecated__pack
+                     (const SmoothMotorControlDeprecated *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &smooth_motor_control_deprecated__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t smooth_motor_control_deprecated__pack_to_buffer
+                     (const SmoothMotorControlDeprecated *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &smooth_motor_control_deprecated__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+SmoothMotorControlDeprecated *
+       smooth_motor_control_deprecated__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (SmoothMotorControlDeprecated *)
+     protobuf_c_message_unpack (&smooth_motor_control_deprecated__descriptor,
+                                allocator, len, data);
+}
+void   smooth_motor_control_deprecated__free_unpacked
+                     (SmoothMotorControlDeprecated *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &smooth_motor_control_deprecated__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   rough_motor_control__init
                      (RoughMotorControl         *message)
 {
@@ -97,51 +412,6 @@ void   led_control__free_unpacked
   assert(message->base.descriptor == &led_control__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
-void   pwm_led__init
-                     (PwmLed         *message)
-{
-  static const PwmLed init_value = PWM_LED__INIT;
-  *message = init_value;
-}
-size_t pwm_led__get_packed_size
-                     (const PwmLed *message)
-{
-  assert(message->base.descriptor == &pwm_led__descriptor);
-  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
-}
-size_t pwm_led__pack
-                     (const PwmLed *message,
-                      uint8_t       *out)
-{
-  assert(message->base.descriptor == &pwm_led__descriptor);
-  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
-}
-size_t pwm_led__pack_to_buffer
-                     (const PwmLed *message,
-                      ProtobufCBuffer *buffer)
-{
-  assert(message->base.descriptor == &pwm_led__descriptor);
-  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
-}
-PwmLed *
-       pwm_led__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data)
-{
-  return (PwmLed *)
-     protobuf_c_message_unpack (&pwm_led__descriptor,
-                                allocator, len, data);
-}
-void   pwm_led__free_unpacked
-                     (PwmLed *message,
-                      ProtobufCAllocator *allocator)
-{
-  if(!message)
-    return;
-  assert(message->base.descriptor == &pwm_led__descriptor);
-  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
-}
 void   encoder_control__init
                      (EncoderControl         *message)
 {
@@ -185,6 +455,96 @@ void   encoder_control__free_unpacked
   if(!message)
     return;
   assert(message->base.descriptor == &encoder_control__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   bandwidth_test__init
+                     (BandwidthTest         *message)
+{
+  static const BandwidthTest init_value = BANDWIDTH_TEST__INIT;
+  *message = init_value;
+}
+size_t bandwidth_test__get_packed_size
+                     (const BandwidthTest *message)
+{
+  assert(message->base.descriptor == &bandwidth_test__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t bandwidth_test__pack
+                     (const BandwidthTest *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &bandwidth_test__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t bandwidth_test__pack_to_buffer
+                     (const BandwidthTest *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &bandwidth_test__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+BandwidthTest *
+       bandwidth_test__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (BandwidthTest *)
+     protobuf_c_message_unpack (&bandwidth_test__descriptor,
+                                allocator, len, data);
+}
+void   bandwidth_test__free_unpacked
+                     (BandwidthTest *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &bandwidth_test__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   to_band__init
+                     (ToBand         *message)
+{
+  static const ToBand init_value = TO_BAND__INIT;
+  *message = init_value;
+}
+size_t to_band__get_packed_size
+                     (const ToBand *message)
+{
+  assert(message->base.descriptor == &to_band__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t to_band__pack
+                     (const ToBand *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &to_band__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t to_band__pack_to_buffer
+                     (const ToBand *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &to_band__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+ToBand *
+       to_band__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (ToBand *)
+     protobuf_c_message_unpack (&to_band__descriptor,
+                                allocator, len, data);
+}
+void   to_band__free_unpacked
+                     (ToBand *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &to_band__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   to_wb55__init
@@ -367,6 +727,57 @@ void   ap__free_unpacked
   assert(message->base.descriptor == &ap__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+void   moment_data__init
+                     (MomentData         *message)
+{
+  static const MomentData init_value = MOMENT_DATA__INIT;
+  *message = init_value;
+}
+size_t moment_data__get_packed_size
+                     (const MomentData *message)
+{
+  assert(message->base.descriptor == &moment_data__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t moment_data__pack
+                     (const MomentData *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &moment_data__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t moment_data__pack_to_buffer
+                     (const MomentData *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &moment_data__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+MomentData *
+       moment_data__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (MomentData *)
+     protobuf_c_message_unpack (&moment_data__descriptor,
+                                allocator, len, data);
+}
+void   moment_data__free_unpacked
+                     (MomentData *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &moment_data__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   to_hi__connect_server__init
+                     (ToHi__ConnectServer         *message)
+{
+  static const ToHi__ConnectServer init_value = TO_HI__CONNECT_SERVER__INIT;
+  *message = init_value;
+}
 void   to_hi__init
                      (ToHi         *message)
 {
@@ -502,6 +913,766 @@ void   to_host__free_unpacked
   assert(message->base.descriptor == &to_host__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+static const ProtobufCFieldDescriptor firmware_update__field_descriptors[6] =
+{
+  {
+    "data",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BYTES,
+    offsetof(FirmwareUpdate, has_data),
+    offsetof(FirmwareUpdate, data),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "verify",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdate, has_verify),
+    offsetof(FirmwareUpdate, verify),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "start",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdate, has_start),
+    offsetof(FirmwareUpdate, start),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "end",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdate, has_end),
+    offsetof(FirmwareUpdate, end),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "start_offset",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdate, has_start_offset),
+    offsetof(FirmwareUpdate, start_offset),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "end_offset",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdate, has_end_offset),
+    offsetof(FirmwareUpdate, end_offset),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned firmware_update__field_indices_by_name[] = {
+  0,   /* field[0] = data */
+  3,   /* field[3] = end */
+  5,   /* field[5] = end_offset */
+  2,   /* field[2] = start */
+  4,   /* field[4] = start_offset */
+  1,   /* field[1] = verify */
+};
+static const ProtobufCIntRange firmware_update__number_ranges[1 + 1] =
+{
+  { 2, 0 },
+  { 0, 6 }
+};
+const ProtobufCMessageDescriptor firmware_update__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "FirmwareUpdate",
+  "FirmwareUpdate",
+  "FirmwareUpdate",
+  "",
+  sizeof(FirmwareUpdate),
+  6,
+  firmware_update__field_descriptors,
+  firmware_update__field_indices_by_name,
+  1,  firmware_update__number_ranges,
+  (ProtobufCMessageInit) firmware_update__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor firmware_update_feedback__field_descriptors[5] =
+{
+  {
+    "data",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdateFeedback, has_data),
+    offsetof(FirmwareUpdateFeedback, data),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "verify",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdateFeedback, has_verify),
+    offsetof(FirmwareUpdateFeedback, verify),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "start",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdateFeedback, has_start),
+    offsetof(FirmwareUpdateFeedback, start),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "end",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdateFeedback, has_end),
+    offsetof(FirmwareUpdateFeedback, end),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "crc",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(FirmwareUpdateFeedback, has_crc),
+    offsetof(FirmwareUpdateFeedback, crc),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned firmware_update_feedback__field_indices_by_name[] = {
+  4,   /* field[4] = crc */
+  0,   /* field[0] = data */
+  3,   /* field[3] = end */
+  2,   /* field[2] = start */
+  1,   /* field[1] = verify */
+};
+static const ProtobufCIntRange firmware_update_feedback__number_ranges[1 + 1] =
+{
+  { 2, 0 },
+  { 0, 5 }
+};
+const ProtobufCMessageDescriptor firmware_update_feedback__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "FirmwareUpdateFeedback",
+  "FirmwareUpdateFeedback",
+  "FirmwareUpdateFeedback",
+  "",
+  sizeof(FirmwareUpdateFeedback),
+  5,
+  firmware_update_feedback__field_descriptors,
+  firmware_update_feedback__field_indices_by_name,
+  1,  firmware_update_feedback__number_ranges,
+  (ProtobufCMessageInit) firmware_update_feedback__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor vl53_l1_data__field_descriptors[5] =
+{
+  {
+    "location",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Data, has_location),
+    offsetof(VL53L1Data, location),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "ranging_state",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Data, has_ranging_state),
+    offsetof(VL53L1Data, ranging_state),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "range",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Data, has_range),
+    offsetof(VL53L1Data, range),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "signal_rate",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Data, has_signal_rate),
+    offsetof(VL53L1Data, signal_rate),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "ambient_rate",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Data, has_ambient_rate),
+    offsetof(VL53L1Data, ambient_rate),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned vl53_l1_data__field_indices_by_name[] = {
+  4,   /* field[4] = ambient_rate */
+  0,   /* field[0] = location */
+  2,   /* field[2] = range */
+  1,   /* field[1] = ranging_state */
+  3,   /* field[3] = signal_rate */
+};
+static const ProtobufCIntRange vl53_l1_data__number_ranges[1 + 1] =
+{
+  { 2, 0 },
+  { 0, 5 }
+};
+const ProtobufCMessageDescriptor vl53_l1_data__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "VL53L1Data",
+  "VL53L1Data",
+  "VL53L1Data",
+  "",
+  sizeof(VL53L1Data),
+  5,
+  vl53_l1_data__field_descriptors,
+  vl53_l1_data__field_indices_by_name,
+  1,  vl53_l1_data__number_ranges,
+  (ProtobufCMessageInit) vl53_l1_data__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor vl53_l1_set__field_descriptors[8] =
+{
+  {
+    "topLeftX",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_topleftx),
+    offsetof(VL53L1Set, topleftx),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "topLeftY",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_toplefty),
+    offsetof(VL53L1Set, toplefty),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "botRightX",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_botrightx),
+    offsetof(VL53L1Set, botrightx),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "botRightY",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_botrighty),
+    offsetof(VL53L1Set, botrighty),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "roi_mode",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_roi_mode),
+    offsetof(VL53L1Set, roi_mode),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "distance_mode",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_distance_mode),
+    offsetof(VL53L1Set, distance_mode),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "timing_budget",
+    8,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_timing_budget),
+    offsetof(VL53L1Set, timing_budget),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "inter_measurement_period",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(VL53L1Set, has_inter_measurement_period),
+    offsetof(VL53L1Set, inter_measurement_period),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned vl53_l1_set__field_indices_by_name[] = {
+  2,   /* field[2] = botRightX */
+  3,   /* field[3] = botRightY */
+  5,   /* field[5] = distance_mode */
+  7,   /* field[7] = inter_measurement_period */
+  4,   /* field[4] = roi_mode */
+  6,   /* field[6] = timing_budget */
+  0,   /* field[0] = topLeftX */
+  1,   /* field[1] = topLeftY */
+};
+static const ProtobufCIntRange vl53_l1_set__number_ranges[1 + 1] =
+{
+  { 2, 0 },
+  { 0, 8 }
+};
+const ProtobufCMessageDescriptor vl53_l1_set__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "VL53L1Set",
+  "VL53L1Set",
+  "VL53L1Set",
+  "",
+  sizeof(VL53L1Set),
+  8,
+  vl53_l1_set__field_descriptors,
+  vl53_l1_set__field_indices_by_name,
+  1,  vl53_l1_set__number_ranges,
+  (ProtobufCMessageInit) vl53_l1_set__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor sensor_data__field_descriptors[10] =
+{
+  {
+    "sensor_mac_address",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(SensorData, sensor_mac_address),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sensor_type",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorData, has_sensor_type),
+    offsetof(SensorData, sensor_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "shtc1_temperature",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_FLOAT,
+    offsetof(SensorData, has_shtc1_temperature),
+    offsetof(SensorData, shtc1_temperature),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "shtc1_humidity",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_FLOAT,
+    offsetof(SensorData, has_shtc1_humidity),
+    offsetof(SensorData, shtc1_humidity),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sgp30_eco2_ppm",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorData, has_sgp30_eco2_ppm),
+    offsetof(SensorData, sgp30_eco2_ppm),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sgp30_tvoc_ppb",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorData, has_sgp30_tvoc_ppb),
+    offsetof(SensorData, sgp30_tvoc_ppb),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "hall_state",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(SensorData, has_hall_state),
+    offsetof(SensorData, hall_state),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "hall_interrupt",
+    8,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(SensorData, has_hall_interrupt),
+    offsetof(SensorData, hall_interrupt),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "pir_interrupt",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(SensorData, has_pir_interrupt),
+    offsetof(SensorData, pir_interrupt),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "bq27441_voltage",
+    10,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorData, has_bq27441_voltage),
+    offsetof(SensorData, bq27441_voltage),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned sensor_data__field_indices_by_name[] = {
+  9,   /* field[9] = bq27441_voltage */
+  7,   /* field[7] = hall_interrupt */
+  6,   /* field[6] = hall_state */
+  8,   /* field[8] = pir_interrupt */
+  0,   /* field[0] = sensor_mac_address */
+  1,   /* field[1] = sensor_type */
+  4,   /* field[4] = sgp30_eco2_ppm */
+  5,   /* field[5] = sgp30_tvoc_ppb */
+  3,   /* field[3] = shtc1_humidity */
+  2,   /* field[2] = shtc1_temperature */
+};
+static const ProtobufCIntRange sensor_data__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 10 }
+};
+const ProtobufCMessageDescriptor sensor_data__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "SensorData",
+  "SensorData",
+  "SensorData",
+  "",
+  sizeof(SensorData),
+  10,
+  sensor_data__field_descriptors,
+  sensor_data__field_indices_by_name,
+  1,  sensor_data__number_ranges,
+  (ProtobufCMessageInit) sensor_data__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor sensor_set__field_descriptors[7] =
+{
+  {
+    "sensor_mac_address",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(SensorSet, sensor_mac_address),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sensor_type",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorSet, has_sensor_type),
+    offsetof(SensorSet, sensor_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "interrupt_alarm",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(SensorSet, has_interrupt_alarm),
+    offsetof(SensorSet, interrupt_alarm),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "notify_period",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorSet, has_notify_period),
+    offsetof(SensorSet, notify_period),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "period_alarm",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(SensorSet, has_period_alarm),
+    offsetof(SensorSet, period_alarm),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "upper_threshold",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorSet, has_upper_threshold),
+    offsetof(SensorSet, upper_threshold),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "lower_threshold",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SensorSet, has_lower_threshold),
+    offsetof(SensorSet, lower_threshold),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned sensor_set__field_indices_by_name[] = {
+  2,   /* field[2] = interrupt_alarm */
+  6,   /* field[6] = lower_threshold */
+  3,   /* field[3] = notify_period */
+  4,   /* field[4] = period_alarm */
+  0,   /* field[0] = sensor_mac_address */
+  1,   /* field[1] = sensor_type */
+  5,   /* field[5] = upper_threshold */
+};
+static const ProtobufCIntRange sensor_set__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 7 }
+};
+const ProtobufCMessageDescriptor sensor_set__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "SensorSet",
+  "SensorSet",
+  "SensorSet",
+  "",
+  sizeof(SensorSet),
+  7,
+  sensor_set__field_descriptors,
+  sensor_set__field_indices_by_name,
+  1,  sensor_set__number_ranges,
+  (ProtobufCMessageInit) sensor_set__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor smooth_motor_control_deprecated__field_descriptors[4] =
+{
+  {
+    "left_motor",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(SmoothMotorControlDeprecated, has_left_motor),
+    offsetof(SmoothMotorControlDeprecated, left_motor),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "right_motor",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(SmoothMotorControlDeprecated, has_right_motor),
+    offsetof(SmoothMotorControlDeprecated, right_motor),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "adc_interval",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SmoothMotorControlDeprecated, has_adc_interval),
+    offsetof(SmoothMotorControlDeprecated, adc_interval),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "acc_decrease",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(SmoothMotorControlDeprecated, has_acc_decrease),
+    offsetof(SmoothMotorControlDeprecated, acc_decrease),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned smooth_motor_control_deprecated__field_indices_by_name[] = {
+  3,   /* field[3] = acc_decrease */
+  2,   /* field[2] = adc_interval */
+  0,   /* field[0] = left_motor */
+  1,   /* field[1] = right_motor */
+};
+static const ProtobufCIntRange smooth_motor_control_deprecated__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 4 }
+};
+const ProtobufCMessageDescriptor smooth_motor_control_deprecated__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "SmoothMotorControlDeprecated",
+  "SmoothMotorControlDeprecated",
+  "SmoothMotorControlDeprecated",
+  "",
+  sizeof(SmoothMotorControlDeprecated),
+  4,
+  smooth_motor_control_deprecated__field_descriptors,
+  smooth_motor_control_deprecated__field_indices_by_name,
+  1,  smooth_motor_control_deprecated__number_ranges,
+  (ProtobufCMessageInit) smooth_motor_control_deprecated__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
 static const ProtobufCFieldDescriptor rough_motor_control__field_descriptors[2] =
 {
   {
@@ -617,83 +1788,6 @@ const ProtobufCMessageDescriptor led_control__descriptor =
   (ProtobufCMessageInit) led_control__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor pwm_led__field_descriptors[4] =
-{
-  {
-    "pwm",
-    1,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_UINT32,
-    offsetof(PwmLed, has_pwm),
-    offsetof(PwmLed, pwm),
-    NULL,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
-    "duty",
-    2,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_UINT32,
-    offsetof(PwmLed, has_duty),
-    offsetof(PwmLed, duty),
-    NULL,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
-    "period",
-    3,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_UINT32,
-    offsetof(PwmLed, has_period),
-    offsetof(PwmLed, period),
-    NULL,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
-    "enable",
-    4,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_UINT32,
-    offsetof(PwmLed, has_enable),
-    offsetof(PwmLed, enable),
-    NULL,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-};
-static const unsigned pwm_led__field_indices_by_name[] = {
-  1,   /* field[1] = duty */
-  3,   /* field[3] = enable */
-  2,   /* field[2] = period */
-  0,   /* field[0] = pwm */
-};
-static const ProtobufCIntRange pwm_led__number_ranges[1 + 1] =
-{
-  { 1, 0 },
-  { 0, 4 }
-};
-const ProtobufCMessageDescriptor pwm_led__descriptor =
-{
-  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
-  "PwmLed",
-  "PwmLed",
-  "PwmLed",
-  "",
-  sizeof(PwmLed),
-  4,
-  pwm_led__field_descriptors,
-  pwm_led__field_indices_by_name,
-  1,  pwm_led__number_ranges,
-  (ProtobufCMessageInit) pwm_led__init,
-  NULL,NULL,NULL    /* reserved[123] */
-};
 static const ProtobufCFieldDescriptor encoder_control__field_descriptors[2] =
 {
   {
@@ -745,7 +1839,213 @@ const ProtobufCMessageDescriptor encoder_control__descriptor =
   (ProtobufCMessageInit) encoder_control__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_wb55__field_descriptors[9] =
+static const ProtobufCFieldDescriptor bandwidth_test__field_descriptors[3] =
+{
+  {
+    "data",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BYTES,
+    offsetof(BandwidthTest, has_data),
+    offsetof(BandwidthTest, data),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "step",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(BandwidthTest, has_step),
+    offsetof(BandwidthTest, step),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "bandwidth_by_hi",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(BandwidthTest, has_bandwidth_by_hi),
+    offsetof(BandwidthTest, bandwidth_by_hi),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned bandwidth_test__field_indices_by_name[] = {
+  2,   /* field[2] = bandwidth_by_hi */
+  0,   /* field[0] = data */
+  1,   /* field[1] = step */
+};
+static const ProtobufCIntRange bandwidth_test__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 3 }
+};
+const ProtobufCMessageDescriptor bandwidth_test__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "BandwidthTest",
+  "BandwidthTest",
+  "BandwidthTest",
+  "",
+  sizeof(BandwidthTest),
+  3,
+  bandwidth_test__field_descriptors,
+  bandwidth_test__field_indices_by_name,
+  1,  bandwidth_test__number_ranges,
+  (ProtobufCMessageInit) bandwidth_test__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor to_band__field_descriptors[9] =
+{
+  {
+    "advertising_interval",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_advertising_interval),
+    offsetof(ToBand, advertising_interval),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "tx_power",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_tx_power),
+    offsetof(ToBand, tx_power),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "tag_name",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToBand, tag_name),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "tag_phone_number",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToBand, tag_phone_number),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "lcd_angle",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_lcd_angle),
+    offsetof(ToBand, lcd_angle),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "lcd_time",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_lcd_time),
+    offsetof(ToBand, lcd_time),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "data_hz",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_data_hz),
+    offsetof(ToBand, data_hz),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "data_req",
+    8,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToBand, has_data_req),
+    offsetof(ToBand, data_req),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "seq",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToBand, has_seq),
+    offsetof(ToBand, seq),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned to_band__field_indices_by_name[] = {
+  0,   /* field[0] = advertising_interval */
+  6,   /* field[6] = data_hz */
+  7,   /* field[7] = data_req */
+  4,   /* field[4] = lcd_angle */
+  5,   /* field[5] = lcd_time */
+  8,   /* field[8] = seq */
+  2,   /* field[2] = tag_name */
+  3,   /* field[3] = tag_phone_number */
+  1,   /* field[1] = tx_power */
+};
+static const ProtobufCIntRange to_band__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 9 }
+};
+const ProtobufCMessageDescriptor to_band__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "ToBand",
+  "ToBand",
+  "ToBand",
+  "",
+  sizeof(ToBand),
+  9,
+  to_band__field_descriptors,
+  to_band__field_indices_by_name,
+  1,  to_band__number_ranges,
+  (ProtobufCMessageInit) to_band__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor to_wb55__field_descriptors[25] =
 {
   {
     "broadcast_interval",
@@ -808,6 +2108,150 @@ static const ProtobufCFieldDescriptor to_wb55__field_descriptors[9] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "scan_start",
+    10,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_scan_start),
+    offsetof(ToWb55, scan_start),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "scan_stop",
+    11,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_scan_stop),
+    offsetof(ToWb55, scan_stop),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "connect",
+    12,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_connect),
+    offsetof(ToWb55, connect),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "connect_mac",
+    13,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, connect_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "disconnect",
+    14,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_disconnect),
+    offsetof(ToWb55, disconnect),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "disconnect_mac",
+    15,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, disconnect_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "req_connect_list",
+    16,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_req_connect_list),
+    offsetof(ToWb55, req_connect_list),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "client",
+    17,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_client),
+    offsetof(ToWb55, client),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "server",
+    18,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToWb55, has_server),
+    offsetof(ToWb55, server),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "toband_bypass",
+    19,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, toband_bypass),
+    &to_band__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "vl53l1_set",
+    20,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, vl53l1_set),
+    &vl53_l1_set__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sensor_set",
+    30,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, sensor_set),
+    &sensor_set__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "to_hi_from_host",
     50,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -855,23 +2299,89 @@ static const ProtobufCFieldDescriptor to_wb55__field_descriptors[9] =
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "to_hi_from_band",
+    54,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, to_hi_from_band),
+    &to_hi__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "to_host_from_wb55",
+    55,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, to_host_from_wb55),
+    &to_host__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "to_wb55_from_wb55",
+    56,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, to_wb55_from_wb55),
+    &to_wb55__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "to_st_from_host",
+    57,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, to_st_from_host),
+    &to_st__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned to_wb55__field_indices_by_name[] = {
   0,   /* field[0] = broadcast_interval */
+  12,   /* field[12] = client */
+  7,   /* field[7] = connect */
+  8,   /* field[8] = connect_mac */
+  9,   /* field[9] = disconnect */
+  10,   /* field[10] = disconnect_mac */
   3,   /* field[3] = get_st_message */
   2,   /* field[2] = name */
   1,   /* field[1] = power */
+  11,   /* field[11] = req_connect_list */
+  5,   /* field[5] = scan_start */
+  6,   /* field[6] = scan_stop */
+  16,   /* field[16] = sensor_set */
   4,   /* field[4] = seq */
-  5,   /* field[5] = to_hi_from_host */
-  8,   /* field[8] = to_hi_from_wb55 */
-  6,   /* field[6] = to_host_from_hi */
-  7,   /* field[7] = to_st_from_hi */
+  13,   /* field[13] = server */
+  21,   /* field[21] = to_hi_from_band */
+  17,   /* field[17] = to_hi_from_host */
+  20,   /* field[20] = to_hi_from_wb55 */
+  18,   /* field[18] = to_host_from_hi */
+  22,   /* field[22] = to_host_from_wb55 */
+  19,   /* field[19] = to_st_from_hi */
+  24,   /* field[24] = to_st_from_host */
+  23,   /* field[23] = to_wb55_from_wb55 */
+  14,   /* field[14] = toband_bypass */
+  15,   /* field[15] = vl53l1_set */
 };
-static const ProtobufCIntRange to_wb55__number_ranges[2 + 1] =
+static const ProtobufCIntRange to_wb55__number_ranges[4 + 1] =
 {
   { 1, 0 },
-  { 50, 5 },
-  { 0, 9 }
+  { 10, 5 },
+  { 30, 16 },
+  { 50, 17 },
+  { 0, 25 }
 };
 const ProtobufCMessageDescriptor to_wb55__descriptor =
 {
@@ -881,15 +2391,27 @@ const ProtobufCMessageDescriptor to_wb55__descriptor =
   "ToWb55",
   "",
   sizeof(ToWb55),
-  9,
+  25,
   to_wb55__field_descriptors,
   to_wb55__field_indices_by_name,
-  2,  to_wb55__number_ranges,
+  4,  to_wb55__number_ranges,
   (ProtobufCMessageInit) to_wb55__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
+static const ProtobufCFieldDescriptor to_st__field_descriptors[14] =
 {
+  {
+    "smooth_motor_control_deprecated",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToSt, smooth_motor_control_deprecated),
+    &smooth_motor_control_deprecated__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
   {
     "rough_motor_control",
     2,
@@ -922,6 +2444,18 @@ static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
     0,   /* quantifier_offset */
     offsetof(ToSt, led_control),
     &led_control__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "auto_charge_control",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToSt, has_auto_charge_control),
+    offsetof(ToSt, auto_charge_control),
+    NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
@@ -999,6 +2533,30 @@ static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "stm_update",
+    12,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToSt, stm_update),
+    &firmware_update__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "ble_update",
+    13,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToSt, ble_update),
+    &firmware_update__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "seq",
     99,
     PROTOBUF_C_LABEL_REQUIRED,
@@ -1012,23 +2570,26 @@ static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
   },
 };
 static const unsigned to_st__field_indices_by_name[] = {
-  6,   /* field[6] = do_charge */
-  1,   /* field[1] = encoder_control */
-  2,   /* field[2] = led_control */
-  8,   /* field[8] = loopback */
-  3,   /* field[3] = neck_speed */
-  5,   /* field[5] = power_command */
-  4,   /* field[4] = request_st_info */
-  7,   /* field[7] = reset_if_no_serial */
-  0,   /* field[0] = rough_motor_control */
-  9,   /* field[9] = seq */
+  4,   /* field[4] = auto_charge_control */
+  12,   /* field[12] = ble_update */
+  8,   /* field[8] = do_charge */
+  2,   /* field[2] = encoder_control */
+  3,   /* field[3] = led_control */
+  10,   /* field[10] = loopback */
+  5,   /* field[5] = neck_speed */
+  7,   /* field[7] = power_command */
+  6,   /* field[6] = request_st_info */
+  9,   /* field[9] = reset_if_no_serial */
+  1,   /* field[1] = rough_motor_control */
+  13,   /* field[13] = seq */
+  0,   /* field[0] = smooth_motor_control_deprecated */
+  11,   /* field[11] = stm_update */
 };
-static const ProtobufCIntRange to_st__number_ranges[3 + 1] =
+static const ProtobufCIntRange to_st__number_ranges[2 + 1] =
 {
-  { 2, 0 },
-  { 6, 3 },
-  { 99, 9 },
-  { 0, 10 }
+  { 1, 0 },
+  { 99, 13 },
+  { 0, 14 }
 };
 const ProtobufCMessageDescriptor to_st__descriptor =
 {
@@ -1038,10 +2599,10 @@ const ProtobufCMessageDescriptor to_st__descriptor =
   "ToSt",
   "",
   sizeof(ToSt),
-  10,
+  14,
   to_st__field_descriptors,
   to_st__field_indices_by_name,
-  3,  to_st__number_ranges,
+  2,  to_st__number_ranges,
   (ProtobufCMessageInit) to_st__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
@@ -1147,7 +2708,122 @@ const ProtobufCMessageDescriptor ap__descriptor =
   (ProtobufCMessageInit) ap__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
+static const ProtobufCFieldDescriptor moment_data__field_descriptors[3] =
+{
+  {
+    "accx",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(MomentData, has_accx),
+    offsetof(MomentData, accx),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "accy",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(MomentData, has_accy),
+    offsetof(MomentData, accy),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "accz",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(MomentData, has_accz),
+    offsetof(MomentData, accz),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned moment_data__field_indices_by_name[] = {
+  0,   /* field[0] = accx */
+  1,   /* field[1] = accy */
+  2,   /* field[2] = accz */
+};
+static const ProtobufCIntRange moment_data__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 3 }
+};
+const ProtobufCMessageDescriptor moment_data__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "MomentData",
+  "MomentData",
+  "MomentData",
+  "",
+  sizeof(MomentData),
+  3,
+  moment_data__field_descriptors,
+  moment_data__field_indices_by_name,
+  1,  moment_data__number_ranges,
+  (ProtobufCMessageInit) moment_data__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor to_hi__connect_server__field_descriptors[2] =
+{
+  {
+    "user_id",
+    1,
+    PROTOBUF_C_LABEL_REQUIRED,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHi__ConnectServer, user_id),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "gmt",
+    2,
+    PROTOBUF_C_LABEL_REQUIRED,
+    PROTOBUF_C_TYPE_UINT32,
+    0,   /* quantifier_offset */
+    offsetof(ToHi__ConnectServer, gmt),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned to_hi__connect_server__field_indices_by_name[] = {
+  1,   /* field[1] = gmt */
+  0,   /* field[0] = user_id */
+};
+static const ProtobufCIntRange to_hi__connect_server__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor to_hi__connect_server__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "ToHi.ConnectServer",
+  "ConnectServer",
+  "ToHi__ConnectServer",
+  "",
+  sizeof(ToHi__ConnectServer),
+  2,
+  to_hi__connect_server__field_descriptors,
+  to_hi__connect_server__field_indices_by_name,
+  1,  to_hi__connect_server__number_ranges,
+  (ProtobufCMessageInit) to_hi__connect_server__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor to_hi__field_descriptors[66] =
 {
   {
     "tohost_bypass",
@@ -1450,6 +3126,162 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "firmware_update_feedback",
+    26,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, firmware_update_feedback),
+    &firmware_update_feedback__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "moment_timestamp",
+    40,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_moment_timestamp),
+    offsetof(ToHi, moment_timestamp),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "moment_data_hz",
+    41,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_moment_data_hz),
+    offsetof(ToHi, moment_data_hz),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "moment_data",
+    42,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(ToHi, n_moment_data),
+    offsetof(ToHi, moment_data),
+    &moment_data__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "moment_data_end",
+    43,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHi, has_moment_data_end),
+    offsetof(ToHi, moment_data_end),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "mac_address",
+    50,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, mac_address),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "dev_name",
+    51,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, dev_name),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "dev_rssi",
+    52,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_dev_rssi),
+    offsetof(ToHi, dev_rssi),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "connected",
+    53,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHi, has_connected),
+    offsetof(ToHi, connected),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "connected_mac",
+    54,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, connected_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "disconnected",
+    55,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHi, has_disconnected),
+    offsetof(ToHi, disconnected),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "disconnected_mac",
+    56,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, disconnected_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "vl53l1_data",
+    57,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, vl53l1_data),
+    &vl53_l1_data__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "phone_public_key",
     100,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -1486,6 +3318,90 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "bandwidth_test",
+    103,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, bandwidth_test),
+    &bandwidth_test__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "request_stop_qc",
+    104,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_request_stop_qc),
+    offsetof(ToHi, request_stop_qc),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "request_mic_loop_back",
+    105,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_request_mic_loop_back),
+    offsetof(ToHi, request_mic_loop_back),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "set_invert_vert",
+    106,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_set_invert_vert),
+    offsetof(ToHi, set_invert_vert),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "set_invert_horiz",
+    107,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_set_invert_horiz),
+    offsetof(ToHi, set_invert_horiz),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "set_mic_vol",
+    108,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHi, has_set_mic_vol),
+    offsetof(ToHi, set_mic_vol),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "set_speaker_vol",
+    109,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_set_speaker_vol),
+    offsetof(ToHi, set_speaker_vol),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "set_ir_cut1",
     110,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -1510,6 +3426,18 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "play_pcm",
+    112,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHi, has_play_pcm),
+    offsetof(ToHi, play_pcm),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "set_mute",
     113,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -1528,6 +3456,42 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
     PROTOBUF_C_TYPE_BYTES,
     offsetof(ToHi, has_audio),
     offsetof(ToHi, audio),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "qc_retry",
+    115,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHi, has_qc_retry),
+    offsetof(ToHi, qc_retry),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "min_exposure",
+    116,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHi, has_min_exposure),
+    offsetof(ToHi, min_exposure),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "max_exposure",
+    117,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHi, has_max_exposure),
+    offsetof(ToHi, max_exposure),
     NULL,
     NULL,
     0,             /* flags */
@@ -1606,13 +3570,25 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[41] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "pwm_led",
+    "connect_server",
+    206,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, connect_server),
+    &to_hi__connect_server__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "to_wb55_from_host",
     300,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
-    offsetof(ToHi, pwm_led),
-    &pwm_led__descriptor,
+    offsetof(ToHi, to_wb55_from_host),
+    &to_wb55__descriptor,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
@@ -1646,11 +3622,20 @@ static const unsigned to_hi__field_indices_by_name[] = {
   4,   /* field[4] = accx */
   5,   /* field[5] = accy */
   6,   /* field[6] = accz */
-  31,   /* field[31] = audio */
+  52,   /* field[52] = audio */
   23,   /* field[23] = auto_charge_step */
+  41,   /* field[41] = bandwidth_test */
   13,   /* field[13] = battery */
   22,   /* field[22] = charge_complete */
-  26,   /* field[26] = do_charge */
+  62,   /* field[62] = connect_server */
+  33,   /* field[33] = connected */
+  34,   /* field[34] = connected_mac */
+  31,   /* field[31] = dev_name */
+  32,   /* field[32] = dev_rssi */
+  35,   /* field[35] = disconnected */
+  36,   /* field[36] = disconnected_mac */
+  39,   /* field[39] = do_charge */
+  25,   /* field[25] = firmware_update_feedback */
   7,   /* field[7] = gyro_x */
   8,   /* field[8] = gyro_y */
   9,   /* field[9] = gyro_z */
@@ -1658,43 +3643,59 @@ static const unsigned to_hi__field_indices_by_name[] = {
   18,   /* field[18] = lenc */
   24,   /* field[24] = loopback */
   15,   /* field[15] = lspeed */
-  25,   /* field[25] = phone_public_key */
+  30,   /* field[30] = mac_address */
+  55,   /* field[55] = max_exposure */
+  54,   /* field[54] = min_exposure */
+  28,   /* field[28] = moment_data */
+  29,   /* field[29] = moment_data_end */
+  27,   /* field[27] = moment_data_hz */
+  26,   /* field[26] = moment_timestamp */
+  38,   /* field[38] = phone_public_key */
   11,   /* field[11] = pitch */
+  50,   /* field[50] = play_pcm */
   20,   /* field[20] = power_button_pressed */
-  38,   /* field[38] = pwm_led */
+  53,   /* field[53] = qc_retry */
   19,   /* field[19] = renc */
-  36,   /* field[36] = req_complete_setup */
-  37,   /* field[37] = req_scan_ap */
-  35,   /* field[35] = req_service_key */
+  60,   /* field[60] = req_complete_setup */
+  61,   /* field[61] = req_scan_ap */
+  59,   /* field[59] = req_service_key */
+  43,   /* field[43] = request_mic_loop_back */
+  42,   /* field[42] = request_stop_qc */
   12,   /* field[12] = roll */
   16,   /* field[16] = rspeed */
-  40,   /* field[40] = sender */
-  39,   /* field[39] = seq */
-  28,   /* field[28] = set_ir_cut1 */
-  29,   /* field[29] = set_ir_cut2 */
-  30,   /* field[30] = set_mute */
-  32,   /* field[32] = ssid */
-  33,   /* field[33] = ssid_password */
-  34,   /* field[34] = ssid_type */
+  65,   /* field[65] = sender */
+  64,   /* field[64] = seq */
+  45,   /* field[45] = set_invert_horiz */
+  44,   /* field[44] = set_invert_vert */
+  48,   /* field[48] = set_ir_cut1 */
+  49,   /* field[49] = set_ir_cut2 */
+  46,   /* field[46] = set_mic_vol */
+  51,   /* field[51] = set_mute */
+  47,   /* field[47] = set_speaker_vol */
+  56,   /* field[56] = ssid */
+  57,   /* field[57] = ssid_password */
+  58,   /* field[58] = ssid_type */
   2,   /* field[2] = status */
   17,   /* field[17] = t_speed */
+  63,   /* field[63] = to_wb55_from_host */
   3,   /* field[3] = tof */
   0,   /* field[0] = tohost_bypass */
   1,   /* field[1] = tost_bypass */
   21,   /* field[21] = usb_con */
-  27,   /* field[27] = video_seq */
+  40,   /* field[40] = video_seq */
+  37,   /* field[37] = vl53l1_data */
   10,   /* field[10] = yaw */
 };
 static const ProtobufCIntRange to_hi__number_ranges[7 + 1] =
 {
   { 1, 0 },
-  { 100, 25 },
-  { 110, 28 },
-  { 113, 30 },
-  { 200, 32 },
-  { 300, 38 },
-  { 999, 39 },
-  { 0, 41 }
+  { 40, 26 },
+  { 50, 30 },
+  { 100, 38 },
+  { 200, 56 },
+  { 300, 63 },
+  { 999, 64 },
+  { 0, 66 }
 };
 const ProtobufCMessageDescriptor to_hi__descriptor =
 {
@@ -1704,7 +3705,7 @@ const ProtobufCMessageDescriptor to_hi__descriptor =
   "ToHi",
   "",
   sizeof(ToHi),
-  41,
+  66,
   to_hi__field_descriptors,
   to_hi__field_indices_by_name,
   7,  to_hi__number_ranges,
@@ -1788,7 +3789,7 @@ const ProtobufCMessageDescriptor rsp_service_key__descriptor =
   (ProtobufCMessageInit) rsp_service_key__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_host__field_descriptors[7] =
+static const ProtobufCFieldDescriptor to_host__field_descriptors[25] =
 {
   {
     "video",
@@ -1815,6 +3816,66 @@ static const ProtobufCFieldDescriptor to_host__field_descriptors[7] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "encrypted_secret_key",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BYTES,
+    offsetof(ToHost, has_encrypted_secret_key),
+    offsetof(ToHost, encrypted_secret_key),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "video_seq",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_video_seq),
+    offsetof(ToHost, video_seq),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "video_ts",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_video_ts),
+    offsetof(ToHost, video_ts),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "latency",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_latency),
+    offsetof(ToHost, latency),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "bitrate",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_bitrate),
+    offsetof(ToHost, bitrate),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "tohi_bypass",
     8,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -1822,6 +3883,114 @@ static const ProtobufCFieldDescriptor to_host__field_descriptors[7] =
     0,   /* quantifier_offset */
     offsetof(ToHost, tohi_bypass),
     &to_hi__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "request_start_qc",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_request_start_qc),
+    offsetof(ToHost, request_start_qc),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "request_bandwidth",
+    10,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(ToHost, has_request_bandwidth),
+    offsetof(ToHost, request_bandwidth),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "bandwidth_test",
+    11,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHost, bandwidth_test),
+    &bandwidth_test__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "debugging_info",
+    12,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(ToHost, debugging_info),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "serial_bandwidth_test",
+    13,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHost, serial_bandwidth_test),
+    &bandwidth_test__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "play_pcm_end",
+    14,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHost, has_play_pcm_end),
+    offsetof(ToHost, play_pcm_end),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "pts",
+    15,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT64,
+    offsetof(ToHost, has_pts),
+    offsetof(ToHost, pts),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "signal_level",
+    16,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHost, has_signal_level),
+    offsetof(ToHost, signal_level),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "sensor_data",
+    62,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHost, sensor_data),
+    &sensor_data__descriptor,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
@@ -1874,22 +4043,88 @@ static const ProtobufCFieldDescriptor to_host__field_descriptors[7] =
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "ping_result",
+    104,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(ToHost, has_ping_result),
+    offsetof(ToHost, ping_result),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "signal_server_setup",
+    105,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHost, has_signal_server_setup),
+    offsetof(ToHost, signal_server_setup),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "room_server_setup",
+    106,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHost, has_room_server_setup),
+    offsetof(ToHost, room_server_setup),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "auth_server_setup",
+    107,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(ToHost, has_auth_server_setup),
+    offsetof(ToHost, auth_server_setup),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned to_host__field_indices_by_name[] = {
-  6,   /* field[6] = ap_connection_result */
-  5,   /* field[5] = ap_list */
+  20,   /* field[20] = ap_connection_result */
+  19,   /* field[19] = ap_list */
   1,   /* field[1] = audio */
-  4,   /* field[4] = rsp_complete_setup */
-  3,   /* field[3] = rsp_service_key */
-  2,   /* field[2] = tohi_bypass */
+  24,   /* field[24] = auth_server_setup */
+  10,   /* field[10] = bandwidth_test */
+  6,   /* field[6] = bitrate */
+  11,   /* field[11] = debugging_info */
+  2,   /* field[2] = encrypted_secret_key */
+  5,   /* field[5] = latency */
+  21,   /* field[21] = ping_result */
+  13,   /* field[13] = play_pcm_end */
+  14,   /* field[14] = pts */
+  9,   /* field[9] = request_bandwidth */
+  8,   /* field[8] = request_start_qc */
+  23,   /* field[23] = room_server_setup */
+  18,   /* field[18] = rsp_complete_setup */
+  17,   /* field[17] = rsp_service_key */
+  16,   /* field[16] = sensor_data */
+  12,   /* field[12] = serial_bandwidth_test */
+  15,   /* field[15] = signal_level */
+  22,   /* field[22] = signal_server_setup */
+  7,   /* field[7] = tohi_bypass */
   0,   /* field[0] = video */
+  3,   /* field[3] = video_seq */
+  4,   /* field[4] = video_ts */
 };
 static const ProtobufCIntRange to_host__number_ranges[3 + 1] =
 {
   { 1, 0 },
-  { 8, 2 },
-  { 100, 3 },
-  { 0, 7 }
+  { 62, 16 },
+  { 100, 17 },
+  { 0, 25 }
 };
 const ProtobufCMessageDescriptor to_host__descriptor =
 {
@@ -1899,7 +4134,7 @@ const ProtobufCMessageDescriptor to_host__descriptor =
   "ToHost",
   "",
   sizeof(ToHost),
-  7,
+  25,
   to_host__field_descriptors,
   to_host__field_indices_by_name,
   3,  to_host__number_ranges,

@@ -42,16 +42,6 @@ MdiChild::MdiChild(QWidget *parent) :
 MdiChild::~MdiChild() {
 }
 
-void MdiChild::on_pushButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-    printf("WOW2\n");
-}
 void MdiChild::mySlotName(const QByteArray& message) {
     uchar *buff = (uchar*)message.data(); 
     // QPixmap pix;
@@ -147,6 +137,7 @@ void MdiChild::on_initPositionButton_clicked()
 
 void MdiChild::on_pwmChangeButton_clicked()
 {
+    /*
     ToHi tohi = TO_HI__INIT;
     PwmLed pwmLed = PWM_LED__INIT;
     tohi.pwm_led = &pwmLed;
@@ -162,6 +153,7 @@ void MdiChild::on_pwmChangeButton_clicked()
     if(p) {
         p->packHiToBuffer(&tohi);
     }
+    */
 }
 
 void MdiChild::on_vaToggleButton_clicked()
@@ -184,8 +176,10 @@ void MdiChild::on_moveUpButton_clicked()
     rmc.has_left_motor = 1;
     rmc.has_right_motor = 1;
 
-    rmc.left_motor = 1;
-    rmc.right_motor = 1;
+    rmc.left_motor = 60;
+    rmc.right_motor = 60;
+    tost.rough_motor_control = &rmc;
+
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
     if(p) {
@@ -195,30 +189,125 @@ void MdiChild::on_moveUpButton_clicked()
 
 void MdiChild::on_moveLeftButton_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
+    rmc.has_left_motor = 1;
+    rmc.has_right_motor = 1;
+
+    rmc.left_motor = 60;
+    rmc.right_motor = -60;
+    tost.rough_motor_control = &rmc;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }
 
 void MdiChild::on_moveOriginButton_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
+    rmc.has_left_motor = 1;
+    rmc.has_right_motor = 1;
+
+    rmc.left_motor = 0;
+    rmc.right_motor = 0;
+    tost.rough_motor_control = &rmc;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }
 
 void MdiChild::on_moveRightButton_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
+    rmc.has_left_motor = 1;
+    rmc.has_right_motor = 1;
+
+    rmc.left_motor = -60;
+    rmc.right_motor = 60;
+    tost.rough_motor_control = &rmc;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }
 
 void MdiChild::on_moveDownButton_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
+    rmc.has_left_motor = 1;
+    rmc.has_right_motor = 1;
+
+    rmc.left_motor = -60;
+    rmc.right_motor = -60;
+    tost.rough_motor_control = &rmc;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }
 
 void MdiChild::on_moveNeckUp_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 500;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }
 
 void MdiChild::on_moveNeckDown_clicked()
 {
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
 
+    tost.has_neck_speed = 1;
+    tost.neck_speed = -500;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckOriginButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }

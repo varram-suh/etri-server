@@ -37,7 +37,6 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
     void mySlotName(const QByteArray& message);
     void mySlotName2(const QByteArray& message);
     void finishedPlaying(QAudio::State state);
@@ -74,6 +73,8 @@ private slots:
     void on_moveNeckUp_clicked();
 
     void on_moveNeckDown_clicked();
+
+    void on_moveNeckOriginButton_clicked();
 
 public:
     Ui::MdiChild *ui;
