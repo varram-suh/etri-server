@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
     circular-buffer.cpp \
-    debugger.cpp \
     license-session.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -38,7 +37,6 @@ SOURCES += \
 HEADERS += \
     asio-server.h \
     circular-buffer.h \
-    debugger.h \
     license-session.h \
     mainwindow.h \
     packet-buffer.h \

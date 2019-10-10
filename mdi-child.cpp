@@ -1,11 +1,8 @@
 #include "mdi-child.h"
 #include "ui_mdichild.h"
-#include "json.hpp"
 #include <iostream>
-using nlohmann::json;
 #include <QMdiArea>
 #include <QMdiSubWindow>
-#include "debugger.h"
 #include "license-session.h"
 #include "spdlogger.h"
 #include <opencv2/opencv.hpp>

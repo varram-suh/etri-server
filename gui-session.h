@@ -12,14 +12,7 @@
 #include <boost/enable_shared_from_this.hpp> 
 #include <boost/shared_ptr.hpp> 
 #include <exception>
-#include "tcp-packet.h"
-//#include "direct-mode.h"
 #include <map>
-//#include "wifi.h"
-//#include "shell.h"
-//#include "sockethelper.h"
-//#include "json/json.h"
-#include "debugger.h"
 #include "gui.h"
 
 

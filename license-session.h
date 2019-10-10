@@ -13,14 +13,10 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <exception>
-#include "tcp-packet.h"
 //#include "direct-mode.h"
 #include <map>
-#include "debugger.h"
-#include "json.hpp"
 #include "spdlogger.h"
 #include "circular-buffer.h"
-#include "debugger.h"
 #include <QString>
 #include <QBuffer>
 #include "mdi-child.h"
@@ -31,9 +27,6 @@
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
-// using boost::asio::ip::tcp;
-// using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
-//namespace http = boost::beast::http;    // from <boost/beast/http.hpp>
 
 #include "mdi-child.h"
 

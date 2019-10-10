@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "json.hpp"
 #include <iostream>
-using nlohmann::json;
 #include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QTimer>

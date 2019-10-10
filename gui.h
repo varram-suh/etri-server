@@ -10,7 +10,6 @@
 //#include <glew.h>
 #include <GLFW/glfw3.h>
 #include "imgui.h"
-#include "stb_image.h"
 
 static const int width = 640;
 static const int height = 480;

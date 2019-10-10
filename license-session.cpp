@@ -1,17 +1,9 @@
 
 #include "license-session.h"
 #include "packet-buffer.h"
-#include "json.hpp"
 #include "http-request.h"
-#include "tcp-packet.h"
 #include "chrono-util.h"
-using json = nlohmann::json;
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-//#include "globalvar.h"
-
-using json = nlohmann::json;
 
 #define PRINT_IF_HAS(OBJ, MEMBER) if(OBJ->has_##MEMBER) { printf(#MEMBER ": %d", (*OBJ).MEMBER); }
 #define STRING_IF_HAS(OBJ, MEMBER) (OBJ->has_##MEMBER ? std::string("") + #MEMBER + ": " + std::to_string((*OBJ).MEMBER) : std::string(""))

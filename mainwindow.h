@@ -12,7 +12,6 @@
 #include <boost/bind.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
-#include "json.hpp"
 #include "license-session.h"
 #include "mdi-child.h"
 

@@ -28,16 +28,15 @@ find_package(Qt5PrintSupport REQUIRED )
 
 MESSAGE(${OpenCV_LIBS})
 # Populate a CMake variable with the sources
-set(helloworld_SRCS
+set(
+    helloworld_SRCS
     mainwindow.ui
     mdichild.ui
     mainwindow.cpp
     mdi-child.cpp
     main.cpp
-    packet-buffer.cpp
     circular-buffer.cpp
     license-session.cpp
-    debugger.cpp
     protobuf-c/protobuf-c.c
     qcustomplot.cpp
     simple.pb-c.c
