@@ -134,7 +134,6 @@ void MdiChild::on_initPositionButton_clicked()
 
 void MdiChild::on_pwmChangeButton_clicked()
 {
-    /*
     ToHi tohi = TO_HI__INIT;
     PwmLed pwmLed = PWM_LED__INIT;
     tohi.pwm_led = &pwmLed;
@@ -150,7 +149,6 @@ void MdiChild::on_pwmChangeButton_clicked()
     if(p) {
         p->packHiToBuffer(&tohi);
     }
-    */
 }
 
 void MdiChild::on_vaToggleButton_clicked()
