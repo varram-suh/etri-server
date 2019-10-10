@@ -1,45 +1,5 @@
 syntax = "proto2"; 
 
-// option java_package = "com.example.ksoo.ballbotpkg";
-// option java_package = "com.varram.model";
-// Âü°í ÀÚ·á: https://docs.google.com/presentation/d/1tmdnr6woK1--EoZApqjyL7k8lveUc39JXn4Tf8xv5pc/edit?usp=sharing
-message FirmwareUpdate {
-    optional bytes data = 2;
-    optional uint32 verify = 3;
-    optional uint32 start = 4;
-    optional uint32 end = 5; 
-    optional uint32 start_offset = 6;
-    optional uint32 end_offset = 7;
-    // optional bytes bin_data = 8;
-} 
-
-message FirmwareUpdateFeedback {
-    optional uint32 data = 2;
-    optional uint32 verify = 3;
-    optional uint32 start = 4;
-    optional uint32 end = 5; 
-    optional uint32 crc = 6;
-}
-
-message VL53L1Data {
-    optional uint32 location = 2;
-    optional uint32 ranging_state = 3;
-    optional uint32 range = 4;
-    optional uint32 signal_rate = 5;
-    optional uint32 ambient_rate = 6;
-}
-
-message VL53L1Set {
-    optional uint32 topLeftX = 2;
-    optional uint32 topLeftY = 3;
-    optional uint32 botRightX = 4;
-    optional uint32 botRightY = 5;
-    optional uint32 roi_mode = 6;
-    optional uint32 distance_mode = 7;
-    optional uint32 timing_budget = 8;
-    optional uint32 inter_measurement_period = 9;
-}
-
 message SensorData {
     optional string sensor_mac_address = 1;
     optional uint32 sensor_type = 2;
@@ -53,7 +13,7 @@ message SensorData {
     optional uint32 bq27441_voltage = 10;
 }
 
-message SensorSet{
+message SensorSet {
     optional string sensor_mac_address = 1;
     optional uint32 sensor_type = 2;
     optional bool interrupt_alarm = 3;
@@ -63,12 +23,6 @@ message SensorSet{
     optional uint32 lower_threshold = 7;
 }
 
-message SmoothMotorControlDeprecated {
-    optional int32 left_motor = 1;
-    optional int32 right_motor = 2;
-    optional uint32 adc_interval = 3;
-    optional uint32 acc_decrease = 4;
-}
 message RoughMotorControl {
     optional int32 left_motor = 1;		//0~60rpm
     optional int32 right_motor = 2;		//0~60rpm
@@ -80,17 +34,18 @@ message LedControl {
     optional uint32 bright = 3;
 }
 
+message PwmLed {
+    optional uint32 pwm = 1;
+    optional uint32 duty = 2;
+    optional uint32 period = 3;
+    optional uint32 enable = 4;
+}
+
 message EncoderControl {
     optional uint32 left = 1;
     optional uint32 right = 2;
 }
 
-message BandwidthTest {
-    optional bytes data = 1;
-    optional uint32 step = 2; // Ã³À½=1, Áß°£=2, ¸¶Áö¸·=3
-    optional uint32 bandwidth_by_hi = 3;
-    // optional uint32 is_begin = 4;
-}
 
 enum StInfo
 {
@@ -125,29 +80,11 @@ message ToWb55 {
     optional uint32 power = 2;
     optional string name = 3;
     optional bool get_st_message = 4; // 
-    optional uint32 seq = 5; // hi ¿¡¼­ serial resender ¸ñÀûÀ¸·Î seq ¸¦ Ã¤¿ö¼­ ÁØ´Ù. ¸¸¾à ÀÌ °ªÀÌ ÀÖ´Ù¸é, wb55 ´Â seq ¸¦ ±×´ë·Î ´ã¾Æ¼­ º¸³»¾ß ÇÑ´Ù.
+    optional uint32 seq = 5; // hi 에서 serial resender 목적으로 seq 를 채워서 준다. 만약 이 값이 있다면, wb55 는 seq 를 그대로 담아서 보내야 한다.
     // from ?? }}}}}}}}}}}}}}}}}}} 
 
-    // {{{{{{{{{{{{{{{{{{{ from HI
-    optional bool scan_start = 10;
-    optional bool scan_stop = 11;
-    optional bool connect = 12;	//sec
-    optional string connect_mac = 13;
-    optional bool disconnect = 14;	//sec
-    optional string disconnect_mac = 15;
-    optional bool req_connect_list = 16;	//sec
-    optional bool client = 17;
-    optional bool server = 18;
-    optional ToBand toband_bypass = 19;
-    optional VL53L1Set vl53l1_set = 20;
-    // from HI }}}}}}}}}}}}}}}}}}} 
-
-    // {{{{{{{{{{{{{{{{{{{ from Host
-    optional SensorSet sensor_set =30;
-    // from Host }}}}}}}}}}}}}}}}}}}
-
-    // android, st ¿¡¼­ Hi ·Î ÁÙ µ¥ÀÌÅÍ´Â ¿©±â¿¡ ³Ö´Â´Ù. 
-    // wb55 °¡ get_st_message °¡ µé¾î¿ÔÀ» ¶§ ¸¸µé¾î³õÀº serilize bytes °¡ ÀÖ´Ù¸é ÆÐÅ¶À» ¸¸µé¾î¼­ Àü¼ÛÇÑ´Ù. 
+    // android, st 에서 Hi 로 줄 데이터는 여기에 넣는다. 
+    // wb55 가 get_st_message 가 들어왔을 때 만들어놓은 serilize bytes 가 있다면 패킷을 만들어서 전송한다. 
     optional ToHi to_hi_from_host = 50; 
     optional ToHost to_host_from_hi = 51; // ble data 
     optional ToSt to_st_from_hi = 52; // ble data 
@@ -156,25 +93,24 @@ message ToWb55 {
     optional ToHost to_host_from_wb55 = 55; 
     optional ToWb55 to_wb55_from_wb55 = 56; 
     optional ToSt to_st_from_host= 57; 
-}
 
+    // {{{{{{{{{{{{{{{{{{{ from Host
+    optional SensorSet sensor_set =30;
+    // from Host }}}}}}}}}}}}}}}}}}}
+} 
 
 message ToSt {
     // {{{{{{{{{{{{{{{{{{{ from HI begin
-    optional SmoothMotorControlDeprecated smooth_motor_control_deprecated = 1;
     optional RoughMotorControl rough_motor_control = 2;
     optional EncoderControl encoder_control = 3;
     optional LedControl led_control = 4;
-    optional bool auto_charge_control = 5;
     optional uint32 neck_speed = 6; // -350 ~ 350
-    optional uint32 request_st_info = 7; // st ¿¡°Ô ¿äÃ»ÇÏ´Â Á¤º¸, StInfo bitwise ¿¬»ê 
-    optional uint32 power_command = 8; // Àü¿ø ¸í·É, 1 ÀÌ¸é ²¨¶ó. 2ÀÌ¸é ½½¸³¸ðµå... µîµî
-    optional uint32 do_charge = 9; // ÃæÀüÇØ¶ó.
-    optional uint32 reset_if_no_serial = 10; // 1 ÀÌ¸é ½Ã¸®¾óÀÌ Æ¯Á¤ ½Ã°£¸¸Å­ ¾Èµé¾î¿ÔÀ» ¶§ Àü¿ø ¸®¼Â
-    optional bytes loopback = 11; // ¿©±â¿¡ ¼ÓÇÑ µ¥ÀÌÅÍ¸¦ ±×´ë·Î ´ã¾Æ¼­ ÀÀ´äÇØ¾ß ÇÔ.
-    optional FirmwareUpdate stm_update = 12;
-    optional FirmwareUpdate ble_update = 13; 
-    required uint32 seq = 99; ///&lt; Áõ°¡ÇÏ´Â°ªÀÎµ¥, ÀÌ¹Ì Ã³¸®µÈ ¸í·ÉÀÌ¶ó¸é ±â¾ïÇÏ°í ÀÖ´Â ¸¶Áö¸· ÀÀ´äÀ» µ¹·ÁÁà¾ß ÇÑ´Ù.  
+    optional uint32 request_st_info = 7; // st 에게 요청하는 정보, StInfo bitwise 연산 
+    optional uint32 power_command = 8; // 전원 명령, 1 이면 꺼라. 2이면 슬립모드... 등등
+    optional uint32 do_charge = 9; // 충전해라.
+    optional uint32 reset_if_no_serial = 10; // 1 이면 시리얼이 특정 시간만큼 안들어왔을 때 전원 리셋
+    optional bytes loopback = 11; // 여기에 속한 데이터를 그대로 담아서 응답해야 함.
+    required uint32 seq = 99; ///&lt; 증가하는값인데, 이미 처리된 명령이라면 기억하고 있는 마지막 응답을 돌려줘야 한다.  
     // from HI }}}}}}}}}}}}}}}}}}} 
 }
 
@@ -187,12 +123,6 @@ message Ap {
     optional string ssid = 1; 
     optional string ssid_type = 2;
 } 
-
-message MomentData {
-    optional uint32 accx = 1; 
-    optional uint32 accy = 2;
-    optional uint32 accz = 3;
-}
 
 message ToHi {
     optional ToHost tohost_bypass = 1;
@@ -221,48 +151,30 @@ message ToHi {
     optional bool usb_con = 22;
     optional bool charge_complete = 23;
     optional uint32 auto_charge_step = 24;
-    optional bytes loopback = 25; // ToSt::loopback À¸·Î Àü´ÞµÈ µ¥ÀÌÅÍ°¡ ´Ù½Ã ¹Þ¾ÆÁö´Â °Í.  
-    optional FirmwareUpdateFeedback firmware_update_feedback = 26;
+    optional bytes loopback = 25; // ToSt::loopback 으로 전달된 데이터가 다시 받아지는 것.  
     // from ST }}}}}}}}}}}}}}}}}}} 
 
-    // {{{{{{{{{{{{{{{{{{{ from Band
-    optional uint32 moment_timestamp = 40;
-    optional uint32 moment_data_hz = 41;
-    repeated MomentData moment_data = 42;
-    optional bool moment_data_end = 43;
-    // from Band }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from WB55 Client, Dongle
-    optional string mac_address = 50;	//sec
-    optional string dev_name = 51;	//sec
-    optional uint32 dev_rssi = 52;	//sec
-    optional bool connected = 53;	//sec
+    optional string mac_address = 50;   //sec
+    optional string dev_name = 51;  //sec
+    optional uint32 dev_rssi = 52;  //sec
+    optional bool connected = 53;   //sec
     optional string connected_mac = 54;
-    optional bool disconnected = 55;	//sec
+    optional bool disconnected = 55;    //sec
     optional string disconnected_mac = 56;
-    optional VL53L1Data vl53l1_data = 57;
+    //optional VL53L1Data vl53l1_data = 57;
     // from WB55 }}}}}}}}}}}}}}}}}}} 
+
 
     // {{{{{{{{{{{{{{{{{{{ from host
     optional string phone_public_key = 100;
     optional uint32 do_charge = 101;
     optional uint32 video_seq = 102;
-    optional BandwidthTest bandwidth_test = 103; 
-    optional uint32 request_stop_qc = 104; 
-
-    optional uint32 request_mic_loop_back = 105;
-    optional uint32 set_invert_vert = 106; 
-    optional uint32 set_invert_horiz = 107; 
-    optional int32 set_mic_vol = 108; 
-    optional uint32 set_speaker_vol = 109; 
     optional uint32 set_ir_cut1 = 110; 
     optional uint32 set_ir_cut2 = 111; 
-    optional int32 play_pcm = 112; 
     optional int32 set_mute = 113; 
     optional bytes audio = 114;
-    optional uint32 qc_retry = 115;
-    optional int32 min_exposure = 116;
-    optional int32 max_exposure = 117;
     // from host }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from BLE
@@ -272,18 +184,15 @@ message ToHi {
 
     optional uint32 req_service_key = 203;
     optional ReqCompleteSetup req_complete_setup = 204;
-    optional uint32 req_scan_ap = 205; // HI ÇÑÅ× ÁÖº¯ AP °Ë»öÇÏ¶ó°í ¸í·É.
-    message ConnectServer {
-        required string user_id = 1;
-        required uint32 gmt = 2;
-    }
-    optional ConnectServer connect_server = 206;
-
+    optional uint32 req_scan_ap = 205; // HI 한테 주변 AP 검색하라고 명령.
     optional uint32 seq = 999;
     required string sender = 1000;
     // from BLE }}}}}}}}}}}}}}}}}}} 
 
-    optional ToWb55 to_wb55_from_host = 300; 
+
+    // {{{{{{{{{{{{{{{{{{{ from everyone
+    optional PwmLed pwm_led = 300;
+    // from everyone }}}}}}}}}}}}}}}}}}} 
 }
 // ToHi close
 
@@ -296,34 +205,16 @@ message RspServiceKey {
 
 message ToHost {
     // {{{{{{{{{{{{{{{{{{{ from HI
-    optional bytes video = 1; // host °¡ Àç»ýÇÒ ºñµð¿À
-    optional bytes audio = 2; // host °¡ Àç»ýÇÒ ¿Àµð¿À
-    optional bytes encrypted_secret_key = 3; // Hi °¡ phone public key ·Î ¾ÏÈ£È­ÇÑ aes key, phone secret key ·Î Ç®¾î¾ß µÊ.
-    optional uint32 video_seq = 4; // latency ÃøÁ¤¿ë
-    optional uint32 video_ts = 5; // Âü°íÀÚ·á
-    optional uint32 latency = 6; // hi °¡ ¿Ã·ÁÁÖ´Â latency
-    optional uint32 bitrate = 7; // hi °¡ ¿Ã·ÁÁÖ´Â h.264 bitrate
-
+    optional bytes video = 1; // host 가 재생할 비디오(jpeg)
+    optional bytes audio = 2; // host 가 재생할 오디오 
     optional ToHi tohi_bypass = 8;
-    optional uint32 request_start_qc = 9;
-    optional uint32 request_bandwidth = 10; 
-    optional BandwidthTest bandwidth_test = 11; 
-    optional string debugging_info = 12;  ///&lt; º¸°í ½ÍÀº µð¹ö±ë ¹®ÀÚ¿­ 
-    optional BandwidthTest serial_bandwidth_test = 13; 
-    optional bool play_pcm_end = 14; // Host (pcqc) ¿¡°Ô pcm Àç»ýÀÌ ³¡³µÀ½À» ¾Ë¸².  
-    optional uint64 pts = 15; // video or audio pts.
-    optional int32 signal_level = 16; // wifi signal level.
     // from HI }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from BLE    
-    optional RspServiceKey rsp_service_key = 100; // ReqServiceKey ÀÇ ÀÀ´ä
-    optional uint32 rsp_complete_setup = 101; // ReqCompleteSetup ÀÇ ÀÀ´ä 
-    repeated Ap ap_list = 102; // ap scan ÈÄ µ¹·ÁÁÖ´Â ¸®½ºÆ®, Æù¿¡¼­ ÀÌ Áß ÇÏ³ª¸¦ ¼±ÅÃÇÔ.  
-    optional int32 ap_connection_result = 103; // ap Á¢¼Ó½Ãµµ °á°ú ¸®ÅÏ   
-    optional int32 ping_result = 104; // ping °á°ú ¸®ÅÏ
-    optional bool signal_server_setup = 105; // signal server Á¢¼Ó °á°ú 
-    optional bool room_server_setup = 106; // room server Á¢¼Ó °á°ú
-    optional bool auth_server_setup = 107; // auth server Á¢¼Ó °á°ú     // from BLE }}}}}}}}}}}}}}}}}}}
+    optional RspServiceKey rsp_service_key = 100; // ReqServiceKey 의 응답
+    optional uint32 rsp_complete_setup = 101; // ReqCompleteSetup 의 응답 
+    repeated Ap ap_list = 102; // ap scan 후 돌려주는 리스트, 폰에서 이 중 하나를 선택함.  
+    optional int32 ap_connection_result = 103; // ap 접속시도 결과 리턴   
 
     // {{{{{{{{{{{{{{{{{{{ from Sensor WB55
     optional SensorData sensor_data = 62;
