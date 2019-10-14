@@ -7,9 +7,65 @@
 #include "spdlogger.h"
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/types_c.h>
+#include <boost/lexical_cast.hpp>
+#include <algorithm>
 
 
+void MdiChild::updateSensor(SensorData* s) {
+    bool isExist = false;
+    for(auto &i : sensorList) {
+        if( i.sensor_mac_address == s->sensor_mac_address ) {
+            isExist = true;
 
+            if( s->has_sensor_type )       { i.has_sensor_type = true; i.sensor_type = s->sensor_type; }
+            if( s->has_shtc1_temperature ) { i.has_temperature = true; i.temperature = s->shtc1_temperature; }
+            if( s->has_shtc1_humidity )    { i.has_humidity = true; i.humidity = s->shtc1_humidity; }
+            if( s->has_sgp30_eco2_ppm )    { i.has_eco2_ppm = true; i.eco2_ppm = s->sgp30_eco2_ppm; }
+            if( s->has_sgp30_tvoc_ppb )    { i.has_tvoc_ppb = true; i.tvoc_ppb = s->sgp30_tvoc_ppb; }
+            if( s->has_hall_state )        { i.has_hall_state = true; i.hall_state = s->hall_state; }
+            if( s->has_hall_interrupt )    { i.has_hall_interrupt = true; i.hall_interrupt = s->hall_interrupt; }
+            if( s->has_pir_interrupt )     { i.has_pir_interrupt = true; i.pir_interrupt = s->pir_interrupt; }
+            if( s->has_bq27441_voltage )   { i.has_voltage = true; i.voltage = s->bq27441_voltage; }
+            break;
+        }
+    }
+
+    if( isExist == false ) {
+        SensorPrint i;
+
+        i.sensor_mac_address = s->sensor_mac_address;
+        if( s->has_sensor_type )       { i.has_sensor_type = true; i.sensor_type = s->sensor_type; }
+        if( s->has_shtc1_temperature ) { i.has_temperature = true; i.temperature = s->shtc1_temperature; }
+        if( s->has_shtc1_humidity )    { i.has_humidity = true; i.humidity = s->shtc1_humidity; }
+        if( s->has_sgp30_eco2_ppm )    { i.has_eco2_ppm = true; i.eco2_ppm = s->sgp30_eco2_ppm; }
+        if( s->has_sgp30_tvoc_ppb )    { i.has_tvoc_ppb = true; i.tvoc_ppb = s->sgp30_tvoc_ppb; }
+        if( s->has_hall_state )        { i.has_hall_state = true; i.hall_state = s->hall_state; }
+        if( s->has_hall_interrupt )    { i.has_hall_interrupt = true; i.hall_interrupt = s->hall_interrupt; }
+        if( s->has_pir_interrupt )     { i.has_pir_interrupt = true; i.pir_interrupt = s->pir_interrupt; }
+        if( s->has_bq27441_voltage )   { i.has_voltage = true; i.voltage = s->bq27441_voltage; }
+        sensorList.push_back( i );
+    }
+
+    // set new text with sensor
+    std::string newText = "";
+    sort(sensorList.begin(), sensorList.end());
+    for(auto &i : sensorList) {
+        newText += i.sensor_mac_address;
+        if( i.has_sensor_type )       { newText += " type : "           + boost::lexical_cast<std::string>( i.sensor_type ); }
+        if( i.has_temperature )       { newText += " temperature : "    + boost::lexical_cast<std::string>( i.temperature ); }
+        if( i.has_humidity )          { newText += " humidity : "       + boost::lexical_cast<std::string>( i.humidity ); }
+        if( i.has_eco2_ppm )          { newText += " eco2 : "           + boost::lexical_cast<std::string>( i.eco2_ppm ); }
+        if( i.has_tvoc_ppb )          { newText += " tvoc : "           + boost::lexical_cast<std::string>( i.tvoc_ppb ); }
+        if( i.has_hall_state )        { newText += " hall_state : "     + boost::lexical_cast<std::string>( i.hall_state ); }
+        if( i.has_hall_interrupt )    { newText += " hall_interrupt : " + boost::lexical_cast<std::string>( i.hall_interrupt ); }
+        if( i.has_pir_interrupt )     { newText += " pir_interrupt : "  + boost::lexical_cast<std::string>( i.pir_interrupt ); }
+        if( i.has_voltage )           { newText += " voltage : "        + boost::lexical_cast<std::string>( i.voltage ); }
+
+        newText += "\n";
+    }
+
+    ui->textBrowser->setText(QString::fromStdString(newText));
+}
 
 MdiChild::MdiChild(QWidget *parent) :
     QMainWindow(parent),

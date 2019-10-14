@@ -121,7 +121,6 @@ int LicenseSession::processBytes() {
                     m_dataBuffer.read(&one, sizeof(one));
                     m_requiredSize = one; 
                     m_modernStep = STEP_ELSEN_PACKET;
-                    printf("LEN : %u\n", one);
                 }
                 break;
             case STEP_ELSEN_PACKET:
@@ -162,6 +161,13 @@ int LicenseSession::processBytes() {
 }
 
 void LicenseSession::processMessage(ToHost* msg2) {
+
+    if(msg2->sensor_data) {
+        m_mdiChild->updateSensor(msg2->sensor_data);
+        //if( msg2->sensor_data->has_sensor_mac_address ) {
+        //}
+    }
+
     if(msg2->has_audio) {
         //CONSOLE_INFO("has_audio {}", msg2->audio.len);
         QByteArray qa = QByteArray((const char*)msg2->audio.data, (size_t)msg2->audio.len);
