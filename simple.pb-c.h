@@ -342,6 +342,7 @@ struct  _ToHi
   ProtobufCMessage base;
   ToHost *tohost_bypass;
   ToSt *tost_bypass;
+  SensorSet *sensor_set_bypass;
   /*
    * {{{{{{{{{{{{{{{{{{{ from ST
    */
@@ -508,7 +509,7 @@ struct  _ToHi
 };
 #define TO_HI__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_hi__descriptor) \
-    , NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL }
+    , NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL }
 
 
 struct  _RspServiceKey

@@ -1761,7 +1761,7 @@ const ProtobufCMessageDescriptor ap__descriptor =
   (ProtobufCMessageInit) ap__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_hi__field_descriptors[48] =
+static const ProtobufCFieldDescriptor to_hi__field_descriptors[49] =
 {
   {
     "tohost_bypass",
@@ -2316,6 +2316,18 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[48] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "sensor_set_bypass",
+    301,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToHi, sensor_set_bypass),
+    &sensor_set__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "seq",
     999,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -2373,8 +2385,9 @@ static const unsigned to_hi__field_indices_by_name[] = {
   42,   /* field[42] = req_service_key */
   12,   /* field[12] = roll */
   16,   /* field[16] = rspeed */
-  47,   /* field[47] = sender */
-  46,   /* field[46] = seq */
+  48,   /* field[48] = sender */
+  46,   /* field[46] = sensor_set_bypass */
+  47,   /* field[47] = seq */
   35,   /* field[35] = set_ir_cut1 */
   36,   /* field[36] = set_ir_cut2 */
   37,   /* field[37] = set_mute */
@@ -2399,8 +2412,8 @@ static const ProtobufCIntRange to_hi__number_ranges[8 + 1] =
   { 113, 37 },
   { 200, 39 },
   { 300, 45 },
-  { 999, 46 },
-  { 0, 48 }
+  { 999, 47 },
+  { 0, 49 }
 };
 const ProtobufCMessageDescriptor to_hi__descriptor =
 {
@@ -2410,7 +2423,7 @@ const ProtobufCMessageDescriptor to_hi__descriptor =
   "ToHi",
   "",
   sizeof(ToHi),
-  48,
+  49,
   to_hi__field_descriptors,
   to_hi__field_indices_by_name,
   8,  to_hi__number_ranges,
