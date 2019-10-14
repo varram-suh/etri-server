@@ -362,3 +362,41 @@ void MdiChild::on_moveNeckOriginButton_clicked()
         p->packHiToBuffer(&tohi);
     }
 }
+
+void MdiChild::on_macText_textChanged()
+{
+    sensor_mac_recv = ui->macText->toPlainText().toStdString();
+}
+
+void MdiChild::on_periodText_textChanged()
+{
+    try {
+        sensor_period_recv = (uint32_t)(ui->periodText->toPlainText().toInt());
+    } catch( std::exception e ) {
+        std::cerr << e.what() << std::endl;
+        sensor_period_recv = 5000;
+    }
+}
+
+void MdiChild::on_setSensorButton_clicked()
+{
+    ToHi tohi = TO_HI__INIT;
+    SensorSet sensor_set = SENSOR_SET__INIT;
+    sensor_set.sensor_mac_address = (char*)sensor_mac_recv.c_str();
+
+    sensor_set.has_period_alarm = 1;
+    sensor_set.period_alarm = 1;
+
+    sensor_set.has_notify_period = 1;
+    sensor_set.notify_period = sensor_period_recv;
+    CONSOLE_INFO("MAC {} period {} notify {}",
+                 sensor_set.sensor_mac_address,
+                 sensor_set.period_alarm,
+                 sensor_set.notify_period);
+
+    tohi.sensor_set_bypass = &sensor_set;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}

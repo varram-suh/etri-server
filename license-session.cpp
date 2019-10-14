@@ -96,7 +96,7 @@ int LicenseSession::processBytes() {
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
                     if(one == 0xCE) {
-                        m_modernStep = STEP_ELSEN_LENGTH;
+                        m_modernStep = STEP_ELSSEN_LENGTH;
                         m_requiredSize = 4;
                     }
                     else {
@@ -115,19 +115,19 @@ int LicenseSession::processBytes() {
                     // uart_printf("[needed: %02d] :: %d\r\n", requiredBytes, __LINE__);
                 }
                 break;
-            case STEP_ELSEN_LENGTH:
+            case STEP_ELSSEN_LENGTH:
                 {
                     uint32_t one;
                     m_dataBuffer.read(&one, sizeof(one));
                     m_requiredSize = one; 
-                    m_modernStep = STEP_ELSEN_PACKET;
+                    m_modernStep = STEP_ELSSEN_PACKET;
                 }
                 break;
-            case STEP_ELSEN_PACKET:
+            case STEP_ELSSEN_PACKET:
                 {
                     uint8_t* buf = new uint8_t[m_requiredSize];
                     m_dataBuffer.read(buf, m_requiredSize);
-                    CONSOLE_INFO("ELSEN PACKET");
+                    CONSOLE_INFO("ELSSEN PACKET");
                     printf("0xEA 0xCE ");
                     printf("0x%02X ", (m_requiredSize << 0 ) & 0xFF);
                     printf("0x%02X ", (m_requiredSize << 8 ) & 0xFF);

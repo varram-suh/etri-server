@@ -108,6 +108,12 @@ private slots:
 
     void on_moveNeckOriginButton_clicked();
 
+    void on_macText_textChanged();
+
+    void on_periodText_textChanged();
+
+    void on_setSensorButton_clicked();
+
 public:
     Ui::MdiChild *ui;
     QAudioOutput* audio; 
@@ -119,6 +125,9 @@ public:
     QVector<double> realtimeX, realtimeY;
     QVector<double> playlistX, playlistY;
     std::chrono::system_clock::time_point startTimePoint;
+
+    std::string sensor_mac_recv = "";
+    uint32_t sensor_period_recv = 5000;
 
     int m_hz_division = 0;
     bool mic_loopback_on = false;

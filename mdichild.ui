@@ -87,66 +87,10 @@
         <property name="spacing">
          <number>5</number>
         </property>
-        <item row="4" column="3">
-         <widget class="QPushButton" name="initPositionButton">
-          <property name="text">
-           <string>Init Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="savePositionButton">
-          <property name="text">
-           <string>Save Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QPushButton" name="gotoPositionButton">
-          <property name="text">
-           <string>Go to Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="pushButton_2">
+        <item row="3" column="4">
+         <widget class="QPushButton" name="pushButton_4">
           <property name="text">
            <string>------------------</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QPushButton" name="pwmChangeButton">
-          <property name="text">
-           <string>random PWM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="moveOriginButton">
-          <property name="text">
-           <string>O</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="QPushButton" name="vaToggleButton">
-          <property name="text">
-           <string>Video/Audio Toggle</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="4">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>------------------</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="moveUpButton">
-          <property name="text">
-           <string>^</string>
           </property>
          </widget>
         </item>
@@ -157,24 +101,55 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="moveLeftButton">
+        <item row="4" column="5">
+         <widget class="QPushButton" name="pwmChangeButton">
           <property name="text">
-           <string>&lt;</string>
+           <string>random PWM</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="moveDownButton">
+        <item row="4" column="1">
+         <widget class="QPushButton" name="savePositionButton">
           <property name="text">
-           <string>v</string>
+           <string>Save Position</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="4">
-         <widget class="QPushButton" name="pushButton_4">
+        <item row="6" column="4">
+         <widget class="QPushButton" name="pushButton_2">
           <property name="text">
            <string>------------------</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="initPositionButton">
+          <property name="text">
+           <string>Init Position</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="moveOriginButton">
+          <property name="text">
+           <string>O</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QTextEdit" name="periodText"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="moveUpButton">
+          <property name="text">
+           <string>^</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="5">
+         <widget class="QPushButton" name="vaToggleButton">
+          <property name="text">
+           <string>Video/Audio Toggle</string>
           </property>
          </widget>
         </item>
@@ -192,10 +167,62 @@
           </property>
          </widget>
         </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="gotoPositionButton">
+          <property name="text">
+           <string>Go to Position</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QTextEdit" name="macText"/>
+        </item>
+        <item row="7" column="4">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>------------------</string>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="5">
          <widget class="QPushButton" name="moveNeckOriginButton">
           <property name="text">
            <string>NECK O</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="moveDownButton">
+          <property name="text">
+           <string>v</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="moveLeftButton">
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>INSERT MAC ADDR UNDER</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="text">
+           <string>INSERT PERIOD UNDER (ms)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QPushButton" name="setSensorButton">
+          <property name="text">
+           <string>set Sensor</string>
           </property>
          </widget>
         </item>
