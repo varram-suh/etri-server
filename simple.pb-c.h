@@ -60,22 +60,22 @@ struct  _SensorData
   char *sensor_mac_address;
   protobuf_c_boolean has_sensor_type;
   uint32_t sensor_type;
-  protobuf_c_boolean has_shtc1_temperature;
-  float shtc1_temperature;
-  protobuf_c_boolean has_shtc1_humidity;
-  float shtc1_humidity;
-  protobuf_c_boolean has_sgp30_eco2_ppm;
-  uint32_t sgp30_eco2_ppm;
-  protobuf_c_boolean has_sgp30_tvoc_ppb;
-  uint32_t sgp30_tvoc_ppb;
+  protobuf_c_boolean has_sensor_temperature;
+  float sensor_temperature;
+  protobuf_c_boolean has_sensor_humidity;
+  float sensor_humidity;
+  protobuf_c_boolean has_eco2_ppm;
+  uint32_t eco2_ppm;
+  protobuf_c_boolean has_tvoc_ppb;
+  uint32_t tvoc_ppb;
   protobuf_c_boolean has_hall_state;
   protobuf_c_boolean hall_state;
   protobuf_c_boolean has_hall_interrupt;
   protobuf_c_boolean hall_interrupt;
   protobuf_c_boolean has_pir_interrupt;
   protobuf_c_boolean pir_interrupt;
-  protobuf_c_boolean has_bq27441_voltage;
-  uint32_t bq27441_voltage;
+  protobuf_c_boolean has_sensor_voltage;
+  uint32_t sensor_voltage;
 };
 #define SENSOR_DATA__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&sensor_data__descriptor) \
@@ -248,10 +248,7 @@ struct  _ToWb55
    * ble data 
    */
   ToSt *to_st_from_hi;
-  ToHi *to_hi_from_wb55;
   ToHi *to_hi_from_band;
-  ToHost *to_host_from_wb55;
-  ToWb55 *to_wb55_from_wb55;
   ToSt *to_st_from_host;
   /*
    * {{{{{{{{{{{{{{{{{{{ from Host
@@ -263,7 +260,7 @@ struct  _ToWb55
 };
 #define TO_WB55__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_wb55__descriptor) \
-    , 0, 0, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }
+    , 0, 0, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL }
 
 
 struct  _ToSt
@@ -305,6 +302,7 @@ struct  _ToSt
    */
   protobuf_c_boolean has_loopback;
   ProtobufCBinaryData loopback;
+  SensorSet *sensor_set;
   /*
    * /&lt; 증가하는값인데, 이미 처리된 명령이라면 기억하고 있는 마지막 응답을 돌려줘야 한다.  
    */
@@ -312,7 +310,7 @@ struct  _ToSt
 };
 #define TO_ST__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_st__descriptor) \
-    , NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, 0 }
+    , NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, 0 }
 
 
 struct  _ReqCompleteSetup
@@ -342,7 +340,6 @@ struct  _ToHi
   ProtobufCMessage base;
   ToHost *tohost_bypass;
   ToSt *tost_bypass;
-  SensorSet *sensor_set_bypass;
   /*
    * {{{{{{{{{{{{{{{{{{{ from ST
    */
@@ -509,7 +506,7 @@ struct  _ToHi
 };
 #define TO_HI__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_hi__descriptor) \
-    , NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL }
+    , NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, {0,NULL}, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL }
 
 
 struct  _RspServiceKey

@@ -164,8 +164,6 @@ void LicenseSession::processMessage(ToHost* msg2) {
 
     if(msg2->sensor_data) {
         m_mdiChild->updateSensor(msg2->sensor_data);
-        //if( msg2->sensor_data->has_sensor_mac_address ) {
-        //}
     }
 
     if(msg2->has_audio) {

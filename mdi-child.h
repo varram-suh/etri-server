@@ -108,11 +108,21 @@ private slots:
 
     void on_moveNeckOriginButton_clicked();
 
-    void on_macText_textChanged();
-
-    void on_periodText_textChanged();
-
     void on_setSensorButton_clicked();
+
+    void on_sensor_type_activated(int index);
+
+    void on_sensor_interruptOnOff_activated(int index);
+
+    void on_sensor_upperThreshold_textChanged();
+
+    void on_sensor_lowerThreshold_textChanged();
+
+    void on_sensor_periodOnOff_activated(int index);
+
+    void on_sensor_period_textChanged();
+
+    void on_sensor_macAddr_textChanged();
 
 public:
     Ui::MdiChild *ui;
@@ -126,13 +136,18 @@ public:
     QVector<double> playlistX, playlistY;
     std::chrono::system_clock::time_point startTimePoint;
 
-    std::string sensor_mac_recv = "";
-    uint32_t sensor_period_recv = 5000;
-
     int m_hz_division = 0;
     bool mic_loopback_on = false;
     std::vector<SensorPrint> sensorList;
     void updateSensor(SensorData* s);
+
+    std::string sensor_mac_address;
+    uint32_t sensor_type;
+    bool sensor_interrupt_alarm;
+    uint32_t sensor_upper_threshold;
+    uint32_t sensor_lower_threshold;
+    bool sensor_period_alarm;
+    uint32_t sensor_notify_period;
 
     // Set up the format, eg.
 };

@@ -83,104 +83,14 @@
        </widget>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0">
         <property name="spacing">
          <number>5</number>
         </property>
-        <item row="3" column="4">
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>------------------</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="moveRightButton">
-          <property name="text">
-           <string>&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QPushButton" name="pwmChangeButton">
-          <property name="text">
-           <string>random PWM</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="savePositionButton">
-          <property name="text">
-           <string>Save Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>------------------</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QPushButton" name="initPositionButton">
-          <property name="text">
-           <string>Init Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="moveOriginButton">
-          <property name="text">
-           <string>O</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
-         <widget class="QTextEdit" name="periodText"/>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="moveUpButton">
-          <property name="text">
-           <string>^</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="QPushButton" name="vaToggleButton">
-          <property name="text">
-           <string>Video/Audio Toggle</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="5">
          <widget class="QPushButton" name="moveNeckUp">
           <property name="text">
            <string>NECK ^</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QPushButton" name="moveNeckDown">
-          <property name="text">
-           <string>NECK v</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QPushButton" name="gotoPositionButton">
-          <property name="text">
-           <string>Go to Position</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QTextEdit" name="macText"/>
-        </item>
-        <item row="7" column="4">
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>------------------</string>
           </property>
          </widget>
         </item>
@@ -191,10 +101,149 @@
           </property>
          </widget>
         </item>
+        <item row="7" column="1">
+         <widget class="QTextEdit" name="sensor_macAddr">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="moveOriginButton">
+          <property name="text">
+           <string>O</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QPushButton" name="moveNeckDown">
+          <property name="text">
+           <string>NECK v</string>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="moveDownButton">
           <property name="text">
            <string>v</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="moveRightButton">
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="5">
+         <widget class="QPushButton" name="vaToggleButton">
+          <property name="text">
+           <string>Video/Audio Toggle</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QComboBox" name="sensor_type">
+          <item>
+           <property name="text">
+            <string>Have to Set Sensor Type</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hall</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Temperature</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Humidity</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>PIR</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>ECO2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>TVOC</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>MAC Address</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="moveUpButton">
+          <property name="text">
+           <string>^</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="initPositionButton">
+          <property name="text">
+           <string>Init Position</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="5">
+         <widget class="QPushButton" name="pwmChangeButton">
+          <property name="text">
+           <string>random PWM</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="gotoPositionButton">
+          <property name="text">
+           <string>Go to Position</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="text">
+           <string>Sensor Type</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="text">
+           <string>Interrupt Alarm On/Off</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QPushButton" name="setSensorButton">
+          <property name="text">
+           <string>set Sensor</string>
           </property>
          </widget>
         </item>
@@ -205,24 +254,131 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QPushButton" name="pushButton">
+        <item row="4" column="1">
+         <widget class="QPushButton" name="savePositionButton">
           <property name="text">
-           <string>INSERT MAC ADDR UNDER</string>
+           <string>Save Position</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="2">
-         <widget class="QPushButton" name="pushButton_5">
+        <item row="3" column="4">
+         <widget class="QPushButton" name="pushButton_4">
           <property name="text">
-           <string>INSERT PERIOD UNDER (ms)</string>
+           <string/>
           </property>
          </widget>
         </item>
-        <item row="7" column="3">
-         <widget class="QPushButton" name="setSensorButton">
+        <item row="9" column="1">
+         <widget class="QComboBox" name="sensor_interruptOnOff">
+          <item>
+           <property name="text">
+            <string>Interrupt On/Off Set</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Interrupt On</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Interrupt Off</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="9" column="4">
+         <widget class="QComboBox" name="sensor_periodOnOff">
+          <item>
+           <property name="text">
+            <string>Period On/Off Set</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Period Alarm On</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Period Alarm Off</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="9" column="2">
+         <widget class="QTextEdit" name="sensor_upperThreshold">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QTextEdit" name="sensor_lowerThreshold">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="5">
+         <widget class="QTextEdit" name="sensor_period">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2">
+         <widget class="QPushButton" name="pushButton_8">
           <property name="text">
-           <string>set Sensor</string>
+           <string>Upper Threshold</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="3">
+         <widget class="QPushButton" name="pushButton_9">
+          <property name="text">
+           <string>Lower Threshold</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="4">
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="text">
+           <string>Period Alarm On/Off</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="5">
+         <widget class="QPushButton" name="pushButton_11">
+          <property name="text">
+           <string>Period (sec)</string>
           </property>
          </widget>
         </item>

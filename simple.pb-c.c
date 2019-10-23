@@ -664,48 +664,48 @@ static const ProtobufCFieldDescriptor sensor_data__field_descriptors[10] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "shtc1_temperature",
+    "sensor_temperature",
     3,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_FLOAT,
-    offsetof(SensorData, has_shtc1_temperature),
-    offsetof(SensorData, shtc1_temperature),
+    offsetof(SensorData, has_sensor_temperature),
+    offsetof(SensorData, sensor_temperature),
     NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "shtc1_humidity",
+    "sensor_humidity",
     4,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_FLOAT,
-    offsetof(SensorData, has_shtc1_humidity),
-    offsetof(SensorData, shtc1_humidity),
+    offsetof(SensorData, has_sensor_humidity),
+    offsetof(SensorData, sensor_humidity),
     NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "sgp30_eco2_ppm",
+    "eco2_ppm",
     5,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_UINT32,
-    offsetof(SensorData, has_sgp30_eco2_ppm),
-    offsetof(SensorData, sgp30_eco2_ppm),
+    offsetof(SensorData, has_eco2_ppm),
+    offsetof(SensorData, eco2_ppm),
     NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "sgp30_tvoc_ppb",
+    "tvoc_ppb",
     6,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_UINT32,
-    offsetof(SensorData, has_sgp30_tvoc_ppb),
-    offsetof(SensorData, sgp30_tvoc_ppb),
+    offsetof(SensorData, has_tvoc_ppb),
+    offsetof(SensorData, tvoc_ppb),
     NULL,
     NULL,
     0,             /* flags */
@@ -748,12 +748,12 @@ static const ProtobufCFieldDescriptor sensor_data__field_descriptors[10] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "bq27441_voltage",
+    "sensor_voltage",
     10,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_UINT32,
-    offsetof(SensorData, has_bq27441_voltage),
-    offsetof(SensorData, bq27441_voltage),
+    offsetof(SensorData, has_sensor_voltage),
+    offsetof(SensorData, sensor_voltage),
     NULL,
     NULL,
     0,             /* flags */
@@ -761,16 +761,16 @@ static const ProtobufCFieldDescriptor sensor_data__field_descriptors[10] =
   },
 };
 static const unsigned sensor_data__field_indices_by_name[] = {
-  9,   /* field[9] = bq27441_voltage */
+  4,   /* field[4] = eco2_ppm */
   7,   /* field[7] = hall_interrupt */
   6,   /* field[6] = hall_state */
   8,   /* field[8] = pir_interrupt */
+  3,   /* field[3] = sensor_humidity */
   0,   /* field[0] = sensor_mac_address */
+  2,   /* field[2] = sensor_temperature */
   1,   /* field[1] = sensor_type */
-  4,   /* field[4] = sgp30_eco2_ppm */
-  5,   /* field[5] = sgp30_tvoc_ppb */
-  3,   /* field[3] = shtc1_humidity */
-  2,   /* field[2] = shtc1_temperature */
+  9,   /* field[9] = sensor_voltage */
+  5,   /* field[5] = tvoc_ppb */
 };
 static const ProtobufCIntRange sensor_data__number_ranges[1 + 1] =
 {
@@ -1293,7 +1293,7 @@ const ProtobufCMessageDescriptor to_band__descriptor =
   (ProtobufCMessageInit) to_band__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_wb55__field_descriptors[14] =
+static const ProtobufCFieldDescriptor to_wb55__field_descriptors[11] =
 {
   {
     "broadcast_interval",
@@ -1404,20 +1404,8 @@ static const ProtobufCFieldDescriptor to_wb55__field_descriptors[14] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "to_hi_from_wb55",
-    53,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_MESSAGE,
-    0,   /* quantifier_offset */
-    offsetof(ToWb55, to_hi_from_wb55),
-    &to_hi__descriptor,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
     "to_hi_from_band",
-    54,
+    53,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
@@ -1428,32 +1416,8 @@ static const ProtobufCFieldDescriptor to_wb55__field_descriptors[14] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "to_host_from_wb55",
-    55,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_MESSAGE,
-    0,   /* quantifier_offset */
-    offsetof(ToWb55, to_host_from_wb55),
-    &to_host__descriptor,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
-    "to_wb55_from_wb55",
-    56,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_MESSAGE,
-    0,   /* quantifier_offset */
-    offsetof(ToWb55, to_wb55_from_wb55),
-    &to_wb55__descriptor,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
     "to_st_from_host",
-    57,
+    54,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
@@ -1471,21 +1435,18 @@ static const unsigned to_wb55__field_indices_by_name[] = {
   1,   /* field[1] = power */
   5,   /* field[5] = sensor_set */
   4,   /* field[4] = seq */
-  10,   /* field[10] = to_hi_from_band */
+  9,   /* field[9] = to_hi_from_band */
   6,   /* field[6] = to_hi_from_host */
-  9,   /* field[9] = to_hi_from_wb55 */
   7,   /* field[7] = to_host_from_hi */
-  11,   /* field[11] = to_host_from_wb55 */
   8,   /* field[8] = to_st_from_hi */
-  13,   /* field[13] = to_st_from_host */
-  12,   /* field[12] = to_wb55_from_wb55 */
+  10,   /* field[10] = to_st_from_host */
 };
 static const ProtobufCIntRange to_wb55__number_ranges[3 + 1] =
 {
   { 1, 0 },
   { 30, 5 },
   { 50, 6 },
-  { 0, 14 }
+  { 0, 11 }
 };
 const ProtobufCMessageDescriptor to_wb55__descriptor =
 {
@@ -1495,14 +1456,14 @@ const ProtobufCMessageDescriptor to_wb55__descriptor =
   "ToWb55",
   "",
   sizeof(ToWb55),
-  14,
+  11,
   to_wb55__field_descriptors,
   to_wb55__field_indices_by_name,
   3,  to_wb55__number_ranges,
   (ProtobufCMessageInit) to_wb55__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
+static const ProtobufCFieldDescriptor to_st__field_descriptors[11] =
 {
   {
     "rough_motor_control",
@@ -1613,6 +1574,18 @@ static const ProtobufCFieldDescriptor to_st__field_descriptors[10] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
+    "sensor_set",
+    30,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToSt, sensor_set),
+    &sensor_set__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
     "seq",
     99,
     PROTOBUF_C_LABEL_REQUIRED,
@@ -1635,14 +1608,16 @@ static const unsigned to_st__field_indices_by_name[] = {
   4,   /* field[4] = request_st_info */
   7,   /* field[7] = reset_if_no_serial */
   0,   /* field[0] = rough_motor_control */
-  9,   /* field[9] = seq */
+  9,   /* field[9] = sensor_set */
+  10,   /* field[10] = seq */
 };
-static const ProtobufCIntRange to_st__number_ranges[3 + 1] =
+static const ProtobufCIntRange to_st__number_ranges[4 + 1] =
 {
   { 2, 0 },
   { 6, 3 },
-  { 99, 9 },
-  { 0, 10 }
+  { 30, 9 },
+  { 99, 10 },
+  { 0, 11 }
 };
 const ProtobufCMessageDescriptor to_st__descriptor =
 {
@@ -1652,10 +1627,10 @@ const ProtobufCMessageDescriptor to_st__descriptor =
   "ToSt",
   "",
   sizeof(ToSt),
-  10,
+  11,
   to_st__field_descriptors,
   to_st__field_indices_by_name,
-  3,  to_st__number_ranges,
+  4,  to_st__number_ranges,
   (ProtobufCMessageInit) to_st__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
@@ -1761,7 +1736,7 @@ const ProtobufCMessageDescriptor ap__descriptor =
   (ProtobufCMessageInit) ap__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor to_hi__field_descriptors[49] =
+static const ProtobufCFieldDescriptor to_hi__field_descriptors[48] =
 {
   {
     "tohost_bypass",
@@ -2316,18 +2291,6 @@ static const ProtobufCFieldDescriptor to_hi__field_descriptors[49] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "sensor_set_bypass",
-    301,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_MESSAGE,
-    0,   /* quantifier_offset */
-    offsetof(ToHi, sensor_set_bypass),
-    &sensor_set__descriptor,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
     "seq",
     999,
     PROTOBUF_C_LABEL_OPTIONAL,
@@ -2385,9 +2348,8 @@ static const unsigned to_hi__field_indices_by_name[] = {
   42,   /* field[42] = req_service_key */
   12,   /* field[12] = roll */
   16,   /* field[16] = rspeed */
-  48,   /* field[48] = sender */
-  46,   /* field[46] = sensor_set_bypass */
-  47,   /* field[47] = seq */
+  47,   /* field[47] = sender */
+  46,   /* field[46] = seq */
   35,   /* field[35] = set_ir_cut1 */
   36,   /* field[36] = set_ir_cut2 */
   37,   /* field[37] = set_mute */
@@ -2412,8 +2374,8 @@ static const ProtobufCIntRange to_hi__number_ranges[8 + 1] =
   { 113, 37 },
   { 200, 39 },
   { 300, 45 },
-  { 999, 47 },
-  { 0, 49 }
+  { 999, 46 },
+  { 0, 48 }
 };
 const ProtobufCMessageDescriptor to_hi__descriptor =
 {
@@ -2423,7 +2385,7 @@ const ProtobufCMessageDescriptor to_hi__descriptor =
   "ToHi",
   "",
   sizeof(ToHi),
-  49,
+  48,
   to_hi__field_descriptors,
   to_hi__field_indices_by_name,
   8,  to_hi__number_ranges,
