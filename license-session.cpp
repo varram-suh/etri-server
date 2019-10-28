@@ -3,7 +3,10 @@
 #include "packet-buffer.h"
 #include "http-request.h"
 #include "chrono-util.h"
-
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
 
 #define PRINT_IF_HAS(OBJ, MEMBER) if(OBJ->has_##MEMBER) { printf(#MEMBER ": %d", (*OBJ).MEMBER); }
 #define STRING_IF_HAS(OBJ, MEMBER) (OBJ->has_##MEMBER ? std::string("") + #MEMBER + ": " + std::to_string((*OBJ).MEMBER) : std::string(""))
@@ -64,6 +67,9 @@ int LicenseSession::processBytes() {
                 {
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
+#ifdef BINARYTEST
+                    fprintf(fout, "--- new packet\n%02X ", one);
+#endif
                     if(one == 0xAB) {
                         m_modernStep = STEP_B7;
                     }
@@ -81,6 +87,9 @@ int LicenseSession::processBytes() {
                     // uart_printf("[%02x] :: %d\r\n", m_modernStep, __LINE__);
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
+#ifdef BINARYTEST
+                    fprintf(fout, "%02X ", one);
+#endif
                     if(one == 0xCD) {
                         m_modernStep = STEP_LENGTH;
                     }
@@ -95,6 +104,9 @@ int LicenseSession::processBytes() {
                     // uart_printf("[%02x] :: %d\r\n", m_modernStep, __LINE__);
                     uint8_t one;
                     m_dataBuffer.read(&one, sizeof(one));
+#ifdef BINARYTEST
+                    fprintf(fout, "%02X ", one);
+#endif
                     if(one == 0xCE) {
                         m_modernStep = STEP_ELSSEN_LENGTH;
                         m_requiredSize = 4;
@@ -109,6 +121,9 @@ int LicenseSession::processBytes() {
                 {
                     uint32_t one;
                     m_dataBuffer.read(&one, sizeof(one));
+#ifdef BINARYTEST
+                    fprintf(fout, "%08X ", one);
+#endif
                     m_requiredSize = one; 
                     m_modernStep = STEP_PROTOBUF;
                     // CONSOLE_INFO("[needed: {}]", m_requiredSize);
@@ -119,6 +134,10 @@ int LicenseSession::processBytes() {
                 {
                     uint32_t one;
                     m_dataBuffer.read(&one, sizeof(one));
+                    //fprintf(fout, "%08X ", one);
+#ifdef BINARYTEST
+                    fprintf(fout, "%08X ", one);
+#endif
                     m_requiredSize = one; 
                     m_modernStep = STEP_ELSSEN_PACKET;
                 }
@@ -127,6 +146,12 @@ int LicenseSession::processBytes() {
                 {
                     uint8_t* buf = new uint8_t[m_requiredSize];
                     m_dataBuffer.read(buf, m_requiredSize);
+#ifdef BINARYTEST
+                    for(int i=0; i<m_requiredSize; i++) {
+                        fprintf(fout, "%02X ", buf[i]);
+                    }
+                    fprintf(fout, "\n");
+#endif
                     CONSOLE_INFO("ELSSEN PACKET");
                     printf("0xEA 0xCE ");
                     printf("0x%02X ", (m_requiredSize << 0 ) & 0xFF);
@@ -147,7 +172,22 @@ int LicenseSession::processBytes() {
                 {
                     uint8_t* buf = new uint8_t[m_requiredSize];
                     m_dataBuffer.read(buf, m_requiredSize);
+#ifdef BINARYTEST
+                    for(int i=0; i<m_requiredSize; i++) {
+                        fprintf(fout, "%02X ", buf[i]);
+                    }
+                    fprintf(fout, "\n");
+#endif
                     ToHost* msg2 = to_host__unpack(NULL, m_requiredSize, buf);  
+#ifdef BINARYTEST
+                    fprintf(fout, "+++ varram data\n");
+                    if( msg2->has_video ) {
+                        fprintf(fout, "has video len : %llu\n", msg2->video.len);
+                    }
+                    if( msg2->has_audio ) {
+                        fprintf(fout, "has audio len : %llu\n", msg2->audio.len);
+                    }
+#endif
                     processMessage(msg2);
                     delete [] buf;
                     to_host__free_unpacked(msg2, NULL);

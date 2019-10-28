@@ -27,12 +27,16 @@
 
 using namespace boost::asio;
 using namespace boost::asio::ip;
+//#define BINARYTEST
 
 #include "mdi-child.h"
 
 class LicenseSession : public boost::enable_shared_from_this<LicenseSession>
 {
     public:
+#ifdef BINARYTEST
+        FILE *fout;
+#endif
 
         tcp::socket m_socket;
         MdiChild* m_mdiChild = nullptr;
@@ -64,6 +68,9 @@ class LicenseSession : public boost::enable_shared_from_this<LicenseSession>
             : m_socket(io_service),
               m_ioService(io_service) {
             //start();
+#ifdef BINARYTEST
+                  fout = fopen("sample.txt", "w+");
+#endif
         }
         virtual ~LicenseSession() {
             CONSOLE_INFO("dest ~LicenseSession");
