@@ -245,11 +245,11 @@ struct  _ToWb55
    */
   ToHost *to_host_from_hi;
   /*
-   * ble data 
+   * ble data
    */
   ToSt *to_st_from_hi;
-  ToHi *to_hi_from_band;
   ToSt *to_st_from_host;
+  ToHi *to_hi_from_band;
   /*
    * {{{{{{{{{{{{{{{{{{{ from Host
    */

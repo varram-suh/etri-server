@@ -87,9 +87,9 @@ message ToWb55 {
     // wb55 가 get_st_message 가 들어왔을 때 만들어놓은 serilize bytes 가 있다면 패킷을 만들어서 전송한다. 
     optional ToHi to_hi_from_host = 50; 
     optional ToHost to_host_from_hi = 51; // ble data 
-    optional ToSt to_st_from_hi = 52; // ble data 
-    optional ToHi to_hi_from_band = 53; 
-    optional ToSt to_st_from_host= 54; 
+    optional ToSt to_st_from_hi = 52; // ble data
+    optional ToSt to_st_from_host= 53;  
+    optional ToHi to_hi_from_band = 55; 
 
     // {{{{{{{{{{{{{{{{{{{ from Host
     optional SensorSet sensor_set =30;

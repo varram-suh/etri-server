@@ -1404,25 +1404,25 @@ static const ProtobufCFieldDescriptor to_wb55__field_descriptors[11] =
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "to_hi_from_band",
-    53,
-    PROTOBUF_C_LABEL_OPTIONAL,
-    PROTOBUF_C_TYPE_MESSAGE,
-    0,   /* quantifier_offset */
-    offsetof(ToWb55, to_hi_from_band),
-    &to_hi__descriptor,
-    NULL,
-    0,             /* flags */
-    0,NULL,NULL    /* reserved1,reserved2, etc */
-  },
-  {
     "to_st_from_host",
-    54,
+    53,
     PROTOBUF_C_LABEL_OPTIONAL,
     PROTOBUF_C_TYPE_MESSAGE,
     0,   /* quantifier_offset */
     offsetof(ToWb55, to_st_from_host),
     &to_st__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "to_hi_from_band",
+    55,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(ToWb55, to_hi_from_band),
+    &to_hi__descriptor,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
@@ -1435,17 +1435,18 @@ static const unsigned to_wb55__field_indices_by_name[] = {
   1,   /* field[1] = power */
   5,   /* field[5] = sensor_set */
   4,   /* field[4] = seq */
-  9,   /* field[9] = to_hi_from_band */
+  10,   /* field[10] = to_hi_from_band */
   6,   /* field[6] = to_hi_from_host */
   7,   /* field[7] = to_host_from_hi */
   8,   /* field[8] = to_st_from_hi */
-  10,   /* field[10] = to_st_from_host */
+  9,   /* field[9] = to_st_from_host */
 };
-static const ProtobufCIntRange to_wb55__number_ranges[3 + 1] =
+static const ProtobufCIntRange to_wb55__number_ranges[4 + 1] =
 {
   { 1, 0 },
   { 30, 5 },
   { 50, 6 },
+  { 55, 10 },
   { 0, 11 }
 };
 const ProtobufCMessageDescriptor to_wb55__descriptor =
@@ -1459,7 +1460,7 @@ const ProtobufCMessageDescriptor to_wb55__descriptor =
   11,
   to_wb55__field_descriptors,
   to_wb55__field_indices_by_name,
-  3,  to_wb55__number_ranges,
+  4,  to_wb55__number_ranges,
   (ProtobufCMessageInit) to_wb55__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
