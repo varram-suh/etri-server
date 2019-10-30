@@ -40,9 +40,13 @@ class SensorPrint {
         bool has_hall_interrupt = false;
         bool has_pir_interrupt = false;
         bool has_voltage = false;
+        std::chrono::system_clock::time_point recvTime;
+        int roomNumber;
 
         SensorPrint() {
             sensor_mac_address = "";
+            recvTime = std::chrono::system_clock::now();
+            roomNumber = 0;
         }
         friend bool operator < ( const SensorPrint &s1, const SensorPrint &s2 ) {
             return s1.sensor_type < s2.sensor_type;
@@ -123,6 +127,33 @@ private slots:
     void on_sensor_period_textChanged();
 
     void on_sensor_macAddr_textChanged();
+    void sensorDataUpdate();
+
+    void on_r1_textChanged();
+    void on_r2_textChanged();
+    void on_r3_textChanged();
+    void on_r4_textChanged();
+    void on_r5_textChanged();
+    void on_r6_textChanged();
+    void on_r7_textChanged();
+    void on_r8_textChanged();
+
+    void on_s1_clicked();
+    void on_s2_clicked();
+    void on_s3_clicked();
+    void on_s4_clicked();
+    void on_s5_clicked();
+    void on_s6_clicked();
+    void on_s7_clicked();
+    void on_s8_clicked();
+
+    void on_savePath_clicked();
+
+    void on_goPath_clicked();
+
+    void on_initPath_clicked();
+
+    void on_saveGoInitRoomNumber_textChanged();
 
 public:
     Ui::MdiChild *ui;
@@ -135,6 +166,7 @@ public:
     QVector<double> realtimeX, realtimeY;
     QVector<double> playlistX, playlistY;
     std::chrono::system_clock::time_point startTimePoint;
+    QTimer *timer;
 
     int m_hz_division = 0;
     bool mic_loopback_on = false;
@@ -148,6 +180,7 @@ public:
     uint32_t sensor_lower_threshold;
     bool sensor_period_alarm;
     uint32_t sensor_notify_period;
+    int editNumber;
 
     // Set up the format, eg.
 };
