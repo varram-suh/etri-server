@@ -262,8 +262,8 @@ void MdiChild::on_moveLeftButton_clicked()
     rmc.has_left_motor = 1;
     rmc.has_right_motor = 1;
 
-    rmc.left_motor = 60;
-    rmc.right_motor = -60;
+    rmc.left_motor = -60;
+    rmc.right_motor = 60;
     tost.rough_motor_control = &rmc;
 
     tohi.tost_bypass = &tost;
@@ -302,8 +302,8 @@ void MdiChild::on_moveRightButton_clicked()
     rmc.has_left_motor = 1;
     rmc.has_right_motor = 1;
 
-    rmc.left_motor = -60;
-    rmc.right_motor = 60;
+    rmc.left_motor = 60;
+    rmc.right_motor = -60;
     tost.rough_motor_control = &rmc;
 
     tohi.tost_bypass = &tost;
