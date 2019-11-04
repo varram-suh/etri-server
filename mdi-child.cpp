@@ -490,8 +490,8 @@ void MdiChild::on_sensor_interruptOnOff_activated(int index)
 {
     sensor_interrupt_alarm = index == 1;
     if( sensor_interrupt_alarm == false ) {
-        ui->sensor_upperThreshold->setDisabled(true);
-        ui->sensor_lowerThreshold->setDisabled(true);
+        //ui->sensor_upperThreshold->setDisabled(true);
+        //ui->sensor_lowerThreshold->setDisabled(true);
     } else {
         ui->sensor_upperThreshold->setEnabled(true);
         ui->sensor_lowerThreshold->setEnabled(true);
@@ -522,7 +522,7 @@ void MdiChild::on_sensor_periodOnOff_activated(int index)
 {
     sensor_period_alarm = index == 1;
     if( sensor_interrupt_alarm == false ) {
-        ui->sensor_period->setDisabled(true);
+        //ui->sensor_period->setDisabled(true);
     } else {
         ui->sensor_period->setEnabled(true);
     }
