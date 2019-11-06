@@ -382,6 +382,13 @@
           </property>
          </widget>
         </item>
+        <item row="7" column="5">
+         <widget class="QPushButton" name="tensorflowTestButton">
+          <property name="text">
+           <string>TensorflowTest</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>

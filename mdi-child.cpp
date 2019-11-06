@@ -8,10 +8,15 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/types_c.h>
 #include <boost/lexical_cast.hpp>
+#include <boost/make_shared.hpp>
 #include <algorithm>
+#include "tensor_test.h"
 
+ZemTensor *zemTensor = nullptr;
 
 void MdiChild::updateSensor(SensorData* s) {
+    IMREAD_COLOR;
+    CV_BGR2RGB;
     bool isExist = false;
     std::cout << "------recv sensor data\n";
     std::cout << "mac_address : " << s->sensor_mac_address << std::endl;
@@ -178,6 +183,10 @@ MdiChild::MdiChild(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    if( !zemTensor ) {
+        zemTensor = new ZemTensor();
+        zemTensor->initTensorflow();
+    }
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(sensorDataUpdate()));
     timer->start(50);
@@ -208,30 +217,14 @@ MdiChild::~MdiChild() {
 
 void MdiChild::mySlotName(const QByteArray& message) {
     uchar *buff = (uchar*)message.data(); 
-    // QPixmap pix;
-    // pix.loadFromData(buff, message.size(), "JPG"); 
-    // ui->label->setPixmap(pix);
-    // ui->label->resize(pix.width(), pix.height()); 
-
     std::vector<char> vb(&buff[0], &buff[message.size()]);
     cv::Mat img = cv::imdecode(vb, 1);
     cvtColor(img, img, CV_BGR2RGB);
-    cv::Mat imgGray;
-    cv::cvtColor(img, imgGray, CV_RGB2GRAY );
-	// cv::Mat img = cv::imread("Lena.jpg", CV_LOAD_IMAGE_COLOR);
-    cv::Mat contours;
-    cv::Canny(imgGray, // 그레이레벨 영상
-              contours, // 결과 외곽선
-              125,  // 낮은 경계값
-              350);  // 높은 경계값
-
-    // 넌제로 화소로 외곽선을 표현하므로 흑백 값을 반전
-    cv::Mat contoursInv; // 반전 영상
-    cv::threshold(contours, contoursInv, 128, 255, cv::THRESH_BINARY_INV);
-    // 밝기 값이 128보다 작으면 255가 되도록 설정
-    cvtColor(contoursInv, contoursInv, CV_GRAY2RGB);
-    // ui->label->setPixmap(QPixmap::fromImage(QImage(contoursInv.data, contoursInv.cols, contoursInv.rows, contoursInv.step, QImage::Format_RGB888)));
     ui->label->setPixmap(QPixmap::fromImage(QImage(img.data, img.cols, img.rows, img.step, QImage::Format_RGB888)));
+
+    if(tensorflowPlay) {
+        zemTensor->findObject(img);
+    }
 }
 
 //void MdiChild::showBandwidth(int download, int upload) {
@@ -853,4 +846,25 @@ void MdiChild::on_saveGoInitRoomNumber_textChanged()
         CONSOLE_INFO("Control {} Path", editNumber);
     } catch( std::exception e ) {
     }
+}
+
+void MdiChild::on_tensorflowTestButton_clicked()
+{
+    QPushButton *q = ui->tensorflowTestButton;
+
+    if( q ) {
+        q->setAutoFillBackground(true);
+        QPalette palette = q->palette();
+        if( tensorflowPlay ) {
+            palette.setColor(QPalette::Button, QColor(255, 255, 255));
+        } else {
+            palette.setColor(QPalette::Button, QColor(255, 0, 0));
+        }
+
+        q->setAutoFillBackground(true);
+        q->setPalette(palette);
+        q->setFlat(true);
+        q->update();
+    }
+    tensorflowPlay = tensorflowPlay == false;
 }

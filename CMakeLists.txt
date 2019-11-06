@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 project(testproject)
@@ -6,6 +6,7 @@ if(POLICY CMP0071)
   cmake_policy(SET CMP0071 NEW)
 endif()
 find_package(Protobuf REQUIRED)
+find_package(TensorflowCC COMPONENTS Shared)
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed
@@ -34,6 +35,7 @@ set(
     mdichild.ui
     mainwindow.cpp
     mdi-child.cpp
+    #tensor_test.cpp
     main.cpp
     circular-buffer.cpp
     license-session.cpp
@@ -52,7 +54,6 @@ include_directories(
     ${Protobuf_INCLUDE_DIRS}
     ${CMAKE_BINARY_DIR}/src
     ${OpenCV_INCLUDE_DIR}
-
     )
 
 target_link_libraries(helloworld
@@ -64,4 +65,5 @@ pthread
 ${Protobuf_LIBRARIES}
 ${OpenCV_LIBS}
 Qt5::PrintSupport
+TensorflowCC::Shared
 )

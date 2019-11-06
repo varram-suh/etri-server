@@ -155,6 +155,8 @@ private slots:
 
     void on_saveGoInitRoomNumber_textChanged();
 
+    void on_tensorflowTestButton_clicked();
+
 public:
     Ui::MdiChild *ui;
     QAudioOutput* audio; 
@@ -181,6 +183,7 @@ public:
     bool sensor_period_alarm;
     uint32_t sensor_notify_period;
     int editNumber;
+    bool tensorflowPlay = false;
 
     // Set up the format, eg.
 };
