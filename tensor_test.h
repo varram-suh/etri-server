@@ -41,7 +41,7 @@ class ZemTensor : public QObject {
         string graphPath;
 
         Status loadGraphStatus;
-        std::map<int, std::string> labelsMap;
+        std::map<int, std::string> labelMap;
         Status readLabelsMapStatus;
         tensorflow::TensorShape shape;
 
@@ -133,10 +133,10 @@ class ZemTensor : public QObject {
 
         double IOU(Rect2f box1, Rect2f box2) {
 
-            float xA = max(box1.tl().x, box2.tl().x);
-            float yA = max(box1.tl().y, box2.tl().y);
-            float xB = min(box1.br().x, box2.br().x);
-            float yB = min(box1.br().y, box2.br().y);
+            float xA = box1.tl().x;//max(box1.tl().x, box2.tl().x);
+            float yA = box1.tl().y;//max(box1.tl().y, box2.tl().y);
+            float xB = box2.tl().x;//min(box1.br().x, box2.br().x);
+            float yB = box2.tl().y;//min(box1.br().y, box2.br().y);
 
             float intersectArea = abs((xB - xA) * (yB - yA));
             float unionArea = abs(box1.area()) + abs(box2.area()) - intersectArea;
@@ -217,11 +217,13 @@ class ZemTensor : public QObject {
                                       map<int, string> &labelsMap,
                                       vector<size_t> &idxs) {
             for (int j = 0; j < idxs.size(); j++)
+                if(classes(idxs.at(j)) == 1) // person only
                 drawBoundingBoxOnImage(image,
                                        boxes(0,idxs.at(j),0), boxes(0,idxs.at(j),1),
                                        boxes(0,idxs.at(j),2), boxes(0,idxs.at(j),3),
                                        scores(idxs.at(j)), labelsMap[classes(idxs.at(j))]);
         }
+
         void initTensorflow() {
             outputLayer.push_back("detection_boxes:0");
             outputLayer.push_back("detection_scores:0");
@@ -233,7 +235,7 @@ class ZemTensor : public QObject {
 
             if (!loadGraphStatus.ok()) return;
 
-            Status readLabelsMapStatus = readLabelsMapFile(tensorflow::io::JoinPath(ROOTDIR, LABELS), labelsMap);
+            Status readLabelsMapStatus = readLabelsMapFile(tensorflow::io::JoinPath(ROOTDIR, LABELS), labelMap);
             if (!readLabelsMapStatus.ok()) return;
 
             shape = tensorflow::TensorShape();
@@ -277,7 +279,7 @@ class ZemTensor : public QObject {
 
             // Draw bboxes and captions
             cvtColor(img, img, COLOR_BGR2RGB);
-            drawBoundingBoxesOnImage(img, scores, classes, boxes, labelsMap, goodIdxs);
+            drawBoundingBoxesOnImage(img, scores, classes, boxes, labelMap, goodIdxs);
             imshow("stream", img);
             waitKey(5);
 
