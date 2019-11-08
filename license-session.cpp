@@ -227,22 +227,6 @@ void LicenseSession::processMessage(ToHost* msg2) {
             m_recvBytes = 0;
         }
     }
-
-    if(msg2->tohi_bypass) {
-        CONSOLE_INFO("bypass by hi");
-        auto tohi = msg2->tohi_bypass;
-        std::string logStr = "";
-        logStr += STRING_IF_HAS(tohi, tof);
-        logStr += std::string(", ") + STRING_IF_HAS(tohi, battery);
-        logStr += std::string(", ") + STRING_IF_HAS(tohi, power_button_pressed);
-        logStr += std::string(", ") + STRING_IF_HAS(tohi, usb_con);
-        QString qa = QString::fromStdString(logStr);
-        QMetaObject::invokeMethod(m_mdiChild,
-                                  "showStatus",
-                                  Qt::AutoConnection, // Can also use any other except DirectConnection
-                                  Q_ARG(QString, qa)); // And some more args if needed
-    } 
-
 }
 
 void LicenseSession::readBytes(const boost::system::error_code& error,
