@@ -327,13 +327,10 @@ void MdiChild::on_moveUpButton_clicked()
     ToHi tohi = TO_HI__INIT;
     ToSt tost = TO_ST__INIT;
 
-    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
-    rmc.has_left_motor = 1;
-    rmc.has_right_motor = 1;
-
-    rmc.left_motor = 60;
-    rmc.right_motor = 60;
-    tost.rough_motor_control = &rmc;
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 60;
+    tost.r_speed = 60;
 
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
@@ -347,13 +344,10 @@ void MdiChild::on_moveLeftButton_clicked()
     ToHi tohi = TO_HI__INIT;
     ToSt tost = TO_ST__INIT;
 
-    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
-    rmc.has_left_motor = 1;
-    rmc.has_right_motor = 1;
-
-    rmc.left_motor = -60;
-    rmc.right_motor = 60;
-    tost.rough_motor_control = &rmc;
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = -60;
+    tost.r_speed = 60;
 
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
@@ -367,13 +361,11 @@ void MdiChild::on_moveOriginButton_clicked()
     ToHi tohi = TO_HI__INIT;
     ToSt tost = TO_ST__INIT;
 
-    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
-    rmc.has_left_motor = 1;
-    rmc.has_right_motor = 1;
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
 
-    rmc.left_motor = 0;
-    rmc.right_motor = 0;
-    tost.rough_motor_control = &rmc;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
 
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
@@ -387,13 +379,11 @@ void MdiChild::on_moveRightButton_clicked()
     ToHi tohi = TO_HI__INIT;
     ToSt tost = TO_ST__INIT;
 
-    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
-    rmc.has_left_motor = 1;
-    rmc.has_right_motor = 1;
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
 
-    rmc.left_motor = 60;
-    rmc.right_motor = -60;
-    tost.rough_motor_control = &rmc;
+    tost.l_speed = 60;
+    tost.r_speed = -60;
 
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
@@ -407,13 +397,11 @@ void MdiChild::on_moveDownButton_clicked()
     ToHi tohi = TO_HI__INIT;
     ToSt tost = TO_ST__INIT;
 
-    RoughMotorControl rmc = ROUGH_MOTOR_CONTROL__INIT;
-    rmc.has_left_motor = 1;
-    rmc.has_right_motor = 1;
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
 
-    rmc.left_motor = -60;
-    rmc.right_motor = -60;
-    tost.rough_motor_control = &rmc;
+    tost.l_speed = -60;
+    tost.r_speed = -60;
 
     tohi.tost_bypass = &tost;
     auto p = m_session.lock();
