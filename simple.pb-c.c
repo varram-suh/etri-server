@@ -7,6 +7,51 @@
 #endif
 
 #include "simple.pb-c.h"
+void   ap__init
+                     (Ap         *message)
+{
+  static const Ap init_value = AP__INIT;
+  *message = init_value;
+}
+size_t ap__get_packed_size
+                     (const Ap *message)
+{
+  assert(message->base.descriptor == &ap__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t ap__pack
+                     (const Ap *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &ap__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t ap__pack_to_buffer
+                     (const Ap *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &ap__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+Ap *
+       ap__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (Ap *)
+     protobuf_c_message_unpack (&ap__descriptor,
+                                allocator, len, data);
+}
+void   ap__free_unpacked
+                     (Ap *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &ap__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   sensor_data__init
                      (SensorData         *message)
 {
@@ -277,6 +322,57 @@ void   to_host__free_unpacked
   assert(message->base.descriptor == &to_host__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+static const ProtobufCFieldDescriptor ap__field_descriptors[2] =
+{
+  {
+    "ssid",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Ap, ssid),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "ssid_type",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Ap, ssid_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned ap__field_indices_by_name[] = {
+  0,   /* field[0] = ssid */
+  1,   /* field[1] = ssid_type */
+};
+static const ProtobufCIntRange ap__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor ap__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "Ap",
+  "Ap",
+  "Ap",
+  "",
+  sizeof(Ap),
+  2,
+  ap__field_descriptors,
+  ap__field_indices_by_name,
+  1,  ap__number_ranges,
+  (ProtobufCMessageInit) ap__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
 static const ProtobufCFieldDescriptor sensor_data__field_descriptors[10] =
 {
   {

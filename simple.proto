@@ -1,4 +1,8 @@
 syntax = "proto2";
+message Ap {
+    optional string ssid = 1;
+    optional string ssid_type = 2;
+}
 
 message SensorData {
     optional string sensor_mac_address = 1;
@@ -84,8 +88,8 @@ message ToHi {
     optional float battery = 11; // voltage
     optional int32 lenc = 12; //left motor rpm
     optional int32 renc = 13; //right motor rpm
-    optional bool power_button_pressed = 14;
-    optional bool usb_con = 15;
+    optional bool power_button_pressed = 14; 
+    optional bool usb_con = 15; 
     // from ST }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from host
@@ -112,7 +116,6 @@ message ToHi {
     optional uint32 test_8  = 808;
     optional uint32 test_9  = 809;
     optional uint32 test_10 = 810;
-    // from BLE }}}}}}}}}}}}}}}}}}} 
 }
 // ToHi close
 
