@@ -1,8 +1,4 @@
 syntax = "proto2";
-message Ap {
-    optional string ssid = 1;
-    optional string ssid_type = 2;
-}
 
 message SensorData {
     optional string sensor_mac_address = 1;
@@ -14,7 +10,7 @@ message SensorData {
     optional bool hall_state = 7;
     optional bool hall_interrupt = 8;
     optional bool pir_interrupt = 9;
-    optional uint32 sensor_voltage = 10; 
+    optional uint32 sensor_voltage = 10;
 }
 
 message SensorSet {
@@ -39,9 +35,9 @@ enum StInfo {
     TOF = 2;
     ACC = 4;
     GYRO = 8;
-    IMU = 16; 
-    HOP = 32; 
-    MOTOR = 64; 
+    IMU = 16;
+    HOP = 32;
+    MOTOR = 64;
     ENC = 128;
     BATTERY = 256;
 }
@@ -51,7 +47,7 @@ message ToSt {
     optional int32 l_speed = 1; // -350 ~ 350
     optional int32 r_speed = 2; // -350 ~ 350
     optional uint32 neck_speed = 3; // -350 ~ 350
-
+    optional uint32 do_charge = 4;
 
     optional uint32 request_st_info = 100; // st 에게 요청하는 정보, StInfo bitwise 연산
 
@@ -88,8 +84,8 @@ message ToHi {
     optional float battery = 11; // voltage
     optional int32 lenc = 12; //left motor rpm
     optional int32 renc = 13; //right motor rpm
-    optional bool power_button_pressed = 14; 
-    optional bool usb_con = 15; 
+    optional bool power_button_pressed = 14;
+    optional bool usb_con = 15;
     // from ST }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from host
@@ -126,7 +122,7 @@ message ToHost {
     // from HI }}}}}}}}}}}}}}}}}}} 
 
     // {{{{{{{{{{{{{{{{{{{ from Sensor WB55
-    optional SensorData sensor_data = 62; 
+    optional SensorData sensor_data = 62;
     // from Sensor WB55 }}}}}}}}}}}}}}}}}}}
 
     optional uint32 test_1  = 801;
@@ -139,4 +135,5 @@ message ToHost {
     optional uint32 test_8  = 808;
     optional uint32 test_9  = 809;
     optional uint32 test_10 = 810;
+
 }
