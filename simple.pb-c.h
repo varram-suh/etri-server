@@ -15,7 +15,6 @@ PROTOBUF_C__BEGIN_DECLS
 #endif
 
 
-typedef struct _Ap Ap;
 typedef struct _SensorData SensorData;
 typedef struct _SensorSet SensorSet;
 typedef struct _PwmLed PwmLed;
@@ -40,17 +39,6 @@ typedef enum _StInfo {
 } StInfo;
 
 /* --- messages --- */
-
-struct  _Ap
-{
-  ProtobufCMessage base;
-  char *ssid;
-  char *ssid_type;
-};
-#define AP__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&ap__descriptor) \
-    , NULL, NULL }
-
 
 struct  _SensorData
 {
@@ -140,6 +128,8 @@ struct  _ToSt
    */
   protobuf_c_boolean has_neck_speed;
   uint32_t neck_speed;
+  protobuf_c_boolean has_do_charge;
+  uint32_t do_charge;
   /*
    * st 에게 요청하는 정보, StInfo bitwise 연산
    */
@@ -172,7 +162,7 @@ struct  _ToSt
 };
 #define TO_ST__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&to_st__descriptor) \
-    , 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+    , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 
 
 struct  _ToHi
@@ -335,25 +325,6 @@ struct  _ToHost
     , 0, {0,NULL}, 0, {0,NULL}, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 
 
-/* Ap methods */
-void   ap__init
-                     (Ap         *message);
-size_t ap__get_packed_size
-                     (const Ap   *message);
-size_t ap__pack
-                     (const Ap   *message,
-                      uint8_t             *out);
-size_t ap__pack_to_buffer
-                     (const Ap   *message,
-                      ProtobufCBuffer     *buffer);
-Ap *
-       ap__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   ap__free_unpacked
-                     (Ap *message,
-                      ProtobufCAllocator *allocator);
 /* SensorData methods */
 void   sensor_data__init
                      (SensorData         *message);
@@ -470,9 +441,6 @@ void   to_host__free_unpacked
                       ProtobufCAllocator *allocator);
 /* --- per-message closures --- */
 
-typedef void (*Ap_Closure)
-                 (const Ap *message,
-                  void *closure_data);
 typedef void (*SensorData_Closure)
                  (const SensorData *message,
                   void *closure_data);
@@ -498,7 +466,6 @@ typedef void (*ToHost_Closure)
 /* --- descriptors --- */
 
 extern const ProtobufCEnumDescriptor    st_info__descriptor;
-extern const ProtobufCMessageDescriptor ap__descriptor;
 extern const ProtobufCMessageDescriptor sensor_data__descriptor;
 extern const ProtobufCMessageDescriptor sensor_set__descriptor;
 extern const ProtobufCMessageDescriptor pwm_led__descriptor;
