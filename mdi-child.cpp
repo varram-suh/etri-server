@@ -322,139 +322,6 @@ void MdiChild::on_vaToggleButton_clicked()
     }
 }
 
-void MdiChild::on_moveUpButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_l_speed = 1;
-    tost.has_r_speed = 1;
-    tost.l_speed = 60;
-    tost.r_speed = 60;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveLeftButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_l_speed = 1;
-    tost.has_r_speed = 1;
-    tost.l_speed = -60;
-    tost.r_speed = 60;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveOriginButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_l_speed = 1;
-    tost.has_r_speed = 1;
-
-    tost.l_speed = 0;
-    tost.r_speed = 0;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveRightButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_l_speed = 1;
-    tost.has_r_speed = 1;
-
-    tost.l_speed = 60;
-    tost.r_speed = -60;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveDownButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_l_speed = 1;
-    tost.has_r_speed = 1;
-
-    tost.l_speed = -60;
-    tost.r_speed = -60;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveNeckUp_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_neck_speed = 1;
-    tost.neck_speed = 500;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveNeckDown_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_neck_speed = 1;
-    tost.neck_speed = -500;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
-void MdiChild::on_moveNeckOriginButton_clicked()
-{
-    ToHi tohi = TO_HI__INIT;
-    ToSt tost = TO_ST__INIT;
-
-    tost.has_neck_speed = 1;
-    tost.neck_speed = 0;
-
-    tohi.tost_bypass = &tost;
-    auto p = m_session.lock();
-    if(p) {
-        p->packHiToBuffer(&tohi);
-    }
-}
-
 void MdiChild::on_sensor_type_activated(int index)
 {
     switch( index ) {
@@ -855,4 +722,264 @@ void MdiChild::on_tensorflowTestButton_clicked()
         q->update();
     }
     tensorflowPlay = tensorflowPlay == false;
+}
+
+void MdiChild::on_moveUpButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveUpButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 30;
+    tost.r_speed = 30;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveOriginButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveOriginButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveLeftButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = -30;
+    tost.r_speed = 30;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveLeftButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveRightButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 30;
+    tost.r_speed = -30;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveRightButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveDownButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = -30;
+    tost.r_speed = -30;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveDownButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_l_speed = 1;
+    tost.has_r_speed = 1;
+    tost.l_speed = 0;
+    tost.r_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckUp_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 500;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckUp_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckOriginButton_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckOriginButton_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckDown_pressed()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = -500;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
+}
+
+void MdiChild::on_moveNeckDown_released()
+{
+    ToHi tohi = TO_HI__INIT;
+    ToSt tost = TO_ST__INIT;
+
+    tost.has_neck_speed = 1;
+    tost.neck_speed = 0;
+
+    tohi.tost_bypass = &tost;
+    auto p = m_session.lock();
+    if(p) {
+        p->packHiToBuffer(&tohi);
+    }
 }

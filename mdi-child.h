@@ -96,22 +96,6 @@ private slots:
 
     void on_vaToggleButton_clicked();
 
-    void on_moveUpButton_clicked();
-
-    void on_moveLeftButton_clicked();
-
-    void on_moveOriginButton_clicked();
-
-    void on_moveRightButton_clicked();
-
-    void on_moveDownButton_clicked();
-
-    void on_moveNeckUp_clicked();
-
-    void on_moveNeckDown_clicked();
-
-    void on_moveNeckOriginButton_clicked();
-
     void on_setSensorButton_clicked();
 
     void on_sensor_type_activated(int index);
@@ -156,6 +140,38 @@ private slots:
     void on_saveGoInitRoomNumber_textChanged();
 
     void on_tensorflowTestButton_clicked();
+
+    void on_moveUpButton_released();
+
+    void on_moveUpButton_pressed();
+
+    void on_moveOriginButton_pressed();
+
+    void on_moveOriginButton_released();
+
+    void on_moveLeftButton_pressed();
+
+    void on_moveLeftButton_released();
+
+    void on_moveRightButton_pressed();
+
+    void on_moveRightButton_released();
+
+    void on_moveDownButton_pressed();
+
+    void on_moveDownButton_released();
+
+    void on_moveNeckUp_pressed();
+
+    void on_moveNeckUp_released();
+
+    void on_moveNeckOriginButton_pressed();
+
+    void on_moveNeckOriginButton_released();
+
+    void on_moveNeckDown_pressed();
+
+    void on_moveNeckDown_released();
 
 public:
     Ui::MdiChild *ui;
